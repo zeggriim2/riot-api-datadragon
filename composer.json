@@ -14,10 +14,13 @@
     ],
     "require": {
         "php": "^8.1",
-        "guzzlehttp/guzzle": "^7.5"
+        "symfony/http-client": "^6.2",
+        "symfony/serializer": "^6.2",
+        "symfony/property-info": "^6.2"
     },
     "require-dev": {
         "symfony/var-dumper": "^6.2",
-        "friendsofphp/php-cs-fixer": "^3.13"
+        "friendsofphp/php-cs-fixer": "^3.13",
+        "symfony/stopwatch": "^6.2"
     }
 }
