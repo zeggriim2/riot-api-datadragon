@@ -7,10 +7,10 @@ namespace Zeggriim\RiotApiDatadragon;
 use Zeggriim\RiotApiDatadragon\base\BaseApi;
 use Zeggriim\RiotApiDatadragon\Enum\TypeReturn;
 use Zeggriim\RiotApiDatadragon\Enum\UrlDataDragon;
-use Zeggriim\RiotApiDatadragon\Model\Champion;
-use Zeggriim\RiotApiDatadragon\Model\ChampionDetail;
-use Zeggriim\RiotApiDatadragon\Model\Item;
-use Zeggriim\RiotApiDatadragon\Model\Summoner;
+use Zeggriim\RiotApiDatadragon\Model\Champion\Champion;
+use Zeggriim\RiotApiDatadragon\Model\Champion\ChampionDetail;
+use Zeggriim\RiotApiDatadragon\Model\Item\Item;
+use Zeggriim\RiotApiDatadragon\Model\Summoner\Summoner;
 use Zeggriim\RiotApiDatadragon\Serializer\DenormalizerArray;
 
 class DataDragonApi extends BaseApi
@@ -42,9 +42,13 @@ class DataDragonApi extends BaseApi
         return $this->makeCall(UrlDataDragon::URL_LANGUAGES);
     }
 
+    /**
+     * Retourne la liste de toutes les Champions
+     * @return array<string,Champion>
+     */
     public function getChampions(int $typeReturn = TypeReturn::RETURN_ARRAY)
     {
-        $url = $this->constructUrl(UrlDataDragon::URL_CHAMPIONS, [
+        $url = BuildUrl::build(UrlDataDragon::URL_CHAMPIONS, [
             "version" => $this->version,
             "lang" => $this->lang
         ]);
@@ -58,9 +62,13 @@ class DataDragonApi extends BaseApi
         return $denormalizeArray->denormalize($data['data'], Champion::class);
     }
 
-    public function getChampion(string $name, int $typeReturn = TypeReturn::RETURN_ARRAY)
+    /**
+     * Retourne la le détail d'un Champion
+     * @return array<string,ChampionDetail>
+     */
+    public function getChampion(string $name, int $typeReturn = TypeReturn::RETURN_ARRAY): array
     {
-        $url = $this->constructUrl(UrlDataDragon::URL_CHAMPION, [
+        $url = BuildUrl::build(UrlDataDragon::URL_CHAMPION, [
             "version" => $this->version,
             "lang" => $this->lang,
             "name" => ucfirst($name)
@@ -75,9 +83,12 @@ class DataDragonApi extends BaseApi
         return $denormalizeArray->denormalize($data['data'], ChampionDetail::class);
     }
 
+    /**
+     * @return array<string,Item>
+     */
     public function getItems()
     {
-        $url = $this->constructUrl(UrlDataDragon::URL_ITEMS, [
+        $url = BuildUrl::build(UrlDataDragon::URL_ITEMS, [
             "version" => $this->version,
             "lang" => $this->lang
         ]);
@@ -87,9 +98,12 @@ class DataDragonApi extends BaseApi
         return $denormalizeArray->denormalize($data['data'], Item::class);
     }
 
+    /**
+     * @return array<string,Summoner>
+     */
     public function getSummoner()
     {
-        $url = $this->constructUrl(UrlDataDragon::URL_SUMMONER, [
+        $url = BuildUrl::build(UrlDataDragon::URL_SUMMONER, [
             "version" => $this->version,
             "lang" => $this->lang
         ]);
@@ -97,17 +111,5 @@ class DataDragonApi extends BaseApi
         $data = $this->makeCall($url);
         $denormalizeArray = new DenormalizerArray();
         return $denormalizeArray->denormalize($data['data'], Summoner::class);
-    }
-
-    /**
-     * @param array<string,string> $params
-     */
-    private function constructUrl(string $url, array $params): string
-    {
-        foreach ($params as $key => $param) {
-            $url = str_replace("{{$key}}", $param, $url);
-        }
-
-        return $url;
     }
 }

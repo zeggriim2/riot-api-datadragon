@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Zeggriim\RiotApiDatadragon\Serializer;
 
-use Zeggriim\RiotApiDatadragon\Model\Champion;
-
 class DenormalizerArray
 {
     public function denormalize(array $datas, string $type): array

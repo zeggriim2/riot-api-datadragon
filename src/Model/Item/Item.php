@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Zeggriim\RiotApiDatadragon\Model;
+namespace Zeggriim\RiotApiDatadragon\Model\Item;
+
+use Zeggriim\RiotApiDatadragon\Model\General\Image;
 
 class Item
 {

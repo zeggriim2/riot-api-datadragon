@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Zeggriim\RiotApiDatadragon\Model;
+namespace Zeggriim\RiotApiDatadragon\Model\Champion;
 
 class Stats
 {
