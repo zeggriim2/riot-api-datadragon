@@ -1,0 +1,28 @@
+{
+    "name": "zeggriim/riot-api-datadragon",
+    "description": "Riot DataDragon API wrapper",
+    "autoload": {
+        "psr-4": {
+            "Zeggriim\\RiotApiDatadragon\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Zeggriim2",
+            "email": "lilian.dorazio@hotmail.fr"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "symfony/http-client": "^6.2",
+        "symfony/serializer": "^6.2",
+        "symfony/property-info": "^6.2",
+        "symfony/property-access": "^6.2"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^6.2",
+        "friendsofphp/php-cs-fixer": "^3.13",
+        "symfony/stopwatch": "^6.2",
+        "phpunit/phpunit": "^9.5"
+    }
+}
