@@ -1,6 +1,10 @@
 {
     "name": "zeggriim/riot-api-datadragon",
+    "type": "library",
     "description": "Riot DataDragon API wrapper",
+    "keywords": ["riot", "league of legends", "data dragon", "api", "wrapper", "php7", "php8", "metapackage", "league of legends"],
+    "homepage": "https://github.com/zeggriim2/riot-api-datadragon",
+    "license": "GPL-3.0-or-later",
     "autoload": {
         "psr-4": {
             "Zeggriim\\RiotApiDatadragon\\": "src/"
