@@ -10,9 +10,6 @@ class Denormalizer
     {
         $serializer = SerializerFactory::create();
 
-        $dataObjet = [];
-        $dataObjet[] = $serializer->denormalize($data, $type);
-
-        return $dataObjet;
+        return $serializer->denormalize($data, $type);
     }
 }
