@@ -24,12 +24,12 @@ abstract class BaseApi
     /**
      * @param string $url
      * @param string $method
-     * @return array
      * @throws ClientExceptionInterface
      * @throws DecodingExceptionInterface
      * @throws RedirectionExceptionInterface
      * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
+     * @return array
      */
     protected function makeCall(string $url, string $method = "GET", array $options = []): array
     {

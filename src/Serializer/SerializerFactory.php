@@ -11,14 +11,19 @@ use Symfony\Component\Serializer\Serializer as SymfonySerializer;
 
 class SerializerFactory
 {
+    private static $serializer = null;
+
     public static function create(): SymfonySerializer
     {
-        $normalizer = new ObjectNormalizer(
-            null,
-            null,
-            null,
-            new ReflectionExtractor()
-        );
-        return new \Symfony\Component\Serializer\Serializer([new DateTimeNormalizer(), $normalizer]);
+        if (is_null(self::$serializer)) {
+            $normalizer = new ObjectNormalizer(
+                null,
+                null,
+                null,
+                new ReflectionExtractor()
+            );
+            self::$serializer = new \Symfony\Component\Serializer\Serializer([new DateTimeNormalizer(), $normalizer]);
+        }
+        return self::$serializer;
     }
 }

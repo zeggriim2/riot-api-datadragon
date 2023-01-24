@@ -12,8 +12,8 @@ class Region extends AbstractEnum
     public const SEA        = "SEA";
 
     private const HOST          = ".api.riotgames.com";
-    public const HOS_AMERICAS   = self::HOST    . self::HOST;
-    public const HOS_ASIA       = self::ASIA    . self::HOST;
-    public const HOS_EUROPE     = self::EUROPE  . self::HOST;
-    public const HOS_SEA        = self::SEA     . self::HOST;
+    public const HOS_AMERICAS   = self::HOST . self::HOST;
+    public const HOS_ASIA       = self::ASIA . self::HOST;
+    public const HOS_EUROPE     = self::EUROPE . self::HOST;
+    public const HOS_SEA        = self::SEA . self::HOST;
 }
