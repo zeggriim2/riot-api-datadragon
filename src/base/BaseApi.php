@@ -31,9 +31,8 @@ abstract class BaseApi
      * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
      */
-    protected function makeCall(string $url, string $method = "GET",array $options = []): array
+    protected function makeCall(string $url, string $method = "GET", array $options = []): array
     {
-
         $response = $this->client->request($method, $url, $options);
 
         if ($response->getStatusCode() === 200) {
