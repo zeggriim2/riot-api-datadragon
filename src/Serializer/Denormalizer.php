@@ -6,7 +6,7 @@ namespace Zeggriim\RiotApiDatadragon\Serializer;
 
 class Denormalizer
 {
-    public function denormalize(array $data, string $type): array
+    public function denormalize(array $data, string $type)
     {
         $serializer = SerializerFactory::create();
 
