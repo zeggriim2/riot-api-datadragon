@@ -6,7 +6,7 @@ namespace Zeggriim\RiotApiDatadragon\Model\Summoner;
 
 use Zeggriim\RiotApiDatadragon\Model\General\Image;
 
-class Summoner
+class SummonerData
 {
     private string $id;
     private string $name;
@@ -19,7 +19,7 @@ class Summoner
     /** @var array<array-key,int>  */
     private array $cost;
     private string $costBurn;
-    private $datavalues;
+    private array $datavalues;
     /** @var array<array,array<array-key,int>|null>  */
     private array $effect;
     /** @var array<array-key,string|null>  */
@@ -127,12 +127,12 @@ class Summoner
         $this->costBurn = $costBurn;
     }
 
-    public function getDatavalues()
+    public function getDatavalues(): array
     {
         return $this->datavalues;
     }
 
-    public function setDatavalues($datavalues): void
+    public function setDatavalues(array$datavalues): void
     {
         $this->datavalues = $datavalues;
     }
