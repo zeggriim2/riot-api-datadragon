@@ -12,8 +12,8 @@ class Item
     private string $description;
     private string $colloq;
     private string $plaintext;
-    /** @var array<array-key,string>  */
-    private array $into;
+    /** @var array<array-key,string>|null  */
+    private ?array $into = null;
     private Image $image;
     private Gold $gold;
     /** @var array<array-key,string>  */
@@ -22,8 +22,8 @@ class Item
     private array $maps;
     /** @var array<array-key,int|float>  */
     private array $stats;
-    /** @var array<string,string>  */
-    private array $effect;
+    /** @var array<string,string>|null  */
+    private ?array $effect = null;
 
     public function getName(): string
     {
@@ -65,12 +65,12 @@ class Item
         $this->plaintext = $plaintext;
     }
 
-    public function getInto(): array
+    public function getInto(): ?array
     {
         return $this->into;
     }
 
-    public function setInto(array $into): void
+    public function setInto(?array $into): void
     {
         $this->into = $into;
     }
@@ -125,12 +125,12 @@ class Item
         $this->stats = $stats;
     }
 
-    public function getEffect(): array
+    public function getEffect(): ?array
     {
         return $this->effect;
     }
 
-    public function setEffect(array $effect): void
+    public function setEffect(?array $effect): void
     {
         $this->effect = $effect;
     }
