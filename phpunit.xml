@@ -13,6 +13,7 @@
     <testsuites>
         <testsuite name="Riot Api DataDragon">
             <directory>tests/</directory>
+            <exclude>./tests/BaseApiTest.php</exclude>
         </testsuite>
     </testsuites>
 
