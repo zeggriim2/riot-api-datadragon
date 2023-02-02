@@ -7,10 +7,13 @@ namespace Zeggriim\RiotApiDatadragon;
 use Zeggriim\RiotApiDatadragon\base\BaseApi;
 use Zeggriim\RiotApiDatadragon\Enum\TypeReturn;
 use Zeggriim\RiotApiDatadragon\Enum\UrlDataDragon;
-use Zeggriim\RiotApiDatadragon\Model\Champion\Champion;
+use Zeggriim\RiotApiDatadragon\Model\Champion\ChampionData;
 use Zeggriim\RiotApiDatadragon\Model\Champion\ChampionDetail;
+use Zeggriim\RiotApiDatadragon\Model\Champion\ChampionMetadata;
 use Zeggriim\RiotApiDatadragon\Model\Item\Item;
-use Zeggriim\RiotApiDatadragon\Model\Summoner\Summoner;
+use Zeggriim\RiotApiDatadragon\Model\Summoner\SummonerData;
+use Zeggriim\RiotApiDatadragon\Model\Summoner\SummonerMetadata;
+use Zeggriim\RiotApiDatadragon\Serializer\Denormalizer;
 use Zeggriim\RiotApiDatadragon\Serializer\DenormalizerArray;
 
 class DataDragonApi extends BaseApi
@@ -35,7 +38,7 @@ class DataDragonApi extends BaseApi
     /**
      *
      * Retourne la liste de toutes les Languages
-     * @return array<array-key,string|Champion>
+     * @return array<array-key,string|ChampionData>
      */
     public function getLanguages(): array
     {
@@ -44,7 +47,7 @@ class DataDragonApi extends BaseApi
 
     /**
      * Retourne la liste de toutes les Champions
-     * @return array<string,Champion>
+     * @return array|ChampionMetadata
      */
     public function getChampions(int $typeReturn = TypeReturn::RETURN_ARRAY)
     {
@@ -58,8 +61,8 @@ class DataDragonApi extends BaseApi
             return $data;
         }
 
-        $denormalizeArray = new DenormalizerArray();
-        return $denormalizeArray->denormalize($data['data'], Champion::class);
+        $denormalizer = new Denormalizer();
+        return $denormalizer->denormalize($data, ChampionMetadata::class);
     }
 
     /**
@@ -84,7 +87,7 @@ class DataDragonApi extends BaseApi
     }
 
     /**
-     * @return array<string,Item>
+     * @return array<string,Item> // TODO gerer le cas en array & object
      */
     public function getItems()
     {
@@ -98,10 +101,7 @@ class DataDragonApi extends BaseApi
         return $denormalizeArray->denormalize($data['data'], Item::class);
     }
 
-    /**
-     * @return array<string,Summoner>
-     */
-    public function getSummoner()
+    public function getSummoner(): SummonerMetadata
     {
         $url = BuildUrl::build(UrlDataDragon::URL_SUMMONER, [
             "version" => $this->version,
@@ -109,7 +109,7 @@ class DataDragonApi extends BaseApi
         ]);
 
         $data = $this->makeCall($url);
-        $denormalizeArray = new DenormalizerArray();
-        return $denormalizeArray->denormalize($data['data'], Summoner::class);
+        $denormalizer = new Denormalizer();
+        return $denormalizer->denormalize($data, SummonerMetadata::class);
     }
 }
