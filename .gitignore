@@ -130,3 +130,4 @@ fabric.properties
 .php-cs-fixer.cache
 
 index.php
+composer.lock
