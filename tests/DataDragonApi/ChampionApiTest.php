@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Zeggriim\RiotApiDatadragon\Tests\DataDragonApi;
 
+use Zeggriim\RiotApiDatadragon\DataDragonApi;
 use Zeggriim\RiotApiDatadragon\Enum\TypeReturn;
+use Zeggriim\RiotApiDatadragon\Exception\EmptyArgument;
 use Zeggriim\RiotApiDatadragon\Model\Champion\ChampionData;
 use Zeggriim\RiotApiDatadragon\Model\Champion\ChampionDetail;
 use Zeggriim\RiotApiDatadragon\Model\Champion\ChampionMetadata;
@@ -22,15 +24,29 @@ class ChampionApiTest extends BaseApiTest
 {
     use AssertImageTrait;
 
+    public function testGetChampionsNullVersion()
+    {
+        $api = new DataDragonApi(lang: 'fr_FR');
+        $this->expectException(EmptyArgument::class);
+        $api->getChampions();
+    }
+
+    public function testGetChampionsNullLang()
+    {
+        $api = new DataDragonApi(version: '13.1.1');
+        $this->expectException(EmptyArgument::class);
+        $api->getChampions();
+    }
+
     public function testGetChampionsArray()
     {
-        $champions = $this->api->getChampions();
+        $champions = $this->dataDragonApiVerionAndLanguages->getChampions();
         $this->assertIsArray($champions);
     }
 
     public function testGetChampionsObjet()
     {
-        $champions = $this->api->getChampions(TypeReturn::RETURN_OBJET);
+        $champions = $this->dataDragonApiVerionAndLanguages->getChampions(TypeReturn::RETURN_OBJET);
         $this->assertInstanceOf(ChampionMetadata::class, $champions);
         $this->assertChampionMetadata($champions);
     }
@@ -209,12 +225,26 @@ class ChampionApiTest extends BaseApiTest
         $this->assertChampionData($champions->getZyra());
     }
 
+    public function testGetChampionNullVersion()
+    {
+        $api = new DataDragonApi(lang: 'fr_FR');
+        $this->expectException(EmptyArgument::class);
+        $api->getChampion("aatrox");
+    }
+
+    public function testGetChampionNullLang()
+    {
+        $api = new DataDragonApi(version: '13.1.1');
+        $this->expectException(EmptyArgument::class);
+        $api->getChampion("aatrox");
+    }
+
     /**
      * @dataProvider nameChampionProvider
      */
     public function testGetChampionArray($name)
     {
-        $champion = $this->api->getChampion($name);
+        $champion = $this->dataDragonApiVerionAndLanguages->getChampion($name);
         $this->assertIsArray($champion);
     }
     /**
@@ -222,7 +252,7 @@ class ChampionApiTest extends BaseApiTest
      */
     public function testGetChampionObjet($name)
     {
-        $champion = $this->api->getChampion($name, TypeReturn::RETURN_OBJET);
+        $champion = $this->dataDragonApiVerionAndLanguages->getChampion($name, TypeReturn::RETURN_OBJET);
         $this->assertIsArray($champion);
         $this->assertInstanceOf(ChampionDetail::class, $champion[ucfirst($name)]);
         $this->assertChampionDetail($champion[ucfirst($name)]);

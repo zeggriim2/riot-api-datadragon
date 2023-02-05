@@ -10,11 +10,11 @@ use Zeggriim\RiotApiDatadragon\Enum\Languages;
 
 class BaseApiTest extends TestCase
 {
-    protected DataDragonApi $api;
+    protected DataDragonApi $dataDragonApiVerionAndLanguages;
 
     protected function setUp(): void
     {
-        $this->api = new DataDragonApi("13.1.1", Languages::CODE_fr_FR);
+        $this->dataDragonApiVerionAndLanguages = new DataDragonApi("13.1.1", Languages::CODE_fr_FR);
     }
 
     protected function assertGeneral($actuals, $type)

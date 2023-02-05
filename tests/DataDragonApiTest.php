@@ -8,14 +8,14 @@ class DataDragonApiTest extends BaseApiTest
 {
     public function testGetVersionApi()
     {
-        $versions = $this->api->getVersions();
+        $versions = $this->dataDragonApiVerionAndLanguages->getVersions();
         $this->assertIsArray($versions);
         $this->assertNotEmpty($versions);
     }
 
     public function testGetLanguages()
     {
-        $languages = $this->api->getLanguages();
+        $languages = $this->dataDragonApiVerionAndLanguages->getLanguages();
         $this->assertIsArray($languages);
         $this->assertNotEmpty($languages);
     }

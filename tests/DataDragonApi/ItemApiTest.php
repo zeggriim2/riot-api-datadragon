@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Zeggriim\RiotApiDatadragon\Tests\DataDragonApi;
 
+use Zeggriim\RiotApiDatadragon\DataDragonApi;
+use Zeggriim\RiotApiDatadragon\Exception\EmptyArgument;
 use Zeggriim\RiotApiDatadragon\Model\Item\Gold;
 use Zeggriim\RiotApiDatadragon\Model\Item\Item;
 use Zeggriim\RiotApiDatadragon\Tests\BaseApiTest;
@@ -15,9 +17,23 @@ class ItemApiTest extends BaseApiTest
     use AssertImageTrait;
     use AssertGeneralTrait;
 
+    public function testGetItemsNullVersion()
+    {
+        $api = new DataDragonApi(lang: 'fr_FR');
+        $this->expectException(EmptyArgument::class);
+        $api->getItems();
+    }
+
+    public function testGetItemsNullLang()
+    {
+        $api = new DataDragonApi(version: '13.1.1');
+        $this->expectException(EmptyArgument::class);
+        $api->getItems();
+    }
+
     public function testGetItems()
     {
-        $items = $this->api->getItems();
+        $items = $this->dataDragonApiVerionAndLanguages->getItems();
         $this->assertGeneral($items, Item::class);
         $first_keys = (string)array_key_first($items);
         foreach ($items as $item) {

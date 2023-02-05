@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Zeggriim\RiotApiDatadragon\Tests\DataDragonApi;
 
+use Zeggriim\RiotApiDatadragon\DataDragonApi;
+use Zeggriim\RiotApiDatadragon\Exception\EmptyArgument;
 use Zeggriim\RiotApiDatadragon\Model\Summoner\SummonerData;
 use Zeggriim\RiotApiDatadragon\Model\Summoner\SummonerMetadata;
 use Zeggriim\RiotApiDatadragon\Model\Summoner\Summoners;
@@ -14,9 +16,23 @@ class SummonerApiTest extends BaseApiTest
 {
     use AssertImageTrait;
 
+    public function testGetSummonersNullVersion()
+    {
+        $api = new DataDragonApi(lang: 'fr_FR');
+        $this->expectException(EmptyArgument::class);
+        $api->getSummoner();
+    }
+
+    public function testGetSummonersNullLang()
+    {
+        $api = new DataDragonApi(version: '13.1.1');
+        $this->expectException(EmptyArgument::class);
+        $api->getSummoner();
+    }
+
     public function testGetSummoner()
     {
-        $summoners = $this->api->getSummoner();
+        $summoners = $this->dataDragonApiVerionAndLanguages->getSummoner();
         $this->assertInstanceOf(SummonerMetadata::class, $summoners);
         $this->assertSummonerMetadata($summoners);
 
