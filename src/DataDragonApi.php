@@ -7,11 +7,11 @@ namespace Zeggriim\RiotApiDatadragon;
 use Zeggriim\RiotApiDatadragon\base\BaseApi;
 use Zeggriim\RiotApiDatadragon\Enum\TypeReturn;
 use Zeggriim\RiotApiDatadragon\Enum\UrlDataDragon;
+use Zeggriim\RiotApiDatadragon\Exception\EmptyArgument;
 use Zeggriim\RiotApiDatadragon\Model\Champion\ChampionData;
 use Zeggriim\RiotApiDatadragon\Model\Champion\ChampionDetail;
 use Zeggriim\RiotApiDatadragon\Model\Champion\ChampionMetadata;
 use Zeggriim\RiotApiDatadragon\Model\Item\Item;
-use Zeggriim\RiotApiDatadragon\Model\Summoner\SummonerData;
 use Zeggriim\RiotApiDatadragon\Model\Summoner\SummonerMetadata;
 use Zeggriim\RiotApiDatadragon\Serializer\Denormalizer;
 use Zeggriim\RiotApiDatadragon\Serializer\DenormalizerArray;
@@ -19,8 +19,8 @@ use Zeggriim\RiotApiDatadragon\Serializer\DenormalizerArray;
 class DataDragonApi extends BaseApi
 {
     public function __construct(
-        private string $version,
-        private string $lang,
+        private ?string $version = null,
+        private ?string $lang = null,
     ) {
         parent::__construct();
     }
@@ -51,6 +51,10 @@ class DataDragonApi extends BaseApi
      */
     public function getChampions(int $typeReturn = TypeReturn::RETURN_ARRAY)
     {
+        if (is_null($this->version) || is_null($this->lang)) {
+            throw new EmptyArgument("Version or Lang is null");
+        }
+
         $url = BuildUrl::build(UrlDataDragon::URL_CHAMPIONS, [
             "version" => $this->version,
             "lang" => $this->lang
@@ -71,6 +75,10 @@ class DataDragonApi extends BaseApi
      */
     public function getChampion(string $name, int $typeReturn = TypeReturn::RETURN_ARRAY): array
     {
+        if (is_null($this->version) || is_null($this->lang)) {
+            throw new EmptyArgument("Version or Lang is null");
+        }
+
         $url = BuildUrl::build(UrlDataDragon::URL_CHAMPION, [
             "version" => $this->version,
             "lang" => $this->lang,
@@ -91,6 +99,10 @@ class DataDragonApi extends BaseApi
      */
     public function getItems()
     {
+        if (is_null($this->version) || is_null($this->lang)) {
+            throw new EmptyArgument("Version or Lang is null");
+        }
+
         $url = BuildUrl::build(UrlDataDragon::URL_ITEMS, [
             "version" => $this->version,
             "lang" => $this->lang
@@ -103,6 +115,10 @@ class DataDragonApi extends BaseApi
 
     public function getSummoner(): SummonerMetadata
     {
+        if (is_null($this->version) || is_null($this->lang)) {
+            throw new EmptyArgument("Version or Lang is null");
+        }
+
         $url = BuildUrl::build(UrlDataDragon::URL_SUMMONER, [
             "version" => $this->version,
             "lang" => $this->lang
