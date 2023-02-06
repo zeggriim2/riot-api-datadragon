@@ -11,7 +11,12 @@ use Zeggriim\RiotApiDatadragon\Exception\EmptyArgument;
 use Zeggriim\RiotApiDatadragon\Model\Champion\ChampionData;
 use Zeggriim\RiotApiDatadragon\Model\Champion\ChampionDetail;
 use Zeggriim\RiotApiDatadragon\Model\Champion\ChampionMetadata;
+use Zeggriim\RiotApiDatadragon\Model\GameMode;
+use Zeggriim\RiotApiDatadragon\Model\GameType;
 use Zeggriim\RiotApiDatadragon\Model\Item\Item;
+use Zeggriim\RiotApiDatadragon\Model\Map;
+use Zeggriim\RiotApiDatadragon\Model\Queue;
+use Zeggriim\RiotApiDatadragon\Model\Season;
 use Zeggriim\RiotApiDatadragon\Model\Summoner\SummonerMetadata;
 use Zeggriim\RiotApiDatadragon\Serializer\Denormalizer;
 use Zeggriim\RiotApiDatadragon\Serializer\DenormalizerArray;
@@ -40,9 +45,14 @@ class DataDragonApi extends BaseApi
      * Retourne la liste de toutes les Maps
      * @return array<array-key,array<string,int|string>>
      */
-    public function getMaps(): array
+    public function getMaps(int $typeReturn = TypeReturn::RETURN_ARRAY): array
     {
-        return $this->makeCall(UrlDataDragon::URL_STATIC_MAPS);
+        $data = $this->makeCall(UrlDataDragon::URL_STATIC_MAPS);
+        if ($typeReturn === TypeReturn::RETURN_ARRAY) {
+            return $data;
+        }
+        $denormalizeArray = new DenormalizerArray();
+        return $denormalizeArray->denormalize($data, Map::class);
     }
 
     /**
@@ -50,9 +60,14 @@ class DataDragonApi extends BaseApi
      * Retourne la liste de toutes les Maps
      * @return array<array-key,array<string,int|string>>
      */
-    public function getSeasons(): array
+    public function getSeasons(int $typeReturn = TypeReturn::RETURN_ARRAY): array
     {
-        return $this->makeCall(UrlDataDragon::URL_STATIC_SEASONS);
+        $data = $this->makeCall(UrlDataDragon::URL_STATIC_SEASONS);
+        if ($typeReturn === TypeReturn::RETURN_ARRAY) {
+            return $data;
+        }
+        $denormalizeArray = new DenormalizerArray();
+        return $denormalizeArray->denormalize($data, Season::class);
     }
 
     /**
@@ -60,9 +75,14 @@ class DataDragonApi extends BaseApi
      * Retourne la liste de toutes les Maps
      * @return array<array-key,array<string,int|string|null>>
      */
-    public function getQueues(): array
+    public function getQueues(int $typeReturn = TypeReturn::RETURN_ARRAY): array
     {
-        return $this->makeCall(UrlDataDragon::URL_STATIC_QUEUES);
+        $data = $this->makeCall(UrlDataDragon::URL_STATIC_QUEUES);
+        if ($typeReturn === TypeReturn::RETURN_ARRAY) {
+            return $data;
+        }
+        $denormalizeArray = new DenormalizerArray();
+        return $denormalizeArray->denormalize($data, Queue::class);
     }
 
     /**
@@ -70,9 +90,14 @@ class DataDragonApi extends BaseApi
      * Retourne la liste de toutes les Maps
      * @return array<array-key,array<string,string>>
      */
-    public function getGameModes(): array
+    public function getGameModes(int $typeReturn = TypeReturn::RETURN_ARRAY): array
     {
-        return $this->makeCall(UrlDataDragon::URL_STATIC_GAME_MODES);
+        $data = $this->makeCall(UrlDataDragon::URL_STATIC_GAME_MODES);
+        if ($typeReturn === TypeReturn::RETURN_ARRAY) {
+            return $data;
+        }
+        $denormalizeArray = new DenormalizerArray();
+        return $denormalizeArray->denormalize($data, GameMode::class);
     }
 
     /**
@@ -80,9 +105,14 @@ class DataDragonApi extends BaseApi
      * Retourne la liste de toutes les Maps
      * @return array<array-key,array<string,string>>
      */
-    public function getGameTypes(): array
+    public function getGameTypes(int $typeReturn = TypeReturn::RETURN_ARRAY): array
     {
-        return $this->makeCall(UrlDataDragon::URL_STATIC_GAME_TYPES);
+        $data = $this->makeCall(UrlDataDragon::URL_STATIC_GAME_TYPES);
+        if ($typeReturn === TypeReturn::RETURN_ARRAY) {
+            return $data;
+        }
+        $denormalizeArray = new DenormalizerArray();
+        return $denormalizeArray->denormalize($data, GameType::class);
     }
 
 
