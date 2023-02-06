@@ -37,6 +37,57 @@ class DataDragonApi extends BaseApi
 
     /**
      *
+     * Retourne la liste de toutes les Maps
+     * @return array<array-key,array<string,int|string>>
+     */
+    public function getMaps(): array
+    {
+        return $this->makeCall(UrlDataDragon::URL_STATIC_MAPS);
+    }
+
+    /**
+     *
+     * Retourne la liste de toutes les Maps
+     * @return array<array-key,array<string,int|string>>
+     */
+    public function getSeasons(): array
+    {
+        return $this->makeCall(UrlDataDragon::URL_STATIC_SEASONS);
+    }
+
+    /**
+     *
+     * Retourne la liste de toutes les Maps
+     * @return array<array-key,array<string,int|string|null>>
+     */
+    public function getQueues(): array
+    {
+        return $this->makeCall(UrlDataDragon::URL_STATIC_QUEUES);
+    }
+
+    /**
+     *
+     * Retourne la liste de toutes les Maps
+     * @return array<array-key,array<string,string>>
+     */
+    public function getGameModes(): array
+    {
+        return $this->makeCall(UrlDataDragon::URL_STATIC_GAME_MODES);
+    }
+
+    /**
+     *
+     * Retourne la liste de toutes les Maps
+     * @return array<array-key,array<string,string>>
+     */
+    public function getGameTypes(): array
+    {
+        return $this->makeCall(UrlDataDragon::URL_STATIC_GAME_TYPES);
+    }
+
+
+    /**
+     *
      * Retourne la liste de toutes les Languages
      * @return array<array-key,string|ChampionData>
      */

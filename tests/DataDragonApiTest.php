@@ -19,4 +19,39 @@ class DataDragonApiTest extends BaseApiTest
         $this->assertIsArray($languages);
         $this->assertNotEmpty($languages);
     }
+
+    public function testGetMaps()
+    {
+        $maps = $this->dataDragonApiVerionAndLanguages->getMaps();
+        $this->assertIsArray($maps);
+        $this->assertNotEmpty($maps);
+    }
+
+    public function testGetSeasons()
+    {
+        $seasons = $this->dataDragonApiVerionAndLanguages->getSeasons();
+        $this->assertIsArray($seasons);
+        $this->assertNotEmpty($seasons);
+    }
+
+    public function testGetQueues()
+    {
+        $queues = $this->dataDragonApiVerionAndLanguages->getQueues();
+        $this->assertIsArray($queues);
+        $this->assertNotEmpty($queues);
+    }
+
+    public function testGetGameModes()
+    {
+        $gameModes = $this->dataDragonApiVerionAndLanguages->getGameModes();
+        $this->assertIsArray($gameModes);
+        $this->assertNotEmpty($gameModes);
+    }
+
+    public function testGetGameTypes()
+    {
+        $gameType = $this->dataDragonApiVerionAndLanguages->getGameTypes();
+        $this->assertIsArray($gameType);
+        $this->assertNotEmpty($gameType);
+    }
 }
