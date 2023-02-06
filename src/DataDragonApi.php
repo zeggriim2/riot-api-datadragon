@@ -43,7 +43,7 @@ class DataDragonApi extends BaseApi
     /**
      *
      * Retourne la liste de toutes les Maps
-     * @return array<array-key,array<string,int|string>>
+     * @return array<array-key,array<string,int|string>>|Map[]
      */
     public function getMaps(int $typeReturn = TypeReturn::RETURN_ARRAY): array
     {
@@ -58,7 +58,7 @@ class DataDragonApi extends BaseApi
     /**
      *
      * Retourne la liste de toutes les Maps
-     * @return array<array-key,array<string,int|string>>
+     * @return array<array-key,array<string,int|string>>|Season[]
      */
     public function getSeasons(int $typeReturn = TypeReturn::RETURN_ARRAY): array
     {
@@ -73,7 +73,7 @@ class DataDragonApi extends BaseApi
     /**
      *
      * Retourne la liste de toutes les Maps
-     * @return array<array-key,array<string,int|string|null>>
+     * @return array<array-key,array<string,int|string|null>>|Queue[]
      */
     public function getQueues(int $typeReturn = TypeReturn::RETURN_ARRAY): array
     {
@@ -88,7 +88,7 @@ class DataDragonApi extends BaseApi
     /**
      *
      * Retourne la liste de toutes les Maps
-     * @return array<array-key,array<string,string>>
+     * @return array<array-key,array<string,string>>|GameMode[]
      */
     public function getGameModes(int $typeReturn = TypeReturn::RETURN_ARRAY): array
     {
@@ -103,7 +103,7 @@ class DataDragonApi extends BaseApi
     /**
      *
      * Retourne la liste de toutes les Maps
-     * @return array<array-key,array<string,string>>
+     * @return array<array-key,array<string,string>>|GameType[]
      */
     public function getGameTypes(int $typeReturn = TypeReturn::RETURN_ARRAY): array
     {

@@ -10,9 +10,12 @@ use Zeggriim\RiotApiDatadragon\Model\GameType;
 use Zeggriim\RiotApiDatadragon\Model\Map;
 use Zeggriim\RiotApiDatadragon\Model\Queue;
 use Zeggriim\RiotApiDatadragon\Model\Season;
+use Zeggriim\RiotApiDatadragon\Tests\Traits\AssertGeneralTrait;
 
 class DataDragonApiTest extends BaseApiTest
 {
+    use AssertGeneralTrait;
+
     public function testGetVersionApi()
     {
         $versions = $this->dataDragonApiVerionAndLanguages->getVersions();
@@ -40,6 +43,7 @@ class DataDragonApiTest extends BaseApiTest
         foreach ($maps as $map) {
             $this->assertInstanceOf(Map::class, $map);
         }
+        $this->assertMap($maps[0]);
     }
 
     public function testGetSeasonsArray()
@@ -55,6 +59,7 @@ class DataDragonApiTest extends BaseApiTest
         foreach ($seasons as $season) {
             $this->assertInstanceOf(Season::class, $season);
         }
+        $this->assertSeason($seasons[0]);
     }
 
     public function testGetQueuesArray()
@@ -70,6 +75,7 @@ class DataDragonApiTest extends BaseApiTest
         foreach ($queues as $queue) {
             $this->assertInstanceOf(Queue::class, $queue);
         }
+        $this->assertQueue($queues[0]);
     }
 
     public function testGetGameModesArray()
@@ -85,6 +91,7 @@ class DataDragonApiTest extends BaseApiTest
         foreach ($gameModes as $gameMode) {
             $this->assertInstanceOf(GameMode::class, $gameMode);
         }
+        $this->assertGameMode($gameModes[0]);
     }
 
     public function testGetGameTypesArray()
@@ -100,5 +107,39 @@ class DataDragonApiTest extends BaseApiTest
         foreach ($gameTypes as $gameType) {
             $this->assertInstanceOf(GameType::class, $gameType);
         }
+        $this->assertGameType($gameTypes[0]);
+    }
+
+    private function assertMap(Map $map)
+    {
+        $this->assertIsInt($map->getMapId());
+        $this->assertIsString($map->getMapName());
+        $this->assertIsString($map->getNotes());
+    }
+
+    private function assertSeason(Season $season)
+    {
+        $this->assertIsInt($season->getId());
+        $this->assertIsString($season->getSeason());
+    }
+
+    private function assertQueue(Queue $queue)
+    {
+        $this->assertIsInt($queue->getQueueId());
+        $this->assertIsString($queue->getMap());
+        $this->assertNullOrIsString($queue->getDescription());
+        $this->assertNullOrIsString($queue->getNotes());
+    }
+
+    private function assertGameMode(GameMode $gameMode)
+    {
+        $this->assertIsString($gameMode->getGameMode());
+        $this->assertIsString($gameMode->getDescription());
+    }
+
+    private function assertGameType(GameType $gameType)
+    {
+        $this->assertIsString($gameType->getGametype());
+        $this->assertIsString($gameType->getDescription());
     }
 }
