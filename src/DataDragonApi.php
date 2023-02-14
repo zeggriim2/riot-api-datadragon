@@ -30,6 +30,16 @@ class DataDragonApi extends BaseApi
         parent::__construct();
     }
 
+    public function setVersion(string $version)
+    {
+        $this->version = $version;
+    }
+
+    public function setLang(string $lang)
+    {
+        $this->lang = $lang;
+    }
+
     /**
      *
      * Retourne la liste de toutes les Versions
