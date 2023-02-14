@@ -13,7 +13,7 @@ class Stats
     private int $movespeed;
     private int $armor;
     private int|float $armorperlevel;
-    private int $spellblock;
+    private int|float $spellblock;
     private float $spellblockperlevel;
     private int $attackrange;
     private int|float $hpregen;
@@ -97,12 +97,12 @@ class Stats
         $this->armorperlevel = $armorperlevel;
     }
 
-    public function getSpellblock(): int
+    public function getSpellblock(): int|float
     {
         return $this->spellblock;
     }
 
-    public function setSpellblock(int $spellblock): void
+    public function setSpellblock(int|float $spellblock): void
     {
         $this->spellblock = $spellblock;
     }
