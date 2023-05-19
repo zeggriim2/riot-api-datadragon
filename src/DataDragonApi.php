@@ -7,19 +7,37 @@ namespace Zeggriim\RiotApiDatadragon;
 use Zeggriim\RiotApiDatadragon\base\BaseApi;
 use Zeggriim\RiotApiDatadragon\Enum\TypeReturn;
 use Zeggriim\RiotApiDatadragon\Enum\UrlDataDragon;
-use Zeggriim\RiotApiDatadragon\Model\Champion\Champion;
+use Zeggriim\RiotApiDatadragon\Exception\EmptyArgument;
+use Zeggriim\RiotApiDatadragon\Model\Champion\ChampionData;
 use Zeggriim\RiotApiDatadragon\Model\Champion\ChampionDetail;
+use Zeggriim\RiotApiDatadragon\Model\Champion\ChampionMetadata;
+use Zeggriim\RiotApiDatadragon\Model\GameMode;
+use Zeggriim\RiotApiDatadragon\Model\GameType;
 use Zeggriim\RiotApiDatadragon\Model\Item\Item;
-use Zeggriim\RiotApiDatadragon\Model\Summoner\Summoner;
+use Zeggriim\RiotApiDatadragon\Model\Map;
+use Zeggriim\RiotApiDatadragon\Model\Queue;
+use Zeggriim\RiotApiDatadragon\Model\Season;
+use Zeggriim\RiotApiDatadragon\Model\Summoner\SummonerMetadata;
+use Zeggriim\RiotApiDatadragon\Serializer\Denormalizer;
 use Zeggriim\RiotApiDatadragon\Serializer\DenormalizerArray;
 
 class DataDragonApi extends BaseApi
 {
     public function __construct(
-        private string $version,
-        private string $lang,
+        private ?string $version = null,
+        private ?string $lang = null,
     ) {
         parent::__construct();
+    }
+
+    public function setVersion(string $version)
+    {
+        $this->version = $version;
+    }
+
+    public function setLang(string $lang)
+    {
+        $this->lang = $lang;
     }
 
     /**
@@ -34,8 +52,84 @@ class DataDragonApi extends BaseApi
 
     /**
      *
+     * Retourne la liste de toutes les Maps
+     * @return array<array-key,array<string,int|string>>|Map[]
+     */
+    public function getMaps(int $typeReturn = TypeReturn::RETURN_ARRAY): array
+    {
+        $data = $this->makeCall(UrlDataDragon::URL_STATIC_MAPS);
+        if ($typeReturn === TypeReturn::RETURN_ARRAY) {
+            return $data;
+        }
+        $denormalizeArray = new DenormalizerArray();
+        return $denormalizeArray->denormalize($data, Map::class);
+    }
+
+    /**
+     *
+     * Retourne la liste de toutes les Maps
+     * @return array<array-key,array<string,int|string>>|Season[]
+     */
+    public function getSeasons(int $typeReturn = TypeReturn::RETURN_ARRAY): array
+    {
+        $data = $this->makeCall(UrlDataDragon::URL_STATIC_SEASONS);
+        if ($typeReturn === TypeReturn::RETURN_ARRAY) {
+            return $data;
+        }
+        $denormalizeArray = new DenormalizerArray();
+        return $denormalizeArray->denormalize($data, Season::class);
+    }
+
+    /**
+     *
+     * Retourne la liste de toutes les Maps
+     * @return array<array-key,array<string,int|string|null>>|Queue[]
+     */
+    public function getQueues(int $typeReturn = TypeReturn::RETURN_ARRAY): array
+    {
+        $data = $this->makeCall(UrlDataDragon::URL_STATIC_QUEUES);
+        if ($typeReturn === TypeReturn::RETURN_ARRAY) {
+            return $data;
+        }
+        $denormalizeArray = new DenormalizerArray();
+        return $denormalizeArray->denormalize($data, Queue::class);
+    }
+
+    /**
+     *
+     * Retourne la liste de toutes les Maps
+     * @return array<array-key,array<string,string>>|GameMode[]
+     */
+    public function getGameModes(int $typeReturn = TypeReturn::RETURN_ARRAY): array
+    {
+        $data = $this->makeCall(UrlDataDragon::URL_STATIC_GAME_MODES);
+        if ($typeReturn === TypeReturn::RETURN_ARRAY) {
+            return $data;
+        }
+        $denormalizeArray = new DenormalizerArray();
+        return $denormalizeArray->denormalize($data, GameMode::class);
+    }
+
+    /**
+     *
+     * Retourne la liste de toutes les Maps
+     * @return array<array-key,array<string,string>>|GameType[]
+     */
+    public function getGameTypes(int $typeReturn = TypeReturn::RETURN_ARRAY): array
+    {
+        $data = $this->makeCall(UrlDataDragon::URL_STATIC_GAME_TYPES);
+        if ($typeReturn === TypeReturn::RETURN_ARRAY) {
+            return $data;
+        }
+        $denormalizeArray = new DenormalizerArray();
+        return $denormalizeArray->denormalize($data, GameType::class);
+    }
+
+
+    /**
+     *
      * Retourne la liste de toutes les Languages
-     * @return array<array-key,string|Champion>
+     * @return array<array-key,string|ChampionData>
      */
     public function getLanguages(): array
     {
@@ -44,10 +138,14 @@ class DataDragonApi extends BaseApi
 
     /**
      * Retourne la liste de toutes les Champions
-     * @return array<string,Champion>
+     * @return array|ChampionMetadata
      */
     public function getChampions(int $typeReturn = TypeReturn::RETURN_ARRAY)
     {
+        if (is_null($this->version) || is_null($this->lang)) {
+            throw new EmptyArgument("Version or Lang is null");
+        }
+
         $url = BuildUrl::build(UrlDataDragon::URL_CHAMPIONS, [
             "version" => $this->version,
             "lang" => $this->lang
@@ -58,8 +156,8 @@ class DataDragonApi extends BaseApi
             return $data;
         }
 
-        $denormalizeArray = new DenormalizerArray();
-        return $denormalizeArray->denormalize($data['data'], Champion::class);
+        $denormalizer = new Denormalizer();
+        return $denormalizer->denormalize($data, ChampionMetadata::class);
     }
 
     /**
@@ -68,6 +166,10 @@ class DataDragonApi extends BaseApi
      */
     public function getChampion(string $name, int $typeReturn = TypeReturn::RETURN_ARRAY): array
     {
+        if (is_null($this->version) || is_null($this->lang)) {
+            throw new EmptyArgument("Version or Lang is null");
+        }
+
         $url = BuildUrl::build(UrlDataDragon::URL_CHAMPION, [
             "version" => $this->version,
             "lang" => $this->lang,
@@ -84,10 +186,14 @@ class DataDragonApi extends BaseApi
     }
 
     /**
-     * @return array<string,Item>
+     * @return array<string,Item> // TODO gerer le cas en array & object
      */
     public function getItems()
     {
+        if (is_null($this->version) || is_null($this->lang)) {
+            throw new EmptyArgument("Version or Lang is null");
+        }
+
         $url = BuildUrl::build(UrlDataDragon::URL_ITEMS, [
             "version" => $this->version,
             "lang" => $this->lang
@@ -98,18 +204,19 @@ class DataDragonApi extends BaseApi
         return $denormalizeArray->denormalize($data['data'], Item::class);
     }
 
-    /**
-     * @return array<string,Summoner>
-     */
-    public function getSummoner()
+    public function getSummoner(): SummonerMetadata
     {
+        if (is_null($this->version) || is_null($this->lang)) {
+            throw new EmptyArgument("Version or Lang is null");
+        }
+
         $url = BuildUrl::build(UrlDataDragon::URL_SUMMONER, [
             "version" => $this->version,
             "lang" => $this->lang
         ]);
 
         $data = $this->makeCall($url);
-        $denormalizeArray = new DenormalizerArray();
-        return $denormalizeArray->denormalize($data['data'], Summoner::class);
+        $denormalizer = new Denormalizer();
+        return $denormalizer->denormalize($data, SummonerMetadata::class);
     }
 }

@@ -13,10 +13,20 @@
     <testsuites>
         <testsuite name="Riot Api DataDragon">
             <directory>tests/</directory>
+            <exclude>./tests/BaseApiTest.php</exclude>
         </testsuite>
     </testsuites>
 
     <php>
         <env name="APP_ENV" value="testing"/>
     </php>
+
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">src/</directory>
+            <exclude>
+                <directory suffix=".php">src/Enum/</directory>
+            </exclude>
+        </whitelist>
+    </filter>
 </phpunit>

@@ -125,3 +125,9 @@ fabric.properties
 # End of https://www.toptal.com/developers/gitignore/api/phpstorm,composer
 .idea/
 .var/
+
+.phpunit.result.cache
+.php-cs-fixer.cache
+
+index.php
+composer.lock

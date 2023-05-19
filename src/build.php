@@ -6,5 +6,5 @@ namespace Zeggriim\RiotApiDatadragon;
 
 interface build
 {
-    public static function build(string $url, array $params):string ;
+    public static function build(string $url, array $params): string ;
 }

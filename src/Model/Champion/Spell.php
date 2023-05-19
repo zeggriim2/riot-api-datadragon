@@ -19,7 +19,7 @@ class Spell
     private string $cooldownBurn;
     /** @var array<array-key,int>  */
     private array $cost;
-    private int $costBurn;
+    private string $costBurn;
     private array $datavalues;
     private array $effect;
     private array $effectBurn;
@@ -122,12 +122,12 @@ class Spell
         $this->cost = $cost;
     }
 
-    public function getCostBurn(): int
+    public function getCostBurn(): string
     {
         return $this->costBurn;
     }
 
-    public function setCostBurn(int $costBurn): void
+    public function setCostBurn(string $costBurn): void
     {
         $this->costBurn = $costBurn;
     }

@@ -7,7 +7,7 @@ namespace Zeggriim\RiotApiDatadragon\Model\Champion;
 use Zeggriim\RiotApiDatadragon\Model\General\Image;
 use Zeggriim\RiotApiDatadragon\Model\General\Info;
 
-class Champion
+class ChampionData
 {
     private string $version;
     private string $id;

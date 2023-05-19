@@ -10,6 +10,11 @@
             "Zeggriim\\RiotApiDatadragon\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Zeggriim\\RiotApiDatadragon\\Tests\\": "tests/"
+        }
+    },
     "authors": [
         {
             "name": "Zeggriim2",
@@ -18,10 +23,11 @@
     ],
     "require": {
         "php": "^8.1",
-        "symfony/http-client": "^6.2",
-        "symfony/serializer": "^6.2",
-        "symfony/property-info": "^6.2",
-        "symfony/property-access": "^6.2"
+        "symfony/http-client": "^5.4|^6.2",
+        "symfony/serializer": "^5.4|^6.2",
+        "symfony/property-info": "^5.4|^6.2",
+        "symfony/property-access": "^5.4|^6.2",
+        "phpdocumentor/reflection-docblock": "^5.3"
     },
     "require-dev": {
         "symfony/var-dumper": "^6.2",
