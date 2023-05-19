@@ -132,4 +132,5 @@ fabric.properties
 index.php
 composer.lock
 
+# Code Coverage
 tests/coverage/*

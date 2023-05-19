@@ -17,6 +17,7 @@ class ChampionData
     private string $blurb;
     private Info $info;
     private Image $image;
+
     /**
      * @var array<array-key,string>
      */
@@ -51,7 +52,7 @@ class ChampionData
 
     public function setKey(int|string $key): void
     {
-        $this->key = (int)$key;
+        $this->key = (int) $key;
     }
 
     public function getName(): string
@@ -120,17 +121,11 @@ class ChampionData
         $this->tags = $tags;
     }
 
-    /**
-     * @return string
-     */
     public function getPartype(): string
     {
         return $this->partype;
     }
 
-    /**
-     * @param string $partype
-     */
     public function setPartype(string $partype): void
     {
         $this->partype = $partype;

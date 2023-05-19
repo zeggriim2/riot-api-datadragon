@@ -12,17 +12,22 @@ class Item
     private string $description;
     private string $colloq;
     private string $plaintext;
-    /** @var array<array-key,string>|null  */
+
+    /** @var null|array<array-key,string> */
     private ?array $into = null;
     private Image $image;
     private Gold $gold;
-    /** @var array<array-key,string>  */
+
+    /** @var array<array-key,string> */
     private array $tags;
-    /** @var array<string,string>  */
+
+    /** @var array<string,string> */
     private array $maps;
-    /** @var array<array-key,int|float>  */
+
+    /** @var array<array-key,float|int> */
     private array $stats;
-    /** @var array<string,string>|null  */
+
+    /** @var null|array<string,string> */
     private ?array $effect = null;
 
     public function getName(): string

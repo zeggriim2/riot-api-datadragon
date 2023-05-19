@@ -14,10 +14,12 @@ class Spell
     private string $tooltip;
     private Leveltip $leveltip;
     private int $maxrank;
-    /** @var array<array-key,int>  */
+
+    /** @var array<array-key,int> */
     private array  $cooldown;
     private string $cooldownBurn;
-    /** @var array<array-key,int>  */
+
+    /** @var array<array-key,int> */
     private array $cost;
     private string $costBurn;
     private array $datavalues;
@@ -26,7 +28,8 @@ class Spell
     private array $vars;
     private string $costType;
     private string $maxammo;
-    /** @var array<array-key,int>  */
+
+    /** @var array<array-key,int> */
     private array $range;
     private string $rangeBurn;
     private Image $image;

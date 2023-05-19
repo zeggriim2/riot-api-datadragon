@@ -8,6 +8,7 @@ class Leveltip
 {
     /** @var array<array-key,string> */
     private array $label;
+
     /** @var array<array-key,string> */
     private array $effect;
 
