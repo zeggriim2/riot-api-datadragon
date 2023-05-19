@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Zeggriim\RiotApiDatadragon\Serializer;
 
-
 use Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor;
 use Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor;
 use Symfony\Component\PropertyInfo\PropertyInfoExtractor;
@@ -15,12 +14,12 @@ use Symfony\Component\Serializer\Serializer as SymfonySerializer;
 
 class SerializerFactory
 {
-    private static $serializer = null;
+    private static $serializer;
 
     public static function create(): SymfonySerializer
     {
-        if (is_null(self::$serializer)) {
-            $phpDocExtractor = new PhpDocExtractor();
+        if (null === self::$serializer) {
+            $phpDocExtractor     = new PhpDocExtractor();
             $reflectionExtractor = new ReflectionExtractor();
 
             $normalizer = new ObjectNormalizer(

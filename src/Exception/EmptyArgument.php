@@ -6,5 +6,4 @@ namespace Zeggriim\RiotApiDatadragon\Exception;
 
 class EmptyArgument extends \Exception
 {
-
 }

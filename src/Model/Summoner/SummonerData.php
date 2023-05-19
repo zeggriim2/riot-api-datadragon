@@ -13,25 +13,31 @@ class SummonerData
     private string $description;
     private string $tooltip;
     private int $maxrank;
-    /** @var array<array-key,int>  */
+
+    /** @var array<array-key,int> */
     private array $cooldown;
     private string $cooldownBurn;
-    /** @var array<array-key,int>  */
+
+    /** @var array<array-key,int> */
     private array $cost;
     private string $costBurn;
     private array $datavalues;
-    /** @var array<array,array<array-key,int>|null>  */
+
+    /** @var array<array,null|array<array-key,int>> */
     private array $effect;
-    /** @var array<array-key,string|null>  */
+
+    /** @var array<array-key,null|string> */
     private array $effectBurn;
     private array $vars;
     private string $key;
     private int $summonerLevel;
-    /** @var array<array-key,string>  */
+
+    /** @var array<array-key,string> */
     private array $modes;
     private string $costType;
     private string $maxammo;
-    /** @var array<array-key,int>  */
+
+    /** @var array<array-key,int> */
     private array $range;
     private string $rangeBurn;
     private Image $image;
@@ -132,7 +138,7 @@ class SummonerData
         return $this->datavalues;
     }
 
-    public function setDatavalues(array$datavalues): void
+    public function setDatavalues(array $datavalues): void
     {
         $this->datavalues = $datavalues;
     }

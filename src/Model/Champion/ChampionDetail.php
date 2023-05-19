@@ -14,19 +14,24 @@ class ChampionDetail
     private string $name;
     private string $title;
     private Image $image;
+
     /** @var Skin[] */
     private array $skins;
     private string $lore;
     private string $blurb;
-    /** @var array<array-key,string>  */
+
+    /** @var array<array-key,string> */
     private array $allytips;
-    /** @var array<array-key,string>  */
+
+    /** @var array<array-key,string> */
     private array $enemytips;
-    /** @var array<array-key,string>  */
+
+    /** @var array<array-key,string> */
     private array $tags;
     private string $partype;
     private Info $info;
     private Stats $stats;
+
     /** @var Spell[] */
     private array $spells;
     private Passive $passive;
@@ -48,7 +53,7 @@ class ChampionDetail
 
     public function setKey(int|string $key): void
     {
-        $this->key = (int)$key;
+        $this->key = (int) $key;
     }
 
     public function getName(): string
