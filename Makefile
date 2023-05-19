@@ -55,4 +55,4 @@ test:
 
 php-cs-fixer:
 	vendor/bin/php-cs-fixer fix "./src" --verbose --config ".php-cs-fixer.dist.php" --allow-risky=yes
-.PHONY:cs-fixer
+.PHONY:php-cs-fixer
