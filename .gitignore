@@ -1,0 +1,11 @@
+.idea
+
+/vendor/
+.phpunit.cache
+
+tests/report
+
+
+### ENV ###
+.env
+### ENV ###

@@ -1,0 +1,7 @@
+services:
+    Zeggriim\RiotApiDataDragon\RiotApiDataDragon:
+        autowire: true
+        public: false
+
+    Zeggriim\RiotApiDataDragon\Endpoint\VersionApi:
+        autowire: true

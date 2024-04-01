@@ -1,0 +1,4 @@
+framework:
+    http_client:
+        scoped_clients:
+            riot.api: '%api.riot.base.uri%'

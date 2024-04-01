@@ -1,38 +1,33 @@
 {
     "name": "zeggriim/riot-api-datadragon",
-    "type": "library",
+    "license": "MIT",
     "description": "Riot DataDragon API wrapper",
-    "keywords": ["riot", "league of legends", "data dragon", "api", "wrapper", "php7", "php8", "metapackage", "league of legends"],
-    "homepage": "https://github.com/zeggriim2/riot-api-datadragon",
-    "license": "GPL-3.0-or-later",
+    "type": "library",
     "autoload": {
         "psr-4": {
-            "Zeggriim\\RiotApiDatadragon\\": "src/"
+            "Zeggriim\\RiotApiDataDragon\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Zeggriim\\RiotApiDatadragon\\Tests\\": "tests/"
+            "Zeggriim\\RiotApiDataDragon\\Tests\\": "tests/"
         }
     },
     "authors": [
         {
-            "name": "Zeggriim2",
-            "email": "lilian.dorazio@hotmail.fr"
+            "name": "zeggriim",
+            "email": "zeggriim@gmail.com"
         }
     ],
     "require": {
-        "php": "^8.1",
-        "symfony/http-client": "^5.4|^6.2",
-        "symfony/serializer": "^5.4|^6.2",
-        "symfony/property-info": "^5.4|^6.2",
-        "symfony/property-access": "^5.4|^6.2",
-        "phpdocumentor/reflection-docblock": "^5.3"
+        "php": "^8.2",
+        "symfony/http-client": "6.4",
+        "symfony/console": "^6.4",
+        "symfony/framework-bundle": "^6.4"
     },
     "require-dev": {
-        "symfony/var-dumper": "^6.2",
-        "friendsofphp/php-cs-fixer": "^3.13",
-        "symfony/stopwatch": "^6.2",
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^10.4",
+        "symfony/var-dumper": "^6.4",
+        "friendsofphp/php-cs-fixer": "^3.52"
     }
 }

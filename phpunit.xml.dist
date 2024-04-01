@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd"
+         colors="true"
+         bootstrap="vendor/autoload.php"
+         cacheDirectory=".phpunit.cache">
+    <php>
+        <ini name="display_errors" value="1"/>
+        <ini name="error_reporting" value="-1"/>
+        <server name="SHELL_VERBOSITY" value="-1"/>
+        <env name="RIOT_API_HOST" value="https://ddragon.leagueoflegends.com/"/>
+    </php>
+
+    <coverage>
+        <report>
+            <clover outputFile="tests/report/xml/clover.xml"/>
+            <html outputDirectory="tests/report/html"/>
+            <text outputFile="tests/report/txt/coverage.txt"/>
+            <php outputFile="tests/report/php/coverage.php"/>
+        </report>
+    </coverage>
+
+    <testsuites>
+        <testsuite name="Library test suite">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <source>
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+    </source>
+</phpunit>
