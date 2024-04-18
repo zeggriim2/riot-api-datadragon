@@ -48,5 +48,5 @@ install: ## Install Package Composer
 .PHONY: install
 
 test:
-	./vendor/bin/phpunit
+	./vendor/bin/phpunit --do-not-cache-result
 .PHONY: test
