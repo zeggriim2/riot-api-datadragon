@@ -1,0 +1,29 @@
+services:
+    Zeggriim\RiotApiDataDragon\RiotApiDataDragon:
+        autowire: true
+        public: false
+
+    Zeggriim\RiotApiDataDragon\Endpoint\ChampionApi:
+        autowire: true
+
+    Zeggriim\RiotApiDataDragon\Endpoint\ItemApi:
+        autowire: true
+
+    Zeggriim\RiotApiDataDragon\Endpoint\LanguageApi:
+        autowire: true
+
+    Zeggriim\RiotApiDataDragon\Endpoint\ProfileIconApi:
+        autowire: true
+
+    Zeggriim\RiotApiDataDragon\Endpoint\SummonerApi:
+        autowire: true
+
+    Zeggriim\RiotApiDataDragon\Endpoint\VersionApi:
+        autowire: true
+
+    Zeggriim\RiotApiDataDragon\Endpoint\ChampionApiInterface: '@Zeggriim\RiotApiDataDragon\Endpoint\ChampionApi'
+    Zeggriim\RiotApiDataDragon\Endpoint\ItemApiInterface: '@Zeggriim\RiotApiDataDragon\Endpoint\ItemApi'
+    Zeggriim\RiotApiDataDragon\Endpoint\LanguageApiInterface: '@Zeggriim\RiotApiDataDragon\Endpoint\LanguageApi'
+    Zeggriim\RiotApiDataDragon\Endpoint\ProfileIconApiInterface: '@Zeggriim\RiotApiDataDragon\Endpoint\ProfileIconApi'
+    Zeggriim\RiotApiDataDragon\Endpoint\SummonerApiInterface: '@Zeggriim\RiotApiDataDragon\Endpoint\SummonerApi'
+    Zeggriim\RiotApiDataDragon\Endpoint\VersionApiInterface: '@Zeggriim\RiotApiDataDragon\Endpoint\VersionApi'

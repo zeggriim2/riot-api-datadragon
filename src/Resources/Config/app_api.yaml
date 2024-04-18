@@ -1,0 +1,2 @@
+parameters:
+    api.riot.base.uri: 'https://ddragon.leagueoflegends.com'

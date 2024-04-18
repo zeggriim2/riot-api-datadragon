@@ -1,13 +1,18 @@
-version: '3.8'
+version: "3"
+
 services:
   php:
+    container_name: riot-api-data-dragon-php
     build:
-      context: docker/php/
-    container_name: php
+      context: .
+      dockerfile: docker/php/Dockerfile
+      args:
+        USER_ID: ${UID}
+        GROUP_ID: ${GID}
     volumes:
-      - .:/var/www/html
-    networks:
-      - mynetworks
-
-networks:
-  mynetworks:
+      - ./:/var/www/html
+    ports:
+      - "8080:80"
+      - "8000:8000"
+    stdin_open: true
+    tty: true
