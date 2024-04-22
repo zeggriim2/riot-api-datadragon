@@ -68,7 +68,7 @@ parameters:
 
 # Liste Endpoints
 
-| Endpoint                                                                               | Interface               
+| Endpoint                                                                               | Interface               |
 |----------------------------------------------------------------------------------------|-------------------------|
 | [Champions & Champion](https://developer.riotgames.com/docs/lol#data-dragon_champions) | ChampionApiInterface    |
 | [Items](https://developer.riotgames.com/docs/lol#data-dragon_items)                    | ItemApiInterface        |
