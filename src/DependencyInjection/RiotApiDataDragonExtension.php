@@ -32,7 +32,7 @@ class RiotApiDataDragonExtension extends Extension implements PrependExtensionIn
                 [
                     'scoped_clients' =>
                         [
-                            'riot.api' => '%env(string:API_RIO_BASE_URI)%'
+                            'riot.api' => ['base_uri' => '%env(string:API_RIO_BASE_URI)%']
                         ]
                 ]
         ];
