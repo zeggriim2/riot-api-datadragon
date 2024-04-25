@@ -26,22 +26,10 @@ return [
 
 
 ### Configuration
+Dans le fichier `.env` de l'environnement souhaité, ajouter :
 
-Ajouter le scope client de http_Client dans la config `framework.yaml`.
-
-
-```yaml
-framework:
-    http_client:
-        scoped_clients:
-            riot.api: '%api.riot.base.uri%'
 ```
-
-Dans ta config `services.yaml` tu peux mettre cette config qui te permettre de adapter ton base uri en fonction des différents environnement :
-
-```yaml
-parameters:
-    api.riot.base.uri: '%env(string:API_RIO_BASE_URI)%'
+API_RIO_BASE_URI='https://ddragon.leagueoflegends.com'
 ```
 
 # Exemple 
