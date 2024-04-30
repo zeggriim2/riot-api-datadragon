@@ -121,8 +121,7 @@ class ChampionApiTest extends KernelTestCase
             ]
         ];
 
-        $riotApi = $this->getClientRiotApi($data);
-        $championApi = new ChampionApi($riotApi);
+        $championApi = $this->getChampionApi($data);
         $champions = $championApi->getChampions('14.6.1');
 
         self::assertIsArray($champions);
@@ -303,8 +302,7 @@ class ChampionApiTest extends KernelTestCase
             ]
         ];
 
-        $riotApi = $this->getClientRiotApi($data);
-        $championApi = new ChampionApi($riotApi);
+        $championApi = $this->getChampionApi($data);
         $champion = $championApi->getChampion('aatrox', '14.8.1');
 
         self::assertIsArray($champion);
@@ -325,8 +323,7 @@ class ChampionApiTest extends KernelTestCase
 
     public function testGetBadRequest()
     {
-        $riotApi = $this->getClientRiotApi(['test' => 'test'], ['http_code' => 400]);
-        $championApi = new ChampionApi($riotApi);
+        $championApi = $this->getChampionApi(['test' => 'test'], ['http_code' => 400]);
         $champion = $championApi->getChampion('aatrox', '14.8.1');
         self::assertCount(0, $champion);
     }

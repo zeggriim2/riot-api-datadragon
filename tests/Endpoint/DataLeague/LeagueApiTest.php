@@ -4,17 +4,13 @@ declare(strict_types=1);
 
 namespace Zeggriim\RiotApiDataDragon\Tests\Endpoint\DataLeague;
 
-use Psr\Log\LoggerInterface;
+
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\HttpClient\MockHttpClient;
-use Symfony\Component\HttpClient\Response\MockResponse;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
-use Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\LeagueApi;
 use Zeggriim\RiotApiDataDragon\Enum\Division;
 use Zeggriim\RiotApiDataDragon\Enum\Queue;
 use Zeggriim\RiotApiDataDragon\Enum\Tier;
-use Zeggriim\RiotApiDataDragon\RiotApiDataLeague;
 use Zeggriim\RiotApiDataDragon\Tests\Traits\AssertLeagueTrait;
+use Zeggriim\RiotApiDataDragon\Tests\Traits\RiotApiDataLeagueTrait;
 
 /**
  * @group league
@@ -22,6 +18,7 @@ use Zeggriim\RiotApiDataDragon\Tests\Traits\AssertLeagueTrait;
 class LeagueApiTest extends KernelTestCase
 {
     use AssertLeagueTrait;
+    use RiotApiDataLeagueTrait;
 
     /**
      * @dataProvider providerLeague
@@ -241,19 +238,5 @@ class LeagueApiTest extends KernelTestCase
         $leagueApi = $this->getLeagueApi(['test'=> 'test'], ['http_code' => 400]);
         $res = $leagueApi->getGrandMaster();
         self::assertCount(0, $res);
-    }
-
-    private function getLeagueApi(array $dataResponse, array $info = ['http_code' => 200]): LeagueApi
-    {
-        return new LeagueApi($this->getClientRiotApiDataLeague($dataResponse, $info));
-    }
-
-    private function getClientRiotApiDataLeague(array $data,array $info = ['http_code' => 200]): RiotApiDataLeague
-    {
-        $response = new MockResponse(json_encode($data), $info);
-        $this->createMock(HttpClientInterface::class);
-        $httpClient = new MockHttpClient($response, null);
-        $logger = $this->createMock(LoggerInterface::class);
-        return new RiotApiDataLeague($httpClient, $logger);
     }
 }

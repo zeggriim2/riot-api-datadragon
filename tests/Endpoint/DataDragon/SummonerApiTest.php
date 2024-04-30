@@ -53,8 +53,7 @@ class SummonerApiTest extends KernelTestCase
             ],
         ];
 
-        $riotApi = $this->getClientRiotApi($data);
-        $summonerApi = new SummonerApi($riotApi);
+        $summonerApi = $this->getSummonerApi($data);
         $summoners = $summonerApi->getSummoner('14.8.1');
 
         self::assertArrayHasKey('type', $summoners);

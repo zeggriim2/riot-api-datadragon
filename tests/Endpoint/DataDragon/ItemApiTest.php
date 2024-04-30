@@ -87,8 +87,7 @@ class ItemApiTest extends KernelTestCase
             ]
         ];
 
-        $riotApi = $this->getClientRiotApi($data);
-        $itemApi = new ItemApi($riotApi);
+        $itemApi = $this->getItemApi($data);
 
         $items = $itemApi->getItems('14.8.1');
 
