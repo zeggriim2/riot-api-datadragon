@@ -17,9 +17,7 @@ class VersionApiTest extends KernelTestCase
     {
         $data = ['16.6.1','16.5.1', '16.4.2','16.4.1'];
 
-        $riotApiDataDragon = $this->getClientRiotApi($data);
-
-        $versionApi = new VersionApi($riotApiDataDragon);
+        $versionApi = $this->getVersionApi($data);
 
         $versions = $versionApi->getVersions();
 

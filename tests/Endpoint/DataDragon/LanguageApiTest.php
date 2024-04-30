@@ -18,9 +18,7 @@ class LanguageApiTest extends KernelTestCase
     {
         $data = ['en_US', 'cs_CZ', 'de_DE', 'en_GB','en_PH', 'fr_FR', 'zh_MY'];
 
-        $riotApiDataDragon = $this->getClientRiotApi($data);
-
-        $languageApi = new LanguageApi($riotApiDataDragon);
+        $languageApi = $this->getLanguageApi($data);
         $languages = $languageApi->getLanguages();
 
         self::assertIsArray($languages);
