@@ -32,22 +32,21 @@ Dans le fichier `.env` de l'environnement souhaité, ajouter :
 API_RIO_BASE_URI='https://ddragon.leagueoflegends.com'
 ```
 
-# Exemple 
+# Exemple
 
 ```php
     namespace App\Controller;
     
-    use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
     use Symfony\Component\HttpFoundation\Response;
     use Symfony\Component\Routing\Annotation\Route;
-    use Zeggriim\RiotApiDataDragon\Endpoint\VersionApiInterface;
+    use Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\VersionApiInterface;
     
     class HomeController
     {
         #[Route('/home', name: 'app_home')]
         public function index(VersionApiInterface $versionApi): Response
         {
-            dd($versionApi->getVersions());
+            $versionApi->getVersions();
             // ['14.8.1','14.7.1','14.6.1','14.5.1','14.4.1'....]
         }
     }

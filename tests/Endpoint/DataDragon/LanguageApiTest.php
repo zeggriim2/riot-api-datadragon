@@ -1,12 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace Zeggriim\RiotApiDataDragon\Tests\Endpoint;
+namespace Zeggriim\RiotApiDataDragon\Tests\Endpoint\DataDragon;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Zeggriim\RiotApiDataDragon\Endpoint\LanguageApi;
+use Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\LanguageApi;
 use Zeggriim\RiotApiDataDragon\Tests\Traits\RiotApiDataDragonTrait;
 
+/**
+ * @group dragon
+ */
 class LanguageApiTest extends KernelTestCase
 {
     use RiotApiDataDragonTrait;

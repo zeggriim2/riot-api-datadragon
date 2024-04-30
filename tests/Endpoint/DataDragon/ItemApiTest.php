@@ -1,17 +1,20 @@
 <?php
 declare(strict_types=1);
 
-namespace Zeggriim\RiotApiDataDragon\Tests\Endpoint;
+namespace Zeggriim\RiotApiDataDragon\Tests\Endpoint\DataDragon;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Zeggriim\RiotApiDataDragon\Endpoint\ItemApi;
-use Zeggriim\RiotApiDataDragon\Tests\Traits\CheckItemTrait;
+use Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\ItemApi;
+use Zeggriim\RiotApiDataDragon\Tests\Traits\AssertItemTrait;
 use Zeggriim\RiotApiDataDragon\Tests\Traits\RiotApiDataDragonTrait;
 
+/**
+ * @group dragon
+ */
 class ItemApiTest extends KernelTestCase
 {
     use RiotApiDataDragonTrait;
-    use CheckItemTrait;
+    use AssertItemTrait;
 
     public function testGetItems()
     {
@@ -106,6 +109,6 @@ class ItemApiTest extends KernelTestCase
         // Item 1
         self::assertArrayHasKey('1028', $dataItems);
         $champion1 = $dataItems['1028'];
-        $this->checkItem($data['data']['1028'], $champion1);
+        $this->assertItem($data['data']['1028'], $champion1);
     }
 }

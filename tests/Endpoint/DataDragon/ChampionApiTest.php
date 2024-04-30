@@ -2,17 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Zeggriim\RiotApiDataDragon\Tests\Endpoint;
+namespace Zeggriim\RiotApiDataDragon\Tests\Endpoint\DataDragon;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Zeggriim\RiotApiDataDragon\Endpoint\ChampionApi;
-use Zeggriim\RiotApiDataDragon\Tests\Traits\CheckerChampionTrait;
+use Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\ChampionApi;
+use Zeggriim\RiotApiDataDragon\Tests\Traits\AssertChampionTrait;
 use Zeggriim\RiotApiDataDragon\Tests\Traits\RiotApiDataDragonTrait;
 
+/**
+ * @group dragon
+ */
 class ChampionApiTest extends KernelTestCase
 {
     use RiotApiDataDragonTrait;
-    use CheckerChampionTrait;
+    use AssertChampionTrait;
 
     public function testGetChampions()
     {
@@ -135,12 +138,12 @@ class ChampionApiTest extends KernelTestCase
 //      Champion 1
         self::assertArrayHasKey('Aatrox', $dataChampions);
         $champion1 = $dataChampions['Aatrox'];
-        $this->checkChampion($data['data']['Aatrox'], $champion1);
+        $this->assertChampion($data['data']['Aatrox'], $champion1);
 
 //      Champion 2
         self::assertArrayHasKey('Akshan', $dataChampions);
         $champion2 = $dataChampions['Akshan'];
-        $this->checkChampion($data['data']['Akshan'], $champion2);
+        $this->assertChampion($data['data']['Akshan'], $champion2);
     }
 
     public function testGetChampion()
@@ -317,6 +320,14 @@ class ChampionApiTest extends KernelTestCase
 
         // Champion
         self::assertArrayHasKey('Aatrox', $dataChampion);
-        $this->checkChampion($data['data']['Aatrox'], $dataChampion['Aatrox'], true);
+        $this->assertChampion($data['data']['Aatrox'], $dataChampion['Aatrox'], true);
+    }
+
+    public function testGetBadRequest()
+    {
+        $riotApi = $this->getClientRiotApi(['test' => 'test'], ['http_code' => 400]);
+        $championApi = new ChampionApi($riotApi);
+        $champion = $championApi->getChampion('aatrox', '14.8.1');
+        self::assertCount(0, $champion);
     }
 }

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Zeggriim\RiotApiDataDragon\Tests\Traits\Checker;
 
-trait CheckerPassiveTrait
+trait AssertPassiveTrait
 {
-    private function checkPassive(array $dataPassive, array $passive): void
+    private function assertPassive(array $dataPassive, array $passive): void
     {
         self::assertArrayHasKey('name', $passive);
         self::assertSame($dataPassive['name'], $passive['name']);
@@ -15,6 +15,6 @@ trait CheckerPassiveTrait
         self::assertSame($dataPassive['description'], $passive['description']);
 
         self::assertArrayHasKey('image', $passive);
-        $this->checkImage($dataPassive['image'], $passive['image']);
+        $this->assertImage($dataPassive['image'], $passive['image']);
     }
 }

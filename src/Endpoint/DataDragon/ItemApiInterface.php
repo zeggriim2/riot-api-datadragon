@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Zeggriim\RiotApiDataDragon\Endpoint;
+namespace Zeggriim\RiotApiDataDragon\Endpoint\DataDragon;
 
 interface ItemApiInterface
 {
