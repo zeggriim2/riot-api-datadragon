@@ -2,13 +2,13 @@
 
 namespace Zeggriim\RiotApiDataDragon\Tests\Traits;
 
-use Zeggriim\RiotApiDataDragon\Tests\Traits\Checker\CheckerImageTrait;
+use Zeggriim\RiotApiDataDragon\Tests\Traits\Checker\AssertImageTrait;
 
-trait CheckItemTrait
+trait AssertItemTrait
 {
-    use CheckerImageTrait;
+    use AssertImageTrait;
 
-    private function checkItem(array $dataItem, array $item):void
+    private function assertItem(array $dataItem, array $item):void
     {
         self::assertArrayHasKey('name', $item);
         self::assertSame($dataItem['name'], $item['name']);
@@ -20,16 +20,16 @@ trait CheckItemTrait
         self::assertSame($dataItem['plaintext'], $item['plaintext']);
 
         self::assertArrayHasKey('image', $item);
-        $this->checkImage($dataItem['image'], $item['image']);
+        $this->assertImage($dataItem['image'], $item['image']);
 
         self::assertArrayHasKey('gold', $item);
-        $this->checkGold($dataItem['gold'], $item['gold']);
+        $this->assertGold($dataItem['gold'], $item['gold']);
 
         self::assertArrayHasKey('maps', $item);
-        $this->checkMap($dataItem['maps'], $item['maps']);
+        $this->assertMap($dataItem['maps'], $item['maps']);
     }
 
-    private function checkGold($dataGold, $gold): void
+    private function assertGold($dataGold, $gold): void
     {
         self::assertArrayHasKey('base', $gold);
         self::assertSame($dataGold['base'], $gold['base']);
@@ -41,7 +41,7 @@ trait CheckItemTrait
         self::assertSame($dataGold['sell'], $gold['sell']);
     }
 
-    private function checkMap($dataMap, $map): void
+    private function assertMap($dataMap, $map): void
     {
         self::assertArrayHasKey(11, $map);
         self::assertSame($dataMap[11], $map[11]);

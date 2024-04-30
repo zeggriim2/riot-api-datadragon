@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Zeggriim\RiotApiDataDragon\Tests\Traits\Checker;
 
-trait CheckerImageTrait
+trait AssertImageTrait
 {
-    private function checkImage(array $dataImage, array $image): void
+    private function assertImage(array $dataImage, array $image): void
     {
         self::assertArrayHasKey('full', $image);
         self::assertSame($dataImage['full'], $image['full']);

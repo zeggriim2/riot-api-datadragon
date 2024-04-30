@@ -50,3 +50,11 @@ install: ## Install Package Composer
 test:
 	./vendor/bin/phpunit --do-not-cache-result
 .PHONY: test
+
+test-dragon:
+	./vendor/bin/phpunit --do-not-cache-result --group dragon
+.PHONY: test-dragon
+
+test-league:
+	./vendor/bin/phpunit --do-not-cache-result --group league
+.PHONY: test-league

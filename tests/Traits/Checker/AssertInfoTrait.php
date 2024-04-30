@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Zeggriim\RiotApiDataDragon\Tests\Traits\Checker;
 
-trait CheckerInfoTrait
+trait AssertInfoTrait
 {
-    private function checkInfo(array $dataInfo, array $info): void
+    private function assertInfo(array $dataInfo, array $info): void
     {
         self::assertArrayHasKey('attack', $info);
         self::assertSame($dataInfo['attack'], $info['attack']);

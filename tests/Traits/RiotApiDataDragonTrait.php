@@ -10,9 +10,9 @@ use Zeggriim\RiotApiDataDragon\RiotApiDataDragon;
 
 trait RiotApiDataDragonTrait
 {
-    private function getClientRiotApi(array $data): RiotApiDataDragon
+    private function getClientRiotApi(array $data, array $info = ['http_code' => 200]): RiotApiDataDragon
     {
-        $response = new MockResponse(json_encode($data));
+        $response = new MockResponse(json_encode($data), $info);
         $this->createMock(HttpClientInterface::class);
         $httpClient = new MockHttpClient($response, 'https://api.riot.io/api/v1/');
         $logger = $this->createMock(LoggerInterface::class);

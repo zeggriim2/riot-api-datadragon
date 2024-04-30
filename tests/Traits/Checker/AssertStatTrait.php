@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Zeggriim\RiotApiDataDragon\Tests\Traits\Checker;
 
-trait CheckerStatTrait
+trait AssertStatTrait
 {
     public function checkStat(array $dataStats, array $stats): void
     {

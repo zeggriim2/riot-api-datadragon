@@ -2,19 +2,19 @@
 
 namespace Zeggriim\RiotApiDataDragon\Tests\Traits;
 
-use Zeggriim\RiotApiDataDragon\Tests\Traits\Checker\CheckerImageTrait;
-use Zeggriim\RiotApiDataDragon\Tests\Traits\Checker\CheckerInfoTrait;
-use Zeggriim\RiotApiDataDragon\Tests\Traits\Checker\CheckerPassiveTrait;
-use Zeggriim\RiotApiDataDragon\Tests\Traits\Checker\CheckerStatTrait;
+use Zeggriim\RiotApiDataDragon\Tests\Traits\Checker\AssertImageTrait;
+use Zeggriim\RiotApiDataDragon\Tests\Traits\Checker\AssertInfoTrait;
+use Zeggriim\RiotApiDataDragon\Tests\Traits\Checker\AssertPassiveTrait;
+use Zeggriim\RiotApiDataDragon\Tests\Traits\Checker\AssertStatTrait;
 
-trait CheckerChampionTrait
+trait AssertChampionTrait
 {
-    use CheckerStatTrait;
-    use CheckerInfoTrait;
-    use CheckerImageTrait;
-    use CheckerPassiveTrait;
+    use AssertStatTrait;
+    use AssertInfoTrait;
+    use AssertImageTrait;
+    use AssertPassiveTrait;
 
-    private function checkChampion(array $dataSend, array $champion,bool $isDetail = false): void
+    private function assertChampion(array $dataSend, array $champion, bool $isDetail = false): void
     {
         self::assertArrayHasKey('id', $champion);
         self::assertSame($dataSend['id'], $champion['id']);
@@ -28,10 +28,10 @@ trait CheckerChampionTrait
         self::assertSame($dataSend['blurb'], $champion['blurb']);
 
         self::assertArrayHasKey('info', $champion);
-        $this->checkInfo($dataSend['info'], $champion['info']);
+        $this->assertInfo($dataSend['info'], $champion['info']);
 
         self::assertArrayHasKey('image', $champion);
-        $this->checkImage($dataSend['image'], $champion['image']);
+        $this->assertImage($dataSend['image'], $champion['image']);
 
         self::assertArrayHasKey('tags', $champion);
         self::assertSame($dataSend['tags'], $champion['tags']);
@@ -59,7 +59,7 @@ trait CheckerChampionTrait
             }
 
             self::assertArrayHasKey('passive', $champion);
-            $this->checkPassive($dataSend['passive'], $champion['passive']);
+            $this->assertPassive($dataSend['passive'], $champion['passive']);
         }
     }
 }
