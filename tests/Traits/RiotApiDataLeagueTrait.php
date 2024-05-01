@@ -6,6 +6,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpClient\MockHttpClient;
 use Symfony\Component\HttpClient\Response\MockResponse;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\ChampionApi;
 use Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\LeagueApi;
 use Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\MatchApi;
 use Zeggriim\RiotApiDataDragon\RiotApiDataLeague;
@@ -22,6 +23,10 @@ trait RiotApiDataLeagueTrait
         return new MatchApi($this->getClientRiotApiDataLeague($dataResponse, $info));
     }
 
+    public function getChampionApi(array $dataResponse, array $info = ['http_code' => 200]): ChampionApi
+    {
+        return new ChampionApi($this->getClientRiotApiDataLeague($dataResponse, $info));
+    }
     private function getClientRiotApiDataLeague(array $data,array $info = ['http_code' => 200]): RiotApiDataLeague
     {
         $response = new MockResponse(json_encode($data), $info);
