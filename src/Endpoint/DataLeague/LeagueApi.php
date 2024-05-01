@@ -18,7 +18,7 @@ class LeagueApi implements LeagueApiInterface
     private const URL_LEAGUE_ID             = '/lol/league/v4/leagues/%s';
     private const URL_LEAGUE_SUMMUNER_ID    = '/lol/league/v4/entries/by-summoner/%s';
 
-    public function __construct(private readonly RiotApiDataLeague $riotApiDataLeague) {}
+        public function __construct(private readonly RiotApiDataLeague $riotApiDataLeague) {}
 
     public function getChallenger(Queue $queue = Queue::RANKED_SOLO): array
     {
