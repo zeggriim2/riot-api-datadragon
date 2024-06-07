@@ -22,6 +22,6 @@ class ChampionApi implements ChampionApiInterface
 
     public function getChampion(string $key, string $version, string $locale = 'fr_FR'): array
     {
-        return $this->riotApiDataDragon->get(sprintf(self::URL_CHAMPION, $key, $version, $locale));
+        return $this->riotApiDataDragon->get(sprintf(self::URL_CHAMPION, $version, $locale, $key));
     }
 }
