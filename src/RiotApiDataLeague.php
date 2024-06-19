@@ -17,10 +17,10 @@ class RiotApiDataLeague
     public const URL = 'https://%s.api.riotgames.com';
 
     public function __construct(
-        public HttpClientInterface $riotLeague,
+        public HttpClientInterface      $riotLeague,
         public readonly LoggerInterface $logger,
-        private readonly string $apiKey,
-        private Platform $platform = Platform::EUW1,
+        private readonly string         $apiKey,
+        private readonly Platform       $platform = Platform::EUW1,
     ) {
         $this->riotLeague = $this->riotLeague->withOptions(
             (new HttpOptions())

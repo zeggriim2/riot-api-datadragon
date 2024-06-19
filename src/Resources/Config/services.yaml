@@ -33,7 +33,7 @@ services:
         autowire: true
         public: false
         arguments:
-            $apikey: '%env(string:API_RIOT_KEY)%'
+            $apiKey: '%env(string:API_RIOT_KEY)%'
 
     Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\LeagueApi:
         autowire: true
