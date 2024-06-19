@@ -14,7 +14,7 @@ use Zeggriim\RiotApiDataDragon\Enum\Platform;
 
 class RiotApiDataLeague
 {
-    public const URL = 'https://%s.api.riotgames.com%s';
+    public const URL = 'https://%s.api.riotgames.com';
 
     public function __construct(
         public HttpClientInterface $riotLeague,
