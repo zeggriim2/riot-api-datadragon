@@ -28,13 +28,11 @@ class RiotApiDataDragonExtension extends Extension implements PrependExtensionIn
     private function getConfigHttpClient(): array
     {
         return [
-            'http_client' =>
-                [
-                    'scoped_clients' =>
-                        [
+            'http_client' => [
+                    'scoped_clients' => [
                             'riot.api' => ['base_uri' => '%env(string:API_RIO_BASE_URI)%']
-                        ]
-                ]
+                    ]
+            ]
         ];
     }
 }
