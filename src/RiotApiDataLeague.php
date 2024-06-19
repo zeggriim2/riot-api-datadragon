@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Zeggriim\RiotApiDataDragon;
 
 use Psr\Log\LoggerInterface;
+use Symfony\Component\HttpClient\HttpOptions;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\HttpClient\Exception\ExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface;
@@ -13,21 +14,26 @@ use Zeggriim\RiotApiDataDragon\Enum\Platform;
 
 class RiotApiDataLeague
 {
-    const URL = 'https://%s.api.riotgames.com%s';
+    public const URL = 'https://%s.api.riotgames.com%s';
 
     public function __construct(
-        public readonly HttpClientInterface $riotLeague,
+        public HttpClientInterface $riotLeague,
         public readonly LoggerInterface $logger,
-        private Platform $platform = Platform::EUW1
-    ) {}
-
+        private readonly string $apiKey,
+        private Platform $platform = Platform::EUW1,
+    ) {
+        $this->riotLeague = $this->riotLeague->withOptions(
+            (new HttpOptions())
+                ->setBaseUri(sprintf(self::URL, $this->platform->value))
+                ->setHeaders(['X-Riot-Token' => $this->apiKey])
+                ->toArray()
+        );
+    }
 
     public function get(string $path): array
     {
-        $url = sprintf(self::URL, $this->platform->value, $path);
-
         try {
-            return $this->processRequest(Request::METHOD_GET, $url);
+            return $this->processRequest(Request::METHOD_GET, $path);
         } catch (ExceptionInterface $exception) {
             return [];
         }
