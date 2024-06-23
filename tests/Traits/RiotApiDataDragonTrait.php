@@ -11,8 +11,7 @@ use Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\ItemApi;
 use Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\LanguageApi;
 use Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\SummonerApi;
 use Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\VersionApi;
-use Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\MatchApi;
-use Zeggriim\RiotApiDataDragon\RiotApiDataDragon;
+use Zeggriim\RiotApiDataDragon\RiotApiDataDragonClient;
 
 trait RiotApiDataDragonTrait
 {
@@ -41,12 +40,12 @@ trait RiotApiDataDragonTrait
         return new VersionApi($this->getClientRiotApiDataDragon($dataResponse, $info));
     }
 
-    private function getClientRiotApiDataDragon(array $data,array $info = ['http_code' => 200]): RiotApiDataDragon
+    private function getClientRiotApiDataDragon(array $data,array $info = ['http_code' => 200]): RiotApiDataDragonClient
     {
         $response = new MockResponse(json_encode($data), $info);
         $this->createMock(HttpClientInterface::class);
         $httpClient = new MockHttpClient($response, 'https://api.riot.io/api/v1/');
         $logger = $this->createMock(LoggerInterface::class);
-        return new RiotApiDataDragon($httpClient, $logger);
+        return new RiotApiDataDragonClient($httpClient, $logger);
     }
 }
