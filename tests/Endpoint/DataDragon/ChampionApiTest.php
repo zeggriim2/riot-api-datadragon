@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Zeggriim\RiotApiDataDragon\Tests\Endpoint\DataDragon;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Contracts\HttpClient\Exception\ExceptionInterface;
 use Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\ChampionApi;
 use Zeggriim\RiotApiDataDragon\Tests\Traits\AssertChampionTrait;
 use Zeggriim\RiotApiDataDragon\Tests\Traits\RiotApiDataDragonTrait;
@@ -324,6 +325,7 @@ class ChampionApiTest extends KernelTestCase
     public function testGetBadRequest()
     {
         $championApi = $this->getChampionApi(['test' => 'test'], ['http_code' => 400]);
+        self::expectException(ExceptionInterface::class);
         $champion = $championApi->getChampion('aatrox', '14.8.1');
         self::assertCount(0, $champion);
     }

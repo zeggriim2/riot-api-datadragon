@@ -11,6 +11,7 @@ interface LeagueApiInterface
     public function getChallenger(Queue $queue): array;
 
     public function getGrandMaster(Queue $queue): array;
+
     public function getMaster(Queue $queue): array;
 
     public function getAll(Queue $queue, Tier $tier, Division $division): array;

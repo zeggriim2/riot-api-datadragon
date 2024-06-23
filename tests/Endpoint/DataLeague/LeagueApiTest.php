@@ -6,9 +6,16 @@ namespace Zeggriim\RiotApiDataDragon\Tests\Endpoint\DataLeague;
 
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\HttpFoundation\Response;
 use Zeggriim\RiotApiDataDragon\Enum\Division;
 use Zeggriim\RiotApiDataDragon\Enum\Queue;
 use Zeggriim\RiotApiDataDragon\Enum\Tier;
+use Zeggriim\RiotApiDataDragon\Exception\DataNotFoundException;
+use Zeggriim\RiotApiDataDragon\Exception\ForbiddenException;
+use Zeggriim\RiotApiDataDragon\Exception\RequestException;
+use Zeggriim\RiotApiDataDragon\Exception\ServerException;
+use Zeggriim\RiotApiDataDragon\Exception\UnauthorizedException;
+use Zeggriim\RiotApiDataDragon\Exception\UnsupportedMediaTypeException;
 use Zeggriim\RiotApiDataDragon\Tests\Traits\AssertLeagueTrait;
 use Zeggriim\RiotApiDataDragon\Tests\Traits\RiotApiDataLeagueTrait;
 
@@ -124,7 +131,7 @@ class LeagueApiTest extends KernelTestCase
         ];
 
         $leagueApi = $this->getLeagueApi($dataResponse);
-        $leagues = $leagueApi->getAll(Queue::RANKED_FLED_SR, Tier::GOLD, Division::I);
+        $leagues = $leagueApi->getAll(Queue::RANKED_FLEX_SR, Tier::GOLD, Division::I);
 
         $firstLeague = $leagues[0];
         $this->assertLeagueEntry($firstLeague, $dataResponse[0]);
@@ -233,10 +240,28 @@ class LeagueApiTest extends KernelTestCase
         $this->assertLeagueEntry($secondLeague, $dataResponse[1]);
     }
 
-    public function testGetBadRequest()
+    /**
+     * @dataProvider provideGetBadRequest
+     */
+    public function testGetBadRequest(int $codeStatus, string $exceptionClass, string $exceptionMessage)
     {
-        $leagueApi = $this->getLeagueApi(['test'=> 'test'], ['http_code' => 400]);
+        $leagueApi = $this->getLeagueApi(['test'=> 'test'], ['http_code' => $codeStatus]);
+        self::expectException($exceptionClass);
+        self::expectExceptionMessage($exceptionMessage);
         $res = $leagueApi->getGrandMaster();
         self::assertCount(0, $res);
+    }
+
+    public static function provideGetBadRequest(): array
+    {
+        return [
+            [Response::HTTP_BAD_REQUEST, RequestException::class,  'LeagueAPI: Request is invalid'],
+            [Response::HTTP_UNAUTHORIZED, UnauthorizedException::class,  'LeagueAPI: Unauthorized request.'],
+            [Response::HTTP_FORBIDDEN, ForbiddenException::class,  'LeagueAPI: Forbidden.'],
+            [Response::HTTP_NOT_FOUND, DataNotFoundException::class,  'LeagueAPI: Data not found'],
+            [Response::HTTP_UNSUPPORTED_MEDIA_TYPE, UnsupportedMediaTypeException::class,  'LeagueAPI: Unsupported media type'],
+            [Response::HTTP_INTERNAL_SERVER_ERROR, ServerException::class,  'LeagueAPI: Internal server error occured.'],
+            [Response::HTTP_SERVICE_UNAVAILABLE, ServerException::class,  'LeagueAPI: Service is temporarily unavailable.'],
+        ];
     }
 }

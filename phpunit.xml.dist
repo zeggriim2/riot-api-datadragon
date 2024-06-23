@@ -36,7 +36,6 @@
             <directory suffix=".php">src/Enum</directory>
 
             <file>src/RiotApiDataDragonBundle.php</file>
-
         </exclude>
     </source>
 </phpunit>
