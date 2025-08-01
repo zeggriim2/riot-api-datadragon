@@ -17,6 +17,6 @@ class SummonerApi implements SummonerApiInterface
 
     public function getSummoner(string $version, string $locale = 'fr_FR'): array
     {
-        return $this->riotApiDataDragon->get(sprintf(self::URL_SUMMONER, $version, $locale))->toArray();
+        return $this->riotApiDataDragon->get(\sprintf(self::URL_SUMMONER, $version, $locale))->toArray();
     }
 }

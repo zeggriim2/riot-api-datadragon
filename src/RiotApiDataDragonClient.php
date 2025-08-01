@@ -11,7 +11,9 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 
 final readonly class RiotApiDataDragonClient
 {
-    public function __construct(private HttpClientInterface $riotApi) {}
+    public function __construct(private HttpClientInterface $riotApi)
+    {
+    }
 
     public function get(string $path): ResponseInterface
     {
@@ -24,7 +26,6 @@ final readonly class RiotApiDataDragonClient
             $response = $this->riotApi->request($method, $path);
             $response->getContent();
         } catch (ExceptionInterface $exception) {
-
             throw $exception;
         }
 

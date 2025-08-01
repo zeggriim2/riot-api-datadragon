@@ -10,7 +10,9 @@ class VersionApi implements VersionApiInterface
 {
     private const VERSION_URL = '/api/versions.json';
 
-    public function __construct(private readonly RiotApiDataDragonClient $riotApiDataDragon) {}
+    public function __construct(private readonly RiotApiDataDragonClient $riotApiDataDragon)
+    {
+    }
 
     public function getVersions(): array
     {
