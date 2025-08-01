@@ -6,5 +6,4 @@ namespace Zeggriim\RiotApiDataDragon;
 
 class BaseApi
 {
-
 }

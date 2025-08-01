@@ -30,7 +30,7 @@ class RiotApiDataLeagueClient
     ) {
         $this->riotLeague = $this->riotLeague->withOptions(
             (new HttpOptions())
-                ->setBaseUri(sprintf(self::URL, $this->platform->value))
+                ->setBaseUri(\sprintf(self::URL, $this->platform->value))
                 ->setHeaders(['X-Riot-Token' => $this->apiKey])
                 ->toArray()
         );

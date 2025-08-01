@@ -12,25 +12,27 @@ class MatchApi implements MatchApiInterface
     private const URL_MATCH = '/lol/match/v5/matches/%s';
     private const URL_MATCH_TIMELINE = '/lol/match/v5/matches/%s/timeline';
 
-    public function __construct(private readonly RiotApiDataLeagueClient $riotApiDataLeague) {}
+    public function __construct(private readonly RiotApiDataLeagueClient $riotApiDataLeague)
+    {
+    }
 
     public function getMatchs(string $puuidSummoner): array
     {
-        $url = sprintf(self::URL_MATCHS, $puuidSummoner);
+        $url = \sprintf(self::URL_MATCHS, $puuidSummoner);
 
         return $this->riotApiDataLeague->get($url)->toArray();
     }
 
     public function getMatch(string $idMatch): array
     {
-        $url = sprintf(self::URL_MATCH, $idMatch);
+        $url = \sprintf(self::URL_MATCH, $idMatch);
 
         return $this->riotApiDataLeague->get($url)->toArray();
     }
 
     public function getMatchTimeLine(string $idMatch): array
     {
-        $url = sprintf(self::URL_MATCH_TIMELINE, $idMatch);
+        $url = \sprintf(self::URL_MATCH_TIMELINE, $idMatch);
 
         return $this->riotApiDataLeague->get($url)->toArray();
     }

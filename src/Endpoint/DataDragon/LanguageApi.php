@@ -10,7 +10,9 @@ class LanguageApi implements LanguageApiInterface
 {
     private const URL_LANGUAGES = '/cdn/languages.json';
 
-    public function __construct(private readonly RiotApiDataDragonClient $riotApiDataDragon) {}
+    public function __construct(private readonly RiotApiDataDragonClient $riotApiDataDragon)
+    {
+    }
 
     public function getLanguages(): array
     {
