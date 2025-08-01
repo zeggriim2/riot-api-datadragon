@@ -6,7 +6,9 @@ namespace Zeggriim\RiotApiDataDragon\Tests\Endpoint\DataLeague;
 
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\HttpClient\Exception\ClientException;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpClient\Exception\ServerException as ServerExceptionHttpClient;
 use Zeggriim\RiotApiDataDragon\Enum\Division;
 use Zeggriim\RiotApiDataDragon\Enum\Queue;
 use Zeggriim\RiotApiDataDragon\Enum\Tier;
@@ -260,8 +262,10 @@ class LeagueApiTest extends KernelTestCase
             [Response::HTTP_FORBIDDEN, ForbiddenException::class,  'LeagueAPI: Forbidden.'],
             [Response::HTTP_NOT_FOUND, DataNotFoundException::class,  'LeagueAPI: Data not found'],
             [Response::HTTP_UNSUPPORTED_MEDIA_TYPE, UnsupportedMediaTypeException::class,  'LeagueAPI: Unsupported media type'],
+            [Response::HTTP_NOT_ACCEPTABLE, ClientException::class,  'HTTP 406 returned for "https://euw1.api.riotgames.com/lol/league/v4/grandmasterleagues/by-queue/RANKED_SOLO_5x5".'],
             [Response::HTTP_INTERNAL_SERVER_ERROR, ServerException::class,  'LeagueAPI: Internal server error occured.'],
             [Response::HTTP_SERVICE_UNAVAILABLE, ServerException::class,  'LeagueAPI: Service is temporarily unavailable.'],
+            [Response::HTTP_GATEWAY_TIMEOUT, ServerExceptionHttpClient::class,  'HTTP 504 returned for "https://euw1.api.riotgames.com/lol/league/v4/grandmasterleagues/by-queue/RANKED_SOLO_5x5'],
         ];
     }
 }

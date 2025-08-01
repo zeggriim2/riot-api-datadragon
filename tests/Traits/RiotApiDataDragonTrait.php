@@ -9,6 +9,7 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\ChampionApi;
 use Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\ItemApi;
 use Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\LanguageApi;
+use Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\ProfileIconApi;
 use Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\SummonerApi;
 use Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\VersionApi;
 use Zeggriim\RiotApiDataDragon\RiotApiDataDragonClient;
@@ -38,6 +39,11 @@ trait RiotApiDataDragonTrait
     private function getVersionApi(array $dataResponse, array $info = ['http_code' => 200]): VersionApi
     {
         return new VersionApi($this->getClientRiotApiDataDragon($dataResponse, $info));
+    }
+
+    private function getProfileIconApi(array $dataResponse, array $info = ['http_code' => 200]): ProfileIconApi
+    {
+        return new ProfileIconApi($this->getClientRiotApiDataDragon($dataResponse, $info));
     }
 
     private function getClientRiotApiDataDragon(array $data,array $info = ['http_code' => 200]): RiotApiDataDragonClient

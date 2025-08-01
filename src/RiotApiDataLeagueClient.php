@@ -59,7 +59,7 @@ class RiotApiDataLeagueClient
                 case 415:
                     throw new UnsupportedMediaTypeException();
                 default:
-                    throw new $exception();
+                    throw new $exception($response);
             }
         } catch (ServerExceptionInterface $exception) {
             switch ($response->getStatusCode()) {
@@ -68,7 +68,7 @@ class RiotApiDataLeagueClient
                 case 503:
                     throw new ServerException('LeagueAPI: Service is temporarily unavailable.');
                 default:
-                    throw new $exception();
+                    throw new $exception($response);
             }
         } catch (ExceptionInterface $exception) {
             throw new $exception();
