@@ -3281,7 +3281,7 @@ class MatchApiTest extends KernelTestCase
         ];
 
         $matchApi = $this->getMatchApi($dataResponse);
-        $match = $matchApi->getMatchs('EUW1_6921668065');
+        $match = $matchApi->getMatch('EUW1_6921668065');
 
         $this->assertMatch($match, $dataResponse);
     }
