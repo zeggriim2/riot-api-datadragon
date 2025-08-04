@@ -14,14 +14,14 @@ class LanguageApiTest extends KernelTestCase
 {
     use RiotApiDataDragonTrait;
 
-    public function testGetLanguages()
+    public function testGetLanguages(): void
     {
         $data = ['en_US', 'cs_CZ', 'de_DE', 'en_GB','en_PH', 'fr_FR', 'zh_MY'];
 
         $languageApi = $this->getLanguageApi($data);
         $languages = $languageApi->getLanguages();
 
-        self::assertIsArray($languages);
+        self::assertNotEmpty($languages);
         self::assertCount(count($data), $languages);
         self::assertSame($data[0], $languages[0]);
         self::assertSame($data[1], $languages[1]);

@@ -43,37 +43,53 @@ class RiotApiDataLeagueClient
 
     private function processRequest(string $method, string $path): ResponseInterface
     {
+        $response = null;
+
         try {
             $response = $this->riotLeague->request($method, $path);
             $response->getContent();
         } catch (ClientExceptionInterface $exception) {
-            switch ($response->getStatusCode()) {
-                case 400:
-                    throw new RequestException();
-                case 401:
-                    throw new UnauthorizedException();
-                case 403:
-                    throw new ForbiddenException();
-                case 404:
-                    throw new DataNotFoundException();
-                case 415:
-                    throw new UnsupportedMediaTypeException();
-                default:
-                    throw new $exception($response);
-            }
+            $this->handleClientException($exception);
         } catch (ServerExceptionInterface $exception) {
-            switch ($response->getStatusCode()) {
-                case 500:
-                    throw new ServerException('LeagueAPI: Internal server error occured.');
-                case 503:
-                    throw new ServerException('LeagueAPI: Service is temporarily unavailable.');
-                default:
-                    throw new $exception($response);
-            }
+            $this->handleServerException($exception);
         } catch (ExceptionInterface $exception) {
             throw new $exception();
         }
 
         return $response;
+    }
+
+    private function handleClientException(ClientExceptionInterface $exception): never
+    {
+        $response = $exception->getResponse();
+
+        switch ($response->getStatusCode()) {
+            case 400:
+                throw new RequestException();
+            case 401:
+                throw new UnauthorizedException();
+            case 403:
+                throw new ForbiddenException();
+            case 404:
+                throw new DataNotFoundException();
+            case 415:
+                throw new UnsupportedMediaTypeException();
+            default:
+                throw $exception;
+        }
+    }
+
+    private function handleServerException(ServerExceptionInterface $exception): never
+    {
+        $response = $exception->getResponse();
+
+        switch ($response->getStatusCode()) {
+            case 500:
+                throw new ServerException('LeagueAPI: Internal server error occured.');
+            case 503:
+                throw new ServerException('LeagueAPI: Service is temporarily unavailable.');
+            default:
+                throw $exception;
+        }
     }
 }

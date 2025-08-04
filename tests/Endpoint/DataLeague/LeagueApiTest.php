@@ -20,6 +20,7 @@ use Zeggriim\RiotApiDataDragon\Exception\UnauthorizedException;
 use Zeggriim\RiotApiDataDragon\Exception\UnsupportedMediaTypeException;
 use Zeggriim\RiotApiDataDragon\Tests\Traits\AssertLeagueTrait;
 use Zeggriim\RiotApiDataDragon\Tests\Traits\RiotApiDataLeagueTrait;
+use Throwable;
 
 /**
  * @group league
@@ -99,7 +100,7 @@ class LeagueApiTest extends KernelTestCase
         ];
     }
 
-    public function testGetAllWithDivisionTierQueue()
+    public function testGetAllWithDivisionTierQueue(): void
     {
         $dataResponse = [
             [
@@ -142,7 +143,7 @@ class LeagueApiTest extends KernelTestCase
         $this->assertLeagueEntry($secondLeague, $dataResponse[1]);
     }
 
-    public function testGetLeagueWithId()
+    public function testGetLeagueWithId(): void
     {
         $dataResponse = [
             "tier"=> "GOLD",
@@ -200,7 +201,7 @@ class LeagueApiTest extends KernelTestCase
         $this->assertLeagueItem($thirdLeague, $dataResponse['entries'][2]);
     }
 
-    public function testGetLeagueWithSummonerId()
+    public function testGetLeagueWithSummonerId(): void
     {
         $dataResponse = [
             [
@@ -244,8 +245,10 @@ class LeagueApiTest extends KernelTestCase
 
     /**
      * @dataProvider provideGetBadRequest
+     *
+     * @param class-string<Throwable> $exceptionClass
      */
-    public function testGetBadRequest(int $codeStatus, string $exceptionClass, string $exceptionMessage)
+    public function testGetBadRequest(int $codeStatus, string $exceptionClass, string $exceptionMessage): void
     {
         $leagueApi = $this->getLeagueApi(['test'=> 'test'], ['http_code' => $codeStatus]);
         self::expectException($exceptionClass);

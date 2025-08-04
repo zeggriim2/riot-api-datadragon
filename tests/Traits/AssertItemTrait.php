@@ -29,7 +29,7 @@ trait AssertItemTrait
         $this->assertMap($dataItem['maps'], $item['maps']);
     }
 
-    private function assertGold($dataGold, $gold): void
+    private function assertGold(array $dataGold, array $gold): void
     {
         self::assertArrayHasKey('base', $gold);
         self::assertSame($dataGold['base'], $gold['base']);
@@ -41,7 +41,7 @@ trait AssertItemTrait
         self::assertSame($dataGold['sell'], $gold['sell']);
     }
 
-    private function assertMap($dataMap, $map): void
+    private function assertMap(array $dataMap, array $map): void
     {
         self::assertArrayHasKey(11, $map);
         self::assertSame($dataMap[11], $map[11]);
