@@ -2,6 +2,11 @@
 
 namespace Zeggriim\RiotApiDataDragon\Tests\Traits;
 
+use Zeggriim\RiotApiDataDragon\Dto\Champion\Champion;
+use Zeggriim\RiotApiDataDragon\Dto\Champion\ChampionImage;
+use Zeggriim\RiotApiDataDragon\Dto\Champion\ChampionInfo;
+use Zeggriim\RiotApiDataDragon\Dto\Champion\ChampionPassive;
+use Zeggriim\RiotApiDataDragon\Dto\Champion\ChampionStats;
 use Zeggriim\RiotApiDataDragon\Tests\Traits\Checker\AssertImageTrait;
 use Zeggriim\RiotApiDataDragon\Tests\Traits\Checker\AssertInfoTrait;
 use Zeggriim\RiotApiDataDragon\Tests\Traits\Checker\AssertPassiveTrait;
@@ -40,7 +45,7 @@ trait AssertChampionTrait
         self::assertSame($dataSend['partype'], $champion['partype']);
 
         self::assertArrayHasKey('stats', $champion);
-        $this->checkStat($dataSend['stats'], $champion['stats']);
+        $this->assertStat($dataSend['stats'], $champion['stats']);
 
         if ($isDetail) {
             self::assertArrayHasKey('lore', $champion);
@@ -60,6 +65,45 @@ trait AssertChampionTrait
 
             self::assertArrayHasKey('passive', $champion);
             $this->assertPassive($dataSend['passive'], $champion['passive']);
+        }
+    }
+
+    public function assertChampionObjet(array $dataSend, Champion $champion, bool $isDetail = false): void
+    {
+        self::assertSame($dataSend['id'], $champion->id);
+        self::assertSame($dataSend['key'], $champion->key);
+        self::assertSame($dataSend['name'], $champion->name);
+        self::assertSame($dataSend['title'], $champion->title);
+        self::assertSame($dataSend['blurb'], $champion->blurb);
+
+        self::assertInstanceOf(ChampionInfo::class, $champion->info);
+        $this->assertInfoObjet($dataSend['info'], $champion->info);
+
+        self::assertInstanceOf(ChampionImage::class, $champion->image);
+        $this->assertImageObjet($dataSend['image'], $champion->image);
+
+        self::assertSame($dataSend['tags'], $champion->tags);
+
+        self::assertSame($dataSend['partype'], $champion->partype);
+
+        self::assertInstanceOf(ChampionStats::class, $champion->stats);
+        $this->assertStatObjet($dataSend['stats'], $champion->stats);
+
+        if ($isDetail) {
+            self::assertSame($dataSend['lore'], $champion->lore);
+
+            self::assertCount(count($dataSend['allytips']), $champion->allytips);
+            foreach ($champion->allytips as $key => $allytip) {
+                self::assertSame($dataSend['allytips'][$key], $allytip);
+            }
+
+            self::assertCount(count($dataSend['enemytips']), $champion->enemytips);
+            foreach ($champion->enemytips as $key => $enemytip) {
+                self::assertSame($dataSend['enemytips'][$key], $enemytip);
+            }
+
+            self::assertInstanceOf(ChampionPassive::class, $champion->passive);
+            $this->assertPassiveObjet($dataSend['passive'], $champion->passive);
         }
     }
 }

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Zeggriim\RiotApiDataDragon\Tests\Traits\Checker;
 
+use Zeggriim\RiotApiDataDragon\Dto\Champion\ChampionImage;
+
 trait AssertImageTrait
 {
     private function assertImage(array $dataImage, array $image): void
@@ -22,5 +24,16 @@ trait AssertImageTrait
         self::assertSame($dataImage['w'], $image['w']);
         self::assertArrayHasKey('h', $image);
         self::assertSame($dataImage['h'], $image['h']);
+    }
+
+    public function assertImageObjet(array $dataImage, ChampionImage $image): void
+    {
+        self::assertSame($dataImage['full'], $image->full);
+        self::assertSame($dataImage['sprite'], $image->sprite);
+        self::assertSame($dataImage['group'], $image->group);
+        self::assertSame($dataImage['x'], $image->x);
+        self::assertSame($dataImage['y'], $image->y);
+        self::assertSame($dataImage['w'], $image->w);
+        self::assertSame($dataImage['h'], $image->h);
     }
 }
