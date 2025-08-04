@@ -1,12 +1,12 @@
 services:
-    Zeggriim\RiotApiDataDragon\RiotApiDataLeague:
+    Zeggriim\RiotApiDataDragon\RiotApiDataLeagueClient:
         autowire: true
         public: false
         arguments:
             $apiKey: '%env(string:API_RIOT_KEY)%'
 
 
-    Zeggriim\RiotApiDataDragon\RiotApiDataDragon:
+    Zeggriim\RiotApiDataDragon\RiotApiDataDragonClient:
         autowire: true
         public: false
 
@@ -40,3 +40,10 @@ services:
         autowire: true
 
     Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\LeagueApiInterface: '@Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\LeagueApi'
+
+    Zeggriim\RiotApiDataDragon\Serializer\Normalizer\ChampionCollectionNormalizer:
+        tags: [ 'serializer.normalizer' ]
+
+    Zeggriim\RiotApiDataDragon\Transformer\ChampionTransformer:
+        arguments:
+            $denormalizer: '@serializer'
