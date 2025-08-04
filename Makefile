@@ -5,6 +5,15 @@ DOCKER_RUN = $(DOCKER) run
 DOCKER_COMPOSE = docker-compose
 DOCKER_COMPOSE_UP = $(DOCKER_COMPOSE) up -d
 DOCKER_COMPOSE_STOP = $(DOCKER_COMPOSE) stop
+# Docker containers
+PHP_CONT = $(DOCKER_COMPOSE) exec php
+
+# Executables
+PHP      = $(PHP_CONT) php
+COMPOSER = $(PHP_CONT) composer
+SYMFONY  = $(PHP) bin/console
+PHPUNIT  = $(PHP) vendor/bin/phpunit
+
 #------------#
 #---PHPQA---#
 PHPQA = jakzal/phpqa:php8.2-debian
@@ -76,17 +85,23 @@ docker-stop: ## Stop docker containers.
 #---------------------------------------------#
 
 install: ## Install Package Composer
-	composer install
+	$(PHPQA_RUN) composer install
 .PHONY: install
 
 test:
-	./vendor/bin/phpunit --do-not-cache-result
-.PHONY: test
+	@$(PHPUNIT) --do-not-cache-result
 
 test-dragon:
-	./vendor/bin/phpunit --do-not-cache-result --group dragon
-.PHONY: test-dragon
+	@$(PHPUNIT) --do-not-cache-result --group dragon
 
 test-league:
-	./vendor/bin/phpunit --do-not-cache-result --group league
-.PHONY: test-league
+	@$(PHPUNIT) --do-not-cache-result --group league
+
+## —— Composer 🧙 ——————————————————————————————————————————————————————————————
+composer: ## Run composer, pass the parameter "c=" to run a given command, example: make composer c='req symfony/orm-pack'
+	@$(eval c ?=)
+	@$(COMPOSER) $(c)
+
+vendor: ## Install vendors according to the current composer.lock file
+vendor: c=install --prefer-dist --no-dev --no-progress --no-scripts --no-interaction
+vendor: composer
