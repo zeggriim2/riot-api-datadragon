@@ -6,5 +6,8 @@ namespace Zeggriim\RiotApiDataDragon\Exception;
 
 class RequestException extends \Exception
 {
-    protected $message = 'LeagueAPI: Request is invalid';
+    public function __construct(string $message = 'LeagueAPI: Request is invalid', int $code = 0, ?\Throwable $previous = null)
+    {
+        parent::__construct($message, $code, $previous);
+    }
 }
