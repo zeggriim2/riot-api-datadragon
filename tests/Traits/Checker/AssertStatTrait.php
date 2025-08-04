@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Zeggriim\RiotApiDataDragon\Tests\Traits\Checker;
 
+use Zeggriim\RiotApiDataDragon\Dto\Champion\ChampionStats;
+
 trait AssertStatTrait
 {
-    public function checkStat(array $dataStats, array $stats): void
+    public function assertStat(array $dataStats, array $stats): void
     {
         self::assertArrayHasKey('hp', $stats);
         self::assertSame($dataStats['hp'], $stats['hp']);
@@ -48,5 +50,29 @@ trait AssertStatTrait
         self::assertSame($dataStats['attackspeedperlevel'], $stats['attackspeedperlevel']);
         self::assertArrayHasKey('attackspeed', $stats);
         self::assertSame($dataStats['attackspeed'], $stats['attackspeed']);
+    }
+
+    public function assertStatObjet(array $dataStats, ChampionStats $stats): void
+    {
+        self::assertSame($dataStats['hp'], $stats->hp);
+        self::assertSame($dataStats['hpperlevel'], $stats->hpperlevel);
+        self::assertSame($dataStats['mp'], $stats->mp);
+        self::assertSame($dataStats['mpperlevel'], $stats->mpperlevel);
+        self::assertSame($dataStats['movespeed'], $stats->movespeed);
+        self::assertSame($dataStats['armor'], $stats->armor);
+        self::assertSame($dataStats['armorperlevel'], $stats->armorperlevel);
+        self::assertSame($dataStats['spellblock'], $stats->spellblock);
+        self::assertSame($dataStats['spellblockperlevel'], $stats->spellblockperlevel);
+        self::assertSame($dataStats['attackrange'], $stats->attackrange);
+        self::assertSame($dataStats['hpregen'], $stats->hpregen);
+        self::assertSame($dataStats['hpregenperlevel'], $stats->hpregenperlevel);
+        self::assertSame($dataStats['mpregen'], $stats->mpregen);
+        self::assertSame($dataStats['mpregenperlevel'], $stats->mpregenperlevel);
+        self::assertSame($dataStats['crit'], $stats->crit);
+        self::assertSame($dataStats['critperlevel'], $stats->critperlevel);
+        self::assertSame($dataStats['attackdamage'], $stats->attackdamage);
+        self::assertSame($dataStats['attackdamageperlevel'], $stats->attackdamageperlevel);
+        self::assertSame($dataStats['attackspeedperlevel'], $stats->attackspeedperlevel);
+        self::assertSame($dataStats['attackspeed'], $stats->attackspeed);
     }
 }
