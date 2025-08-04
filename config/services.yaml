@@ -41,9 +41,18 @@ services:
 
     Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\LeagueApiInterface: '@Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\LeagueApi'
 
+    # Normalizers
     Zeggriim\RiotApiDataDragon\Serializer\Normalizer\ChampionCollectionNormalizer:
         tags: [ 'serializer.normalizer' ]
 
+    Zeggriim\RiotApiDataDragon\Serializer\Normalizer\LanguageCollectionNormalizer:
+        tags: [ 'serializer.normalizer' ]
+
+    # Transformers
     Zeggriim\RiotApiDataDragon\Transformer\ChampionTransformer:
+        arguments:
+            $denormalizer: '@serializer'
+
+    Zeggriim\RiotApiDataDragon\Transformer\LanguageTransformer:
         arguments:
             $denormalizer: '@serializer'
