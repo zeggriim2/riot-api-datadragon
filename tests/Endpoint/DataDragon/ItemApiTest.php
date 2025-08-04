@@ -16,7 +16,7 @@ class ItemApiTest extends KernelTestCase
     use RiotApiDataDragonTrait;
     use AssertItemTrait;
 
-    public function testGetItems()
+    public function testGetItems(): void
     {
         $data = [
             'type' => 'item',
@@ -91,7 +91,7 @@ class ItemApiTest extends KernelTestCase
 
         $items = $itemApi->getItems('14.8.1');
 
-        self::assertIsArray($items);
+        self::assertNotEmpty($items);
 
         self::assertArrayHasKey('type', $items);
         self::assertSame($data['type'], $items['type']);
@@ -103,7 +103,6 @@ class ItemApiTest extends KernelTestCase
         self::assertSame($data['tree'], $items['tree']);
 
         $dataItems = $items['data'];
-        self::assertIsArray($dataItems);
 
         // Item 1
         self::assertArrayHasKey('1028', $dataItems);

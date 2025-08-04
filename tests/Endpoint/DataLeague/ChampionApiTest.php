@@ -10,7 +10,7 @@ use Zeggriim\RiotApiDataDragon\Tests\Traits\RiotApiDataLeagueTrait;
 class ChampionApiTest extends KernelTestCase
 {
     use RiotApiDataLeagueTrait;
-    public function testGetChampionRotation()
+    public function testGetChampionRotation(): void
     {
         $dataResponse = [
             "freeChampionIds"=> [13, 14, 18, 25, 35, 45, 53, 57, 72, 85, 114, 133, 166, 200, 221, 222, 238, 245, 555, 897],
@@ -21,7 +21,7 @@ class ChampionApiTest extends KernelTestCase
         $championApi = $this->getChampionApi($dataResponse);
         $championRotation = $championApi->getChampionRotation();
 
-        self::assertIsArray($championRotation);
+        self::assertNotEmpty($championRotation);;
         self::assertArrayHasKey('freeChampionIds', $championRotation);
         self::assertCount(count($dataResponse['freeChampionIds']), $championRotation['freeChampionIds']);
         self::assertArrayHasKey('freeChampionIdsForNewPlayers', $championRotation);

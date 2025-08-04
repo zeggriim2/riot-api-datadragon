@@ -6,5 +6,8 @@ namespace Zeggriim\RiotApiDataDragon\Exception;
 
 class ForbiddenException extends \Exception
 {
-    protected $message = 'LeagueAPI: Forbidden.';
+    public function __construct(string $message = 'LeagueAPI: Forbidden.', int $code = 0, ?\Throwable $previous = null)
+    {
+        parent::__construct($message, $code, $previous);
+    }
 }
