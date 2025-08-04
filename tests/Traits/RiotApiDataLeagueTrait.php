@@ -29,7 +29,12 @@ trait RiotApiDataLeagueTrait
     }
     private function getClientRiotApiDataLeague(array $data,array $info = ['http_code' => 200]): RiotApiDataLeagueClient
     {
-        $response = new MockResponse(json_encode($data), $info);
+        $jsonData = json_encode($data);
+        if ($jsonData === false) {
+            throw new \RuntimeException('Failed to encode data as JSON');
+        }
+
+        $response = new MockResponse($jsonData, $info);
         $this->createMock(HttpClientInterface::class);
         $httpClient = new MockHttpClient($response, null);
         return new RiotApiDataLeagueClient($httpClient, 'key');

@@ -6,5 +6,8 @@ namespace Zeggriim\RiotApiDataDragon\Exception;
 
 class UnauthorizedException extends \Exception
 {
-    protected $message = 'LeagueAPI: Unauthorized request.';
+    public function __construct(string $message = 'LeagueAPI: Unauthorized request.', int $code = 0, ?\Throwable $previous = null)
+    {
+        parent::__construct($message, $code, $previous);
+    }
 }

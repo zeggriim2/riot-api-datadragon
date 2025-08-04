@@ -48,10 +48,14 @@ trait RiotApiDataDragonTrait
 
     private function getClientRiotApiDataDragon(array $data,array $info = ['http_code' => 200]): RiotApiDataDragonClient
     {
-        $response = new MockResponse(json_encode($data), $info);
+        $jsonData = json_encode($data);
+        if ($jsonData === false) {
+            throw new \RuntimeException('Failed to encode data as JSON');
+        }
+
+        $response = new MockResponse($jsonData, $info);
         $this->createMock(HttpClientInterface::class);
         $httpClient = new MockHttpClient($response, 'https://api.riot.io/api/v1/');
-        $logger = $this->createMock(LoggerInterface::class);
-        return new RiotApiDataDragonClient($httpClient, $logger);
+        return new RiotApiDataDragonClient($httpClient);
     }
 }

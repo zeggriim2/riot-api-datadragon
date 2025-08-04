@@ -36,7 +36,7 @@ class MatchApiTest extends KernelTestCase
         $matchApi = $this->getMatchApi($dataResponse);
         $matchs = $matchApi->getMatchs('Iavkw0jaMjK2JBchJo3x68Lf8tQ4rNyIRP4jca_5rX3LSMkFA88KOkYbIqsl7FgR8ni2zanAOXPH6Q');
 
-        self::assertIsArray($matchs);
+        self::assertNotEmpty($matchs);
         self::assertCount(count($dataResponse), $matchs);
     }
 

@@ -54,9 +54,8 @@ trait AssertLeagueTrait
         self::assertSame($dataSend['hotStreak'], $league['hotStreak']);
     }
 
-    public function assertLeagueEntryList(array $dataSend, array $league, int $nbList)
+    public function assertLeagueEntryList(array $dataSend, array $league, int $nbList): void
     {
-
         self::assertArrayHasKey('tier', $dataSend);
         self::assertSame($dataSend['tier'], $league['tier']);
         self::assertArrayHasKey('leagueId', $dataSend);

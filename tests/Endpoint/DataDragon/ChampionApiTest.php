@@ -18,7 +18,7 @@ class ChampionApiTest extends KernelTestCase
     use RiotApiDataDragonTrait;
     use AssertChampionTrait;
 
-    public function testGetChampions()
+    public function testGetChampions(): void
     {
         $data = [
             'type' => 'champion',
@@ -125,7 +125,7 @@ class ChampionApiTest extends KernelTestCase
         $championApi = $this->getChampionApi($data);
         $champions = $championApi->getChampions('14.6.1');
 
-        self::assertIsArray($champions);
+        self::assertNotEmpty($champions);
         self::assertArrayHasKey('type', $champions);
         self::assertSame($data['type'], $champions['type']);
         self::assertArrayHasKey('format', $champions);
@@ -146,7 +146,7 @@ class ChampionApiTest extends KernelTestCase
         $this->assertChampion($data['data']['Akshan'], $champion2);
     }
 
-    public function testGetChampion()
+    public function testGetChampion(): void
     {
         $data = [
             'type' => 'champion',
@@ -306,7 +306,7 @@ class ChampionApiTest extends KernelTestCase
         $championApi = $this->getChampionApi($data);
         $champion = $championApi->getChampion('aatrox', '14.8.1');
 
-        self::assertIsArray($champion);
+        self::assertNotEmpty($champion);
         self::assertArrayHasKey('type', $champion);
         self::assertSame($data['type'], $champion['type']);
         self::assertArrayHasKey('format', $champion);
@@ -322,7 +322,7 @@ class ChampionApiTest extends KernelTestCase
         $this->assertChampion($data['data']['Aatrox'], $dataChampion['Aatrox'], true);
     }
 
-    public function testGetBadRequest()
+    public function testGetBadRequest(): void
     {
         $championApi = $this->getChampionApi(['test' => 'test'], ['http_code' => 400]);
         self::expectException(ExceptionInterface::class);
