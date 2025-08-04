@@ -19,7 +19,9 @@ use Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\VersionApi;
 use Zeggriim\RiotApiDataDragon\RiotApiDataDragonClient;
 use Zeggriim\RiotApiDataDragon\Serializer\Normalizer\ChampionCollectionNormalizer;
 use Zeggriim\RiotApiDataDragon\Serializer\Normalizer\ChampionNormalizer;
+use Zeggriim\RiotApiDataDragon\Serializer\Normalizer\LanguageCollectionNormalizer;
 use Zeggriim\RiotApiDataDragon\Transformer\ChampionTransformer;
+use Zeggriim\RiotApiDataDragon\Transformer\LanguageTransformer;
 
 trait RiotApiDataDragonTrait
 {
@@ -55,7 +57,21 @@ trait RiotApiDataDragonTrait
 
     private function getLanguageApi(array $dataResponse, array $info = ['http_code' => 200]): LanguageApi
     {
-        return new LanguageApi($this->getClientRiotApiDataDragon($dataResponse, $info));
+        $languageCollectionNormalizer = new LanguageCollectionNormalizer();
+        $normalizers = [
+            $languageCollectionNormalizer,
+            new ArrayDenormalizer(),
+            new ObjectNormalizer(),
+        ];
+
+        $serializer = new Serializer($normalizers, [new JsonEncoder()]);
+        $languageCollectionNormalizer->setDenormalizer($serializer);
+
+        $transformer = new LanguageTransformer($serializer);
+        return new LanguageApi(
+            $this->getClientRiotApiDataDragon($dataResponse, $info),
+            $transformer
+        );
     }
 
     private function getSummonerApi(array $dataResponse, array $info = ['http_code' => 200]): SummonerApi
