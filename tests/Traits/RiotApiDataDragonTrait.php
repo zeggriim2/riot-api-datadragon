@@ -20,8 +20,11 @@ use Zeggriim\RiotApiDataDragon\RiotApiDataDragonClient;
 use Zeggriim\RiotApiDataDragon\Serializer\Normalizer\ChampionCollectionNormalizer;
 use Zeggriim\RiotApiDataDragon\Serializer\Normalizer\ChampionNormalizer;
 use Zeggriim\RiotApiDataDragon\Serializer\Normalizer\LanguageCollectionNormalizer;
+use Zeggriim\RiotApiDataDragon\Serializer\Normalizer\ProfileIconCollectionNormalizer;
+use Zeggriim\RiotApiDataDragon\Serializer\Normalizer\ProfileIconNormalizer;
 use Zeggriim\RiotApiDataDragon\Transformer\ChampionTransformer;
 use Zeggriim\RiotApiDataDragon\Transformer\LanguageTransformer;
+use Zeggriim\RiotApiDataDragon\Transformer\ProfileIconTransformer;
 
 trait RiotApiDataDragonTrait
 {
@@ -31,15 +34,14 @@ trait RiotApiDataDragonTrait
         $championNormalizer = new ChampionNormalizer();
 
         $normalizers = [
-            $championCollectionNormalizer, // Doit être en premier
-            $championNormalizer, // Doit être en premier
+            $championCollectionNormalizer,
+            $championNormalizer,
             new ArrayDenormalizer(),
             new ObjectNormalizer(),
         ];
 
         $serializer = new Serializer($normalizers, [new JsonEncoder()]);
 
-        // IMPORTANT : Le normalizer doit connaître le serializer
         $championCollectionNormalizer->setDenormalizer($serializer);
         $championNormalizer->setDenormalizer($serializer);
 
@@ -86,7 +88,25 @@ trait RiotApiDataDragonTrait
 
     private function getProfileIconApi(array $dataResponse, array $info = ['http_code' => 200]): ProfileIconApi
     {
-        return new ProfileIconApi($this->getClientRiotApiDataDragon($dataResponse, $info));
+        $profileIconCollectionNormalizer = new ProfileIconCollectionNormalizer();
+        $profileIconNormalizer = new ProfileIconNormalizer();
+
+        $normalizers = [
+            $profileIconCollectionNormalizer,
+            $profileIconNormalizer,
+            new ArrayDenormalizer(),
+            new ObjectNormalizer(),
+        ];
+
+        $serializer = new Serializer($normalizers, [new JsonEncoder()]);
+        $profileIconCollectionNormalizer->setDenormalizer($serializer);
+        $profileIconNormalizer->setDenormalizer($serializer);
+
+        $transformer = new ProfileIconTransformer($serializer);
+        return new ProfileIconApi(
+            $this->getClientRiotApiDataDragon($dataResponse, $info),
+            $transformer
+        );
     }
 
     private function getClientRiotApiDataDragon(array $data,array $info = ['http_code' => 200]): RiotApiDataDragonClient
