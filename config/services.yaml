@@ -48,11 +48,21 @@ services:
     Zeggriim\RiotApiDataDragon\Serializer\Normalizer\LanguageCollectionNormalizer:
         tags: [ 'serializer.normalizer' ]
 
+    Zeggriim\RiotApiDataDragon\Serializer\Normalizer\ProfileIconCollectionNormalizer:
+        tags: [ 'serializer.normalizer' ]
+
+    Zeggriim\RiotApiDataDragon\Serializer\Normalizer\ProfileIconNormalizer:
+        tags: [ 'serializer.normalizer' ]
+
     # Transformers
     Zeggriim\RiotApiDataDragon\Transformer\ChampionTransformer:
         arguments:
             $denormalizer: '@serializer'
 
     Zeggriim\RiotApiDataDragon\Transformer\LanguageTransformer:
+        arguments:
+            $denormalizer: '@serializer'
+
+    Zeggriim\RiotApiDataDragon\Transformer\ProfileIconTransformer:
         arguments:
             $denormalizer: '@serializer'
