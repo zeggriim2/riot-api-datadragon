@@ -2,7 +2,6 @@
 
 namespace Zeggriim\RiotApiDataDragon\Tests\Traits;
 
-use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpClient\MockHttpClient;
 use Symfony\Component\HttpClient\Response\MockResponse;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
@@ -17,14 +16,17 @@ use Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\ProfileIconApi;
 use Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\SummonerApi;
 use Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\VersionApi;
 use Zeggriim\RiotApiDataDragon\RiotApiDataDragonClient;
-use Zeggriim\RiotApiDataDragon\Serializer\Normalizer\ChampionCollectionNormalizer;
-use Zeggriim\RiotApiDataDragon\Serializer\Normalizer\ChampionNormalizer;
+use Zeggriim\RiotApiDataDragon\Serializer\Normalizer\Champion\ChampionCollectionNormalizer;
+use Zeggriim\RiotApiDataDragon\Serializer\Normalizer\Champion\ChampionNormalizer;
 use Zeggriim\RiotApiDataDragon\Serializer\Normalizer\LanguageCollectionNormalizer;
-use Zeggriim\RiotApiDataDragon\Serializer\Normalizer\ProfileIconCollectionNormalizer;
-use Zeggriim\RiotApiDataDragon\Serializer\Normalizer\ProfileIconNormalizer;
+use Zeggriim\RiotApiDataDragon\Serializer\Normalizer\ProfileIcon\ProfileIconCollectionNormalizer;
+use Zeggriim\RiotApiDataDragon\Serializer\Normalizer\ProfileIcon\ProfileIconNormalizer;
+use Zeggriim\RiotApiDataDragon\Serializer\Normalizer\Summoner\SummonerCollectionNormalizer;
+use Zeggriim\RiotApiDataDragon\Serializer\Normalizer\Summoner\SummonerNormalizer;
 use Zeggriim\RiotApiDataDragon\Transformer\ChampionTransformer;
 use Zeggriim\RiotApiDataDragon\Transformer\LanguageTransformer;
 use Zeggriim\RiotApiDataDragon\Transformer\ProfileIconTransformer;
+use Zeggriim\RiotApiDataDragon\Transformer\SummonerTransformer;
 
 trait RiotApiDataDragonTrait
 {
@@ -78,7 +80,26 @@ trait RiotApiDataDragonTrait
 
     private function getSummonerApi(array $dataResponse, array $info = ['http_code' => 200]): SummonerApi
     {
-        return new SummonerApi($this->getClientRiotApiDataDragon($dataResponse, $info));
+        $summonerCollectionNormalizer = new SummonerCollectionNormalizer();
+        $summonerNormalizer = new SummonerNormalizer();
+
+        $normalizers = [
+            $summonerCollectionNormalizer,
+            $summonerNormalizer,
+            new ArrayDenormalizer(),
+            new ObjectNormalizer(),
+        ];
+
+        $serializer = new Serializer($normalizers, [new JsonEncoder()]);
+
+        $summonerCollectionNormalizer->setDenormalizer($serializer);
+        $summonerNormalizer->setDenormalizer($serializer);
+
+        $transformer = new SummonerTransformer($serializer);
+        return new SummonerApi(
+            $this->getClientRiotApiDataDragon($dataResponse, $info),
+            $transformer
+        );
     }
 
     private function getVersionApi(array $dataResponse, array $info = ['http_code' => 200]): VersionApi
