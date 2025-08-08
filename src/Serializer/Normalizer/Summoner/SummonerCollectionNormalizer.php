@@ -18,7 +18,7 @@ final class SummonerCollectionNormalizer implements DenormalizerInterface, Denor
     {
         $summoners = [];
         foreach ($data['data'] as $summonerName => $summoner) {
-            $summoners[$summonerName] =  $this->denormalizer->denormalize($summoner, Summoner::class, $format, $context);
+            $summoners[$summonerName] = $this->denormalizer->denormalize($summoner, Summoner::class, $format, $context);
         }
 
         return new SummonerCollection(

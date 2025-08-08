@@ -48,6 +48,7 @@ trait RiotApiDataDragonTrait
         $championNormalizer->setDenormalizer($serializer);
 
         $transformer = new ChampionTransformer($serializer);
+
         return new ChampionApi(
             $this->getClientRiotApiDataDragon($dataResponse, $info),
             $transformer
@@ -72,6 +73,7 @@ trait RiotApiDataDragonTrait
         $languageCollectionNormalizer->setDenormalizer($serializer);
 
         $transformer = new LanguageTransformer($serializer);
+
         return new LanguageApi(
             $this->getClientRiotApiDataDragon($dataResponse, $info),
             $transformer
@@ -96,6 +98,7 @@ trait RiotApiDataDragonTrait
         $summonerNormalizer->setDenormalizer($serializer);
 
         $transformer = new SummonerTransformer($serializer);
+
         return new SummonerApi(
             $this->getClientRiotApiDataDragon($dataResponse, $info),
             $transformer
@@ -124,22 +127,24 @@ trait RiotApiDataDragonTrait
         $profileIconNormalizer->setDenormalizer($serializer);
 
         $transformer = new ProfileIconTransformer($serializer);
+
         return new ProfileIconApi(
             $this->getClientRiotApiDataDragon($dataResponse, $info),
             $transformer
         );
     }
 
-    private function getClientRiotApiDataDragon(array $data,array $info = ['http_code' => 200]): RiotApiDataDragonClient
+    private function getClientRiotApiDataDragon(array $data, array $info = ['http_code' => 200]): RiotApiDataDragonClient
     {
         $jsonData = json_encode($data);
-        if ($jsonData === false) {
+        if (false === $jsonData) {
             throw new \RuntimeException('Failed to encode data as JSON');
         }
 
         $response = new MockResponse($jsonData, $info);
         $this->createMock(HttpClientInterface::class);
         $httpClient = new MockHttpClient($response, 'https://api.riot.io/api/v1/');
+
         return new RiotApiDataDragonClient($httpClient);
     }
 }

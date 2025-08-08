@@ -11,8 +11,12 @@ use Zeggriim\RiotApiDataDragon\Tests\Traits\RiotApiDataDragonTrait;
 
 /**
  * @group dragon
+ *
+ * @internal
+ *
+ * @coversNothing
  */
-class SummonerApiTest extends KernelTestCase
+final class SummonerApiTest extends KernelTestCase
 {
     use RiotApiDataDragonTrait;
 
@@ -32,10 +36,10 @@ class SummonerApiTest extends KernelTestCase
                     'cooldownBurn' => '240',
                     'cost' => [0],
                     'costBurn' => '0',
-                    'effect' => [null,0.3,0,0,0.5,826,0.5,0,0,0,0],
-                    'effectBurn' => [null,'0.3','0', '0', '0.5', '826', '0.5','0','0','0','0','0'],
+                    'effect' => [null, 0.3, 0, 0, 0.5, 826, 0.5, 0, 0, 0, 0],
+                    'effectBurn' => [null, '0.3', '0', '0', '0.5', '826', '0.5', '0', '0', '0', '0', '0'],
                     'key' => '7',
-                    'summonerLevel'=> 1,
+                    'summonerLevel' => 1,
                     'modes' => [],
                     'costType' => 'Pas de coût',
                     'range' => [850],
@@ -49,7 +53,7 @@ class SummonerApiTest extends KernelTestCase
                         'w' => 48,
                         'h' => 48,
                     ],
-                    'resource' => 'Pas de coût'
+                    'resource' => 'Pas de coût',
                 ],
             ],
         ];
@@ -103,11 +107,11 @@ class SummonerApiTest extends KernelTestCase
                     'cooldownBurn' => '240',
                     'cost' => [0],
                     'costBurn' => '0',
-                    'effect' => [null,0.3,0,0,0.5,826,0.5,0,0,0,0],
-                    'effectBurn' => [null,'0.3','0', '0', '0.5', '826', '0.5','0','0','0','0','0'],
+                    'effect' => [null, 0.3, 0, 0, 0.5, 826, 0.5, 0, 0, 0, 0],
+                    'effectBurn' => [null, '0.3', '0', '0', '0.5', '826', '0.5', '0', '0', '0', '0', '0'],
                     'vars' => [],
                     'key' => '7',
-                    'summonerLevel'=> 1,
+                    'summonerLevel' => 1,
                     'modes' => [],
                     'costType' => 'Pas de coût',
                     'maxammo' => '-1',
@@ -122,7 +126,7 @@ class SummonerApiTest extends KernelTestCase
                         'w' => 48,
                         'h' => 48,
                     ],
-                    'resource' => 'Pas de coût'
+                    'resource' => 'Pas de coût',
                 ],
             ],
         ];
@@ -130,11 +134,11 @@ class SummonerApiTest extends KernelTestCase
         $summonerApi = $this->getSummonerApi($data);
         $summoners = $summonerApi->getSummonerAsCollection('14.8.1');
 
-//        self::assertInstanceOf(SummonerCollection::class, $summoners);
+        //        self::assertInstanceOf(SummonerCollection::class, $summoners);
         self::assertSame($data['type'], $summoners->type);
         self::assertSame($data['version'], $summoners->version);
 
-        $summonersData = count($data['data']);
+        $summonersData = \count($data['data']);
         self::assertCount($summonersData, $summoners->summoners);
         self::assertSame($summonersData, $summoners->count());
 

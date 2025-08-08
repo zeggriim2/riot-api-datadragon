@@ -12,12 +12,12 @@ final readonly class SummonerCollection implements \Countable
     public function __construct(
         public string $type,
         public string $version,
-        public array  $summoners
+        public array $summoners,
     ) {
     }
 
     public function count(): int
     {
-        return count($this->summoners);
+        return \count($this->summoners);
     }
 }

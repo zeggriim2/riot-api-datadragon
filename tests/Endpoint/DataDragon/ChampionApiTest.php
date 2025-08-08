@@ -8,23 +8,26 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Contracts\HttpClient\Exception\ExceptionInterface;
 use Zeggriim\RiotApiDataDragon\Dto\Champion\Champion;
 use Zeggriim\RiotApiDataDragon\Dto\Champion\ChampionCollection;
-use Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\ChampionApi;
 use Zeggriim\RiotApiDataDragon\Tests\Traits\AssertChampionTrait;
 use Zeggriim\RiotApiDataDragon\Tests\Traits\RiotApiDataDragonTrait;
 
 /**
  * @group dragon
+ *
+ * @internal
+ *
+ * @coversNothing
  */
-class ChampionApiTest extends KernelTestCase
+final class ChampionApiTest extends KernelTestCase
 {
-    use RiotApiDataDragonTrait;
     use AssertChampionTrait;
+    use RiotApiDataDragonTrait;
 
     public function testGetChampions(): void
     {
         $data = [
             'type' => 'champion',
-            'format'=> 'standAloneComplex',
+            'format' => 'standAloneComplex',
             'version' => '14.6.1',
             'data' => [
                 'Aatrox' => [
@@ -35,15 +38,15 @@ class ChampionApiTest extends KernelTestCase
                     'title' => 'Épée des Darkin',
                     'blurb' => 'Autrefois, Aatrox et ses…Cependant, après des...',
                     'info' => [
-                        'attack'     => 8,
-                        'defense'    => 4,
-                        'magic'      => 3,
+                        'attack' => 8,
+                        'defense' => 4,
+                        'magic' => 3,
                         'difficulty' => 4,
                     ],
                     'image' => [
-                        'full'   => 'Aatrox.png',
+                        'full' => 'Aatrox.png',
                         'sprite' => 'champion0.png',
-                        'group'  => 'champion',
+                        'group' => 'champion',
                         'x' => 0,
                         'y' => 0,
                         'w' => 48,
@@ -52,26 +55,26 @@ class ChampionApiTest extends KernelTestCase
                     'tags' => ['tank', 'Fighter'],
                     'partype' => 'Puits de sang',
                     'stats' => [
-                        'hp'                    => 650,
-                        'hpperlevel'            => 114,
-                        'mp'                    => 0,
-                        'mpperlevel'            => 0,
-                        'movespeed'             => 345,
-                        'armor'                 => 38,
-                        'armorperlevel'         => 4.45,
-                        'spellblock'            => 32,
-                        'spellblockperlevel'    => 2.05,
-                        'attackrange'           => 175,
-                        'hpregen'               => 3,
-                        'hpregenperlevel'       => 1,
-                        'mpregen'               => 0,
-                        'mpregenperlevel'       => 0,
-                        'crit'                  => 0,
-                        'critperlevel'          => 0,
-                        'attackdamage'          => 60,
-                        'attackdamageperlevel'  => 5,
-                        'attackspeed'           => 0.651,
-                        'attackspeedperlevel'   => 2.5,
+                        'hp' => 650,
+                        'hpperlevel' => 114,
+                        'mp' => 0,
+                        'mpperlevel' => 0,
+                        'movespeed' => 345,
+                        'armor' => 38,
+                        'armorperlevel' => 4.45,
+                        'spellblock' => 32,
+                        'spellblockperlevel' => 2.05,
+                        'attackrange' => 175,
+                        'hpregen' => 3,
+                        'hpregenperlevel' => 1,
+                        'mpregen' => 0,
+                        'mpregenperlevel' => 0,
+                        'crit' => 0,
+                        'critperlevel' => 0,
+                        'attackdamage' => 60,
+                        'attackdamageperlevel' => 5,
+                        'attackspeed' => 0.651,
+                        'attackspeedperlevel' => 2.5,
                     ],
                 ],
                 'Akshan' => [
@@ -82,9 +85,9 @@ class ChampionApiTest extends KernelTestCase
                     'title' => 'Sentinelle rebelle',
                     'blurb' => 'Se jouant du danger, Aks…per au regard de ses...',
                     'info' => [
-                        'attack'     => 0,
-                        'defense'    => 4,
-                        'magic'      => 3,
+                        'attack' => 0,
+                        'defense' => 4,
+                        'magic' => 3,
                         'difficulty' => 4,
                     ],
                     'image' => [
@@ -99,29 +102,29 @@ class ChampionApiTest extends KernelTestCase
                     'tags' => ['Marksman', 'Assassin'],
                     'partype' => 'Puits de sang',
                     'stats' => [
-                        'hp'                    => 630,
-                        'hpperlevel'            => 107,
-                        'mp'                    => 350,
-                        'mpperlevel'            => 40,
-                        'movespeed'             => 330,
-                        'armor'                 => 26,
-                        'armorperlevel'         => 4.7,
-                        'spellblock'            => 30,
-                        'spellblockperlevel'    => 1.3,
-                        'attackrange'           => 500,
-                        'hpregen'               => 3.75,
-                        'hpregenperlevel'       => 0.65,
-                        'mpregen'               => 8.2,
-                        'mpregenperlevel'       => 0.7,
-                        'crit'                  => 0,
-                        'critperlevel'          => 0,
-                        'attackdamage'          => 52,
-                        'attackdamageperlevel'  => 3,
-                        'attackspeed'           => 0.638,
-                        'attackspeedperlevel'   => 4,
+                        'hp' => 630,
+                        'hpperlevel' => 107,
+                        'mp' => 350,
+                        'mpperlevel' => 40,
+                        'movespeed' => 330,
+                        'armor' => 26,
+                        'armorperlevel' => 4.7,
+                        'spellblock' => 30,
+                        'spellblockperlevel' => 1.3,
+                        'attackrange' => 500,
+                        'hpregen' => 3.75,
+                        'hpregenperlevel' => 0.65,
+                        'mpregen' => 8.2,
+                        'mpregenperlevel' => 0.7,
+                        'crit' => 0,
+                        'critperlevel' => 0,
+                        'attackdamage' => 52,
+                        'attackdamageperlevel' => 3,
+                        'attackspeed' => 0.638,
+                        'attackspeedperlevel' => 4,
                     ],
-                ]
-            ]
+                ],
+            ],
         ];
 
         $championApi = $this->getChampionApi($data);
@@ -135,14 +138,14 @@ class ChampionApiTest extends KernelTestCase
         self::assertArrayHasKey('version', $champions);
         self::assertSame($data['version'], $champions['version']);
         self::assertArrayHasKey('data', $champions);
-        self::assertCount(count($data['data']), $champions['data']);
+        self::assertCount(\count($data['data']), $champions['data']);
         $dataChampions = $champions['data'];
-//      Champion 1
+        //      Champion 1
         self::assertArrayHasKey('Aatrox', $dataChampions);
         $champion1 = $dataChampions['Aatrox'];
         $this->assertChampion($data['data']['Aatrox'], $champion1);
 
-//      Champion 2
+        //      Champion 2
         self::assertArrayHasKey('Akshan', $dataChampions);
         $champion2 = $dataChampions['Akshan'];
         $this->assertChampion($data['data']['Akshan'], $champion2);
@@ -152,7 +155,7 @@ class ChampionApiTest extends KernelTestCase
     {
         $data = [
             'type' => 'champion',
-            'format'=> 'standAloneComplex',
+            'format' => 'standAloneComplex',
             'version' => '14.6.1',
             'data' => [
                 'Aatrox' => [
@@ -163,15 +166,15 @@ class ChampionApiTest extends KernelTestCase
                     'title' => 'Épée des Darkin',
                     'blurb' => 'Autrefois, Aatrox et ses…Cependant, après des...',
                     'info' => [
-                        'attack'     => 8,
-                        'defense'    => 4,
-                        'magic'      => 3,
+                        'attack' => 8,
+                        'defense' => 4,
+                        'magic' => 3,
                         'difficulty' => 4,
                     ],
                     'image' => [
-                        'full'   => 'Aatrox.png',
+                        'full' => 'Aatrox.png',
                         'sprite' => 'champion0.png',
-                        'group'  => 'champion',
+                        'group' => 'champion',
                         'x' => 0,
                         'y' => 0,
                         'w' => 48,
@@ -180,26 +183,26 @@ class ChampionApiTest extends KernelTestCase
                     'tags' => ['Fighter', 'Tank'],
                     'partype' => 'Puits de sang',
                     'stats' => [
-                        'hp'                    => 650.0,
-                        'hpperlevel'            => 114.0,
-                        'mp'                    => 0.0,
-                        'mpperlevel'            => 0.0,
-                        'movespeed'             => 345.0,
-                        'armor'                 => 38.0,
-                        'armorperlevel'         => 4.45,
-                        'spellblock'            => 32.0,
-                        'spellblockperlevel'    => 2.05,
-                        'attackrange'           => 175.0,
-                        'hpregen'               => 3.0,
-                        'hpregenperlevel'       => 1.0,
-                        'mpregen'               => 0.0,
-                        'mpregenperlevel'       => 0.0,
-                        'crit'                  => 0.0,
-                        'critperlevel'          => 0.0,
-                        'attackdamage'          => 60.0,
-                        'attackdamageperlevel'  => 5.0,
-                        'attackspeed'           => 0.651,
-                        'attackspeedperlevel'   => 2.5,
+                        'hp' => 650.0,
+                        'hpperlevel' => 114.0,
+                        'mp' => 0.0,
+                        'mpperlevel' => 0.0,
+                        'movespeed' => 345.0,
+                        'armor' => 38.0,
+                        'armorperlevel' => 4.45,
+                        'spellblock' => 32.0,
+                        'spellblockperlevel' => 2.05,
+                        'attackrange' => 175.0,
+                        'hpregen' => 3.0,
+                        'hpregenperlevel' => 1.0,
+                        'mpregen' => 0.0,
+                        'mpregenperlevel' => 0.0,
+                        'crit' => 0.0,
+                        'critperlevel' => 0.0,
+                        'attackdamage' => 60.0,
+                        'attackdamageperlevel' => 5.0,
+                        'attackspeed' => 0.651,
+                        'attackspeedperlevel' => 2.5,
                     ],
                 ],
                 'Akshan' => [
@@ -210,9 +213,9 @@ class ChampionApiTest extends KernelTestCase
                     'title' => 'Sentinelle rebelle',
                     'blurb' => 'Se jouant du danger, Aks…per au regard de ses...',
                     'info' => [
-                        'attack'     => 0,
-                        'defense'    => 4,
-                        'magic'      => 3,
+                        'attack' => 0,
+                        'defense' => 4,
+                        'magic' => 3,
                         'difficulty' => 4,
                     ],
                     'image' => [
@@ -227,29 +230,29 @@ class ChampionApiTest extends KernelTestCase
                     'tags' => ['Marksman', 'Assassin'],
                     'partype' => 'Mana',
                     'stats' => [
-                        'hp'                    => 630.0,
-                        'hpperlevel'            => 107.0,
-                        'mp'                    => 350.0,
-                        'mpperlevel'            => 40.0,
-                        'movespeed'             => 330.0,
-                        'armor'                 => 26.0,
-                        'armorperlevel'         => 4.7,
-                        'spellblock'            => 30.0,
-                        'spellblockperlevel'    => 1.3,
-                        'attackrange'           => 500.0,
-                        'hpregen'               => 3.75,
-                        'hpregenperlevel'       => 0.65,
-                        'mpregen'               => 8.2,
-                        'mpregenperlevel'       => 0.7,
-                        'crit'                  => 0.0,
-                        'critperlevel'          => 0.0,
-                        'attackdamage'          => 52.0,
-                        'attackdamageperlevel'  => 3.0,
-                        'attackspeed'           => 0.638,
-                        'attackspeedperlevel'   => 4.0,
+                        'hp' => 630.0,
+                        'hpperlevel' => 107.0,
+                        'mp' => 350.0,
+                        'mpperlevel' => 40.0,
+                        'movespeed' => 330.0,
+                        'armor' => 26.0,
+                        'armorperlevel' => 4.7,
+                        'spellblock' => 30.0,
+                        'spellblockperlevel' => 1.3,
+                        'attackrange' => 500.0,
+                        'hpregen' => 3.75,
+                        'hpregenperlevel' => 0.65,
+                        'mpregen' => 8.2,
+                        'mpregenperlevel' => 0.7,
+                        'crit' => 0.0,
+                        'critperlevel' => 0.0,
+                        'attackdamage' => 52.0,
+                        'attackdamageperlevel' => 3.0,
+                        'attackspeed' => 0.638,
+                        'attackspeedperlevel' => 4.0,
                     ],
-                ]
-            ]
+                ],
+            ],
         ];
 
         $championApi = $this->getChampionApi($data);
@@ -257,7 +260,7 @@ class ChampionApiTest extends KernelTestCase
 
         // Test de la Collection
         self::assertInstanceOf(ChampionCollection::class, $championCollection);
-        self::assertSame(count($data['data']), $championCollection->count());
+        self::assertSame(\count($data['data']), $championCollection->count());
 
         self::assertSame($data['type'], $championCollection->type);
         self::assertSame($data['version'], $championCollection->version);
@@ -297,37 +300,37 @@ class ChampionApiTest extends KernelTestCase
                         [
                             'id' => '266000',
                             'num' => 0,
-                            'name' => "default",
+                            'name' => 'default',
                             'chromas' => false,
                         ],
                         [
                             'id' => '266001',
                             'num' => 1,
-                            'name' => "Aatrox Justicier",
+                            'name' => 'Aatrox Justicier',
                             'chromas' => false,
                         ],
                         [
                             'id' => '266002',
                             'num' => 2,
-                            'name' => "Mecha Aatrox",
+                            'name' => 'Mecha Aatrox',
                             'chromas' => true,
                         ],
                         [
                             'id' => '266003',
                             'num' => 3,
-                            'name' => "Aatrox chasseur marin",
+                            'name' => 'Aatrox chasseur marin',
                             'chromas' => false,
                         ],
                         [
                             'id' => '266007',
                             'num' => 7,
-                            'name' => "Aatrox lune de sang",
+                            'name' => 'Aatrox lune de sang',
                             'chromas' => false,
                         ],
                         [
                             'id' => '266008',
                             'num' => 8,
-                            'name' => "Aatrox lune de sang prestige",
+                            'name' => 'Aatrox lune de sang prestige',
                             'chromas' => false,
                         ],
                         [
@@ -372,20 +375,20 @@ class ChampionApiTest extends KernelTestCase
                     'allytips' => [
                         'Utilisez Ruée obscure tout en lançant Épée des Darkin pour augmenter vos chances de toucher l\'ennemi.',
                         'Facilitez Épée des Darkin avec des compétences de contrôle de foule, telles que Chaînes infernales, ou avec les effets immobilisants de vos alliés.',
-                        'Lancez Fossoyeur des mondes quand vous êtes certain de pouvoir forcer le combat.'
+                        'Lancez Fossoyeur des mondes quand vous êtes certain de pouvoir forcer le combat.',
                     ],
                     'enemytips' => [
                         'Les attaques d\'Aatrox sont prévisibles. Profitez-en pour esquiver ses zones d\'impact.',
                         'Il est plus facile de fuir les Chaînes infernales d\'Aatrox en courant vers un côté ou vers Aatrox.',
-                        'Quand Aatrox utilise son ultime, gardez vos distances pour l\'empêcher de revenir à la vie.'
+                        'Quand Aatrox utilise son ultime, gardez vos distances pour l\'empêcher de revenir à la vie.',
                     ],
                     'tags' => ['Fighter', 'Tank', 'Puits de sang'],
                     'partype' => 'Puits de sang',
                     'info' => [
                         'attack' => 8,
-                        'defense'=> 4,
-                        'magic' =>  3,
-                        'difficulty' =>  4,
+                        'defense' => 4,
+                        'magic' => 3,
+                        'difficulty' => 4,
                     ],
                     'stats' => [
                         'hp' => 650,
@@ -407,10 +410,9 @@ class ChampionApiTest extends KernelTestCase
                         'attackdamage' => 60,
                         'attackdamageperlevel' => 5,
                         'attackspeedperlevel' => 2.5,
-                        'attackspeed' => 0.651
+                        'attackspeed' => 0.651,
                     ],
                     'spells' => [
-
                     ],
                     'passive' => [
                         'name' => 'Posture du massacreur',
@@ -423,10 +425,10 @@ class ChampionApiTest extends KernelTestCase
                             'y' => 0,
                             'w' => 48,
                             'h' => 48,
-                        ]
-                    ]
-                ]
-            ]
+                        ],
+                    ],
+                ],
+            ],
         ];
 
         $championApi = $this->getChampionApi($data);
@@ -440,7 +442,7 @@ class ChampionApiTest extends KernelTestCase
         self::assertArrayHasKey('version', $champion);
         self::assertSame($data['version'], $champion['version']);
         self::assertArrayHasKey('data', $champion);
-        self::assertCount(count($data['data']), $champion['data']);
+        self::assertCount(\count($data['data']), $champion['data']);
         $dataChampion = $champion['data'];
 
         // Champion
@@ -473,37 +475,37 @@ class ChampionApiTest extends KernelTestCase
                         [
                             'id' => '266000',
                             'num' => 0,
-                            'name' => "default",
+                            'name' => 'default',
                             'chromas' => false,
                         ],
                         [
                             'id' => '266001',
                             'num' => 1,
-                            'name' => "Aatrox Justicier",
+                            'name' => 'Aatrox Justicier',
                             'chromas' => false,
                         ],
                         [
                             'id' => '266002',
                             'num' => 2,
-                            'name' => "Mecha Aatrox",
+                            'name' => 'Mecha Aatrox',
                             'chromas' => true,
                         ],
                         [
                             'id' => '266003',
                             'num' => 3,
-                            'name' => "Aatrox chasseur marin",
+                            'name' => 'Aatrox chasseur marin',
                             'chromas' => false,
                         ],
                         [
                             'id' => '266007',
                             'num' => 7,
-                            'name' => "Aatrox lune de sang",
+                            'name' => 'Aatrox lune de sang',
                             'chromas' => false,
                         ],
                         [
                             'id' => '266008',
                             'num' => 8,
-                            'name' => "Aatrox lune de sang prestige",
+                            'name' => 'Aatrox lune de sang prestige',
                             'chromas' => false,
                         ],
                         [
@@ -548,20 +550,20 @@ class ChampionApiTest extends KernelTestCase
                     'allytips' => [
                         'Utilisez Ruée obscure tout en lançant Épée des Darkin pour augmenter vos chances de toucher l\'ennemi.',
                         'Facilitez Épée des Darkin avec des compétences de contrôle de foule, telles que Chaînes infernales, ou avec les effets immobilisants de vos alliés.',
-                        'Lancez Fossoyeur des mondes quand vous êtes certain de pouvoir forcer le combat.'
+                        'Lancez Fossoyeur des mondes quand vous êtes certain de pouvoir forcer le combat.',
                     ],
                     'enemytips' => [
                         'Les attaques d\'Aatrox sont prévisibles. Profitez-en pour esquiver ses zones d\'impact.',
                         'Il est plus facile de fuir les Chaînes infernales d\'Aatrox en courant vers un côté ou vers Aatrox.',
-                        'Quand Aatrox utilise son ultime, gardez vos distances pour l\'empêcher de revenir à la vie.'
+                        'Quand Aatrox utilise son ultime, gardez vos distances pour l\'empêcher de revenir à la vie.',
                     ],
                     'tags' => ['Fighter', 'Tank', 'Puits de sang'],
                     'partype' => 'Puits de sang',
                     'info' => [
                         'attack' => 8,
-                        'defense'=> 4,
-                        'magic' =>  3,
-                        'difficulty' =>  4,
+                        'defense' => 4,
+                        'magic' => 3,
+                        'difficulty' => 4,
                     ],
                     'stats' => [
                         'hp' => 650.0,
@@ -583,10 +585,9 @@ class ChampionApiTest extends KernelTestCase
                         'attackdamage' => 60.0,
                         'attackdamageperlevel' => 5.0,
                         'attackspeedperlevel' => 2.5,
-                        'attackspeed' => 0.651
+                        'attackspeed' => 0.651,
                     ],
                     'spells' => [
-
                     ],
                     'passive' => [
                         'name' => 'Posture du massacreur',
@@ -599,10 +600,10 @@ class ChampionApiTest extends KernelTestCase
                             'y' => 0,
                             'w' => 48,
                             'h' => 48,
-                        ]
-                    ]
-                ]
-            ]
+                        ],
+                    ],
+                ],
+            ],
         ];
 
         $championApi = $this->getChampionApi($data);
