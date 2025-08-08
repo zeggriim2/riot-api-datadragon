@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Zeggriim\RiotApiDataDragon\Tests\Endpoint\DataLeague;
 
-
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpClient\Exception\ClientException;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpClient\Exception\ServerException as ServerExceptionHttpClient;
+use Symfony\Component\HttpFoundation\Response;
 use Zeggriim\RiotApiDataDragon\Enum\Division;
 use Zeggriim\RiotApiDataDragon\Enum\Queue;
 use Zeggriim\RiotApiDataDragon\Enum\Tier;
@@ -20,26 +19,29 @@ use Zeggriim\RiotApiDataDragon\Exception\UnauthorizedException;
 use Zeggriim\RiotApiDataDragon\Exception\UnsupportedMediaTypeException;
 use Zeggriim\RiotApiDataDragon\Tests\Traits\AssertLeagueTrait;
 use Zeggriim\RiotApiDataDragon\Tests\Traits\RiotApiDataLeagueTrait;
-use Throwable;
 
 /**
  * @group league
+ *
+ * @internal
+ *
+ * @coversNothing
  */
-class LeagueApiTest extends KernelTestCase
+final class LeagueApiTest extends KernelTestCase
 {
     use AssertLeagueTrait;
     use RiotApiDataLeagueTrait;
 
     /**
-     * @dataProvider providerLeague
+     * @dataProvider provideGetBigLeagueCases
      */
-    public function testGetBigLeague(array $dataResponse,string $method): void
+    public function testGetBigLeague(array $dataResponse, string $method): void
     {
         $leagueApi = $this->getLeagueApi($dataResponse);
 
         self::assertTrue(method_exists($leagueApi, $method));
 
-        $leagues = $leagueApi->$method();
+        $leagues = $leagueApi->{$method}();
 
         self::assertIsArray($leagues);
         $this->assertLeagueEntryList($leagues, $dataResponse, 2);
@@ -51,7 +53,7 @@ class LeagueApiTest extends KernelTestCase
         $this->assertLeagueItem($secondLeague, $dataResponse['entries'][1]);
     }
 
-    public static function providerLeague(): array
+    public static function provideGetBigLeagueCases(): iterable
     {
         $dataResponse = [
             'tier' => 'CHALLENGER',
@@ -60,15 +62,15 @@ class LeagueApiTest extends KernelTestCase
             'name' => 'Nami \'s Alliance',
             'entries' => [
                 [
-                    'summonerId'=> 'hEVfJbhPOagFBgHHDvOTaCigErxIKw3lKjz9YChqMAZ8lQc',
-                    'leaguePoints'=> 892,
-                    'rank'=> 'I',
-                    'wins'=> 310,
-                    'losses'=> 254,
-                    'veteran'=> false,
-                    'inactive'=> false,
-                    'freshBlood'=> true,
-                    'hotStreak'=> true
+                    'summonerId' => 'hEVfJbhPOagFBgHHDvOTaCigErxIKw3lKjz9YChqMAZ8lQc',
+                    'leaguePoints' => 892,
+                    'rank' => 'I',
+                    'wins' => 310,
+                    'losses' => 254,
+                    'veteran' => false,
+                    'inactive' => false,
+                    'freshBlood' => true,
+                    'hotStreak' => true,
                 ],
                 [
                     'summonerId' => 'tKfbJzZOJ0NVzTiPDFZw7e-5YvoKf7vyNXfb4wxRds4VX0-',
@@ -79,23 +81,23 @@ class LeagueApiTest extends KernelTestCase
                     'veteran' => false,
                     'inactive' => false,
                     'freshBlood' => false,
-                    'hotStreak' => false
-                ]
-            ]
+                    'hotStreak' => false,
+                ],
+            ],
         ];
 
         return [
             'Challenger' => [
                 'dataResponse' => $dataResponse,
-                'method' => 'getChallenger'
+                'method' => 'getChallenger',
             ],
             'Grand Master' => [
                 'dataResponse' => $dataResponse,
-                'method' => 'getGrandMaster'
+                'method' => 'getGrandMaster',
             ],
             'Master' => [
                 'dataResponse' => $dataResponse,
-                'method' => 'getMaster'
+                'method' => 'getMaster',
             ],
         ];
     }
@@ -104,32 +106,32 @@ class LeagueApiTest extends KernelTestCase
     {
         $dataResponse = [
             [
-                "leagueId"=> "3437378e-b857-4b1e-b554-4598f31dd36a",
-                "queueType"=> "RANKED_FLEX_SR",
-                "tier"=> "GOLD",
-                "rank"=> "I",
-                "summonerId"=> "T1e3zoiqAc5gNv88a6EhUktK3InEtscj6rXKjUyhApQCFwJ0",
-                "leaguePoints"=> 82,
-                "wins"=> 9,
-                "losses"=> 5,
-                "veteran"=> false,
-                "inactive"=> false,
-                "freshBlood"=> false,
-                "hotStreak"=> false
+                'leagueId' => '3437378e-b857-4b1e-b554-4598f31dd36a',
+                'queueType' => 'RANKED_FLEX_SR',
+                'tier' => 'GOLD',
+                'rank' => 'I',
+                'summonerId' => 'T1e3zoiqAc5gNv88a6EhUktK3InEtscj6rXKjUyhApQCFwJ0',
+                'leaguePoints' => 82,
+                'wins' => 9,
+                'losses' => 5,
+                'veteran' => false,
+                'inactive' => false,
+                'freshBlood' => false,
+                'hotStreak' => false,
             ],
             [
-                "leagueId"=> "80c6f19e-56d4-4da6-ad25-0338314e5fa7",
-                "queueType"=> "RANKED_FLEX_SR",
-                "tier"=> "GOLD",
-                "rank"=> "I",
-                "summonerId"=> "jSjP7GyZY4j9STVYwxnNvKO7VGNZL27oDiT79K9TSRGsnDDn",
-                "leaguePoints"=> 50,
-                "wins"=> 2,
-                "losses"=> 8,
-                "veteran"=> false,
-                "inactive"=> false,
-                "freshBlood"=> false,
-                "hotStreak"=> false
+                'leagueId' => '80c6f19e-56d4-4da6-ad25-0338314e5fa7',
+                'queueType' => 'RANKED_FLEX_SR',
+                'tier' => 'GOLD',
+                'rank' => 'I',
+                'summonerId' => 'jSjP7GyZY4j9STVYwxnNvKO7VGNZL27oDiT79K9TSRGsnDDn',
+                'leaguePoints' => 50,
+                'wins' => 2,
+                'losses' => 8,
+                'veteran' => false,
+                'inactive' => false,
+                'freshBlood' => false,
+                'hotStreak' => false,
             ],
         ];
 
@@ -146,45 +148,45 @@ class LeagueApiTest extends KernelTestCase
     public function testGetLeagueWithId(): void
     {
         $dataResponse = [
-            "tier"=> "GOLD",
-            "leagueId"=> "3437378e-b857-4b1e-b554-4598f31dd36a",
-            "queue"=> "RANKED_FLEX_SR",
-            "name"=> "Dr. Mundo's Inquisitors",
-            "entries"=> [
+            'tier' => 'GOLD',
+            'leagueId' => '3437378e-b857-4b1e-b554-4598f31dd36a',
+            'queue' => 'RANKED_FLEX_SR',
+            'name' => "Dr. Mundo's Inquisitors",
+            'entries' => [
                 [
-                    "summonerId"=> "YIhWs5RLvg0K1TvICE0Z0lRq9qYe0vEqJ5NYD7It72q_Ddc",
-                    "leaguePoints"=> 0,
-                    "rank"=> "IV",
-                    "wins"=> 51,
-                    "losses"=> 40,
-                    "veteran"=> false,
-                    "inactive"=> false,
-                    "freshBlood"=> false,
-                    "hotStreak"=> false
+                    'summonerId' => 'YIhWs5RLvg0K1TvICE0Z0lRq9qYe0vEqJ5NYD7It72q_Ddc',
+                    'leaguePoints' => 0,
+                    'rank' => 'IV',
+                    'wins' => 51,
+                    'losses' => 40,
+                    'veteran' => false,
+                    'inactive' => false,
+                    'freshBlood' => false,
+                    'hotStreak' => false,
                 ],
                 [
-                    "summonerId"=> "GM87Q1cVqHNsqgXBEFp0nul27BP1UJBknFYTpBp6wsODeqI",
-                    "leaguePoints"=> 36,
-                    "rank"=> "IV",
-                    "wins"=> 15,
-                    "losses"=> 8,
-                    "veteran"=> false,
-                    "inactive"=> false,
-                    "freshBlood"=> false,
-                    "hotStreak"=> false
+                    'summonerId' => 'GM87Q1cVqHNsqgXBEFp0nul27BP1UJBknFYTpBp6wsODeqI',
+                    'leaguePoints' => 36,
+                    'rank' => 'IV',
+                    'wins' => 15,
+                    'losses' => 8,
+                    'veteran' => false,
+                    'inactive' => false,
+                    'freshBlood' => false,
+                    'hotStreak' => false,
                 ],
                 [
-                    "summonerId"=> "9c5xsKUES_hOp1dVnyJ216Sjr3Syukou11xgjFoDEjatpNE",
-                    "leaguePoints"=> 41,
-                    "rank"=> "IV",
-                    "wins"=> 19,
-                    "losses"=> 16,
-                    "veteran"=> false,
-                    "inactive"=> false,
-                    "freshBlood"=> false,
-                    "hotStreak"=> false
-                ]
-            ]
+                    'summonerId' => '9c5xsKUES_hOp1dVnyJ216Sjr3Syukou11xgjFoDEjatpNE',
+                    'leaguePoints' => 41,
+                    'rank' => 'IV',
+                    'wins' => 19,
+                    'losses' => 16,
+                    'veteran' => false,
+                    'inactive' => false,
+                    'freshBlood' => false,
+                    'hotStreak' => false,
+                ],
+            ],
         ];
 
         $leagueApi = $this->getLeagueApi($dataResponse);
@@ -205,33 +207,33 @@ class LeagueApiTest extends KernelTestCase
     {
         $dataResponse = [
             [
-                "leagueId"      => "3437378e-b857-4b1e-b554-4598f31dd36a",
-                "queueType"     => "RANKED_FLEX_SR",
-                "tier"          => "GOLD",
-                "rank"          => "IV",
-                "summonerId"    => "YIhWs5RLvg0K1TvICE0Z0lRq9qYe0vEqJ5NYD7It72q_Ddc",
-                "leaguePoints"  => 0,
-                "wins"          => 51,
-                "losses"        => 40,
-                "veteran"       => false,
-                "inactive"      => false,
-                "freshBlood"    => false,
-                "hotStreak"     => false
+                'leagueId' => '3437378e-b857-4b1e-b554-4598f31dd36a',
+                'queueType' => 'RANKED_FLEX_SR',
+                'tier' => 'GOLD',
+                'rank' => 'IV',
+                'summonerId' => 'YIhWs5RLvg0K1TvICE0Z0lRq9qYe0vEqJ5NYD7It72q_Ddc',
+                'leaguePoints' => 0,
+                'wins' => 51,
+                'losses' => 40,
+                'veteran' => false,
+                'inactive' => false,
+                'freshBlood' => false,
+                'hotStreak' => false,
             ],
             [
-                "leagueId"      => "b9872597-386f-4db4-b79a-fa952cb3471f",
-                "queueType"     => "RANKED_SOLO_5x5",
-                "tier"          => "BRONZE",
-                "rank"          => "II",
-                "summonerId"    => "YIhWs5RLvg0K1TvICE0Z0lRq9qYe0vEqJ5NYD7It72q_Ddc",
-                "leaguePoints"  => 45,
-                "wins"          => 76,
-                "losses"        => 89,
-                "veteran"       => false,
-                "inactive"      => false,
-                "freshBlood"    => false,
-                "hotStreak"     => false
-            ]
+                'leagueId' => 'b9872597-386f-4db4-b79a-fa952cb3471f',
+                'queueType' => 'RANKED_SOLO_5x5',
+                'tier' => 'BRONZE',
+                'rank' => 'II',
+                'summonerId' => 'YIhWs5RLvg0K1TvICE0Z0lRq9qYe0vEqJ5NYD7It72q_Ddc',
+                'leaguePoints' => 45,
+                'wins' => 76,
+                'losses' => 89,
+                'veteran' => false,
+                'inactive' => false,
+                'freshBlood' => false,
+                'hotStreak' => false,
+            ],
         ];
 
         $leagueApi = $this->getLeagueApi($dataResponse);
@@ -244,20 +246,20 @@ class LeagueApiTest extends KernelTestCase
     }
 
     /**
-     * @dataProvider provideGetBadRequest
+     * @dataProvider provideGetBadRequestCases
      *
-     * @param class-string<Throwable> $exceptionClass
+     * @param class-string<\Throwable> $exceptionClass
      */
     public function testGetBadRequest(int $codeStatus, string $exceptionClass, string $exceptionMessage): void
     {
-        $leagueApi = $this->getLeagueApi(['test'=> 'test'], ['http_code' => $codeStatus]);
+        $leagueApi = $this->getLeagueApi(['test' => 'test'], ['http_code' => $codeStatus]);
         self::expectException($exceptionClass);
         self::expectExceptionMessage($exceptionMessage);
         $res = $leagueApi->getGrandMaster();
         self::assertCount(0, $res);
     }
 
-    public static function provideGetBadRequest(): array
+    public static function provideGetBadRequestCases(): iterable
     {
         return [
             [Response::HTTP_BAD_REQUEST, RequestException::class,  'LeagueAPI: Request is invalid'],

@@ -10,10 +10,15 @@ use Zeggriim\RiotApiDataDragon\Tests\Traits\RiotApiDataDragonTrait;
 
 /**
  * @group dragon
+ *
+ * @internal
+ *
+ * @coversNothing
  */
-class ProfileIconApiTest extends KernelTestCase
+final class ProfileIconApiTest extends KernelTestCase
 {
     use RiotApiDataDragonTrait;
+
     public function testProfileIcon(): void
     {
         $data = [
@@ -30,7 +35,7 @@ class ProfileIconApiTest extends KernelTestCase
                         'y' => 0,
                         'w' => 48,
                         'h' => 48,
-                    ]
+                    ],
                 ],
                 [
                     'id' => 1,
@@ -42,9 +47,9 @@ class ProfileIconApiTest extends KernelTestCase
                         'y' => 2880,
                         'w' => 48,
                         'h' => 48,
-                    ]
-                ]
-            ]
+                    ],
+                ],
+            ],
         ];
 
         $profileIconApi = $this->getProfileIconApi($data);
@@ -83,7 +88,7 @@ class ProfileIconApiTest extends KernelTestCase
                         'y' => 0,
                         'w' => 48,
                         'h' => 48,
-                    ]
+                    ],
                 ],
                 [
                     'id' => 1,
@@ -95,9 +100,9 @@ class ProfileIconApiTest extends KernelTestCase
                         'y' => 2880,
                         'w' => 48,
                         'h' => 48,
-                    ]
-                ]
-            ]
+                    ],
+                ],
+            ],
         ];
 
         $profileIconApi = $this->getProfileIconApi($data);
@@ -107,7 +112,7 @@ class ProfileIconApiTest extends KernelTestCase
         self::assertSame($data['type'], $profileIcons->type);
         self::assertSame($data['version'], $profileIcons->version);
 
-        $profileIconData = count($data['data']);
+        $profileIconData = \count($data['data']);
         self::assertCount($profileIconData, $profileIcons->profileIcons);
         self::assertSame($profileIconData, $profileIcons->count());
     }

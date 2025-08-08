@@ -1,0 +1,33 @@
+name: PHP CS Fixer
+
+on:
+    pull_request:
+        types: [opened, synchronize, reopened, ready_for_review]
+    workflow_dispatch:
+
+jobs:
+    quality:
+        name: QA (PHP 8.2)
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Afficher les versions Docker et OS
+              run: |
+                  docker --version
+                  uname -a
+
+            - name: Installer les dépendances Composer (via PHPQA)
+              run: |
+                  make install
+
+            - name: PHP CS Fixer (dry-run via Makefile)
+              run: |
+                  make qa-cs-fixer-dry-run
+
+            - name: PHPStan (via Makefile)
+              run: |
+                  make qa-phpstan

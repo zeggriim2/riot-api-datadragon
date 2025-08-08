@@ -2,7 +2,6 @@
 
 namespace Zeggriim\RiotApiDataDragon\Tests\Traits;
 
-use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpClient\MockHttpClient;
 use Symfony\Component\HttpClient\Response\MockResponse;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
@@ -27,16 +26,18 @@ trait RiotApiDataLeagueTrait
     {
         return new ChampionApi($this->getClientRiotApiDataLeague($dataResponse, $info));
     }
-    private function getClientRiotApiDataLeague(array $data,array $info = ['http_code' => 200]): RiotApiDataLeagueClient
+
+    private function getClientRiotApiDataLeague(array $data, array $info = ['http_code' => 200]): RiotApiDataLeagueClient
     {
         $jsonData = json_encode($data);
-        if ($jsonData === false) {
+        if (false === $jsonData) {
             throw new \RuntimeException('Failed to encode data as JSON');
         }
 
         $response = new MockResponse($jsonData, $info);
         $this->createMock(HttpClientInterface::class);
         $httpClient = new MockHttpClient($response, null);
+
         return new RiotApiDataLeagueClient($httpClient, 'key');
     }
 }

@@ -8,7 +8,7 @@ trait AssertItemTrait
 {
     use AssertImageTrait;
 
-    private function assertItem(array $dataItem, array $item):void
+    private function assertItem(array $dataItem, array $item): void
     {
         self::assertArrayHasKey('name', $item);
         self::assertSame($dataItem['name'], $item['name']);
