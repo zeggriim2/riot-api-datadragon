@@ -14,10 +14,10 @@ use Zeggriim\RiotApiDataDragon\Tests\Traits\Checker\AssertStatTrait;
 
 trait AssertChampionTrait
 {
-    use AssertStatTrait;
-    use AssertInfoTrait;
     use AssertImageTrait;
+    use AssertInfoTrait;
     use AssertPassiveTrait;
+    use AssertStatTrait;
 
     private function assertChampion(array $dataSend, array $champion, bool $isDetail = false): void
     {
@@ -52,13 +52,13 @@ trait AssertChampionTrait
             self::assertSame($dataSend['lore'], $champion['lore']);
 
             self::assertArrayHasKey('allytips', $champion);
-            self::assertCount(count($dataSend['allytips']), $champion['allytips']);
+            self::assertCount(\count($dataSend['allytips']), $champion['allytips']);
             foreach ($champion['allytips'] as $key => $allytip) {
                 self::assertSame($dataSend['allytips'][$key], $allytip);
             }
 
             self::assertArrayHasKey('enemytips', $champion);
-            self::assertCount(count($dataSend['enemytips']), $champion['enemytips']);
+            self::assertCount(\count($dataSend['enemytips']), $champion['enemytips']);
             foreach ($champion['enemytips'] as $key => $enemytip) {
                 self::assertSame($dataSend['enemytips'][$key], $enemytip);
             }
@@ -92,12 +92,12 @@ trait AssertChampionTrait
         if ($isDetail) {
             self::assertSame($dataSend['lore'], $champion->lore);
 
-            self::assertCount(count($dataSend['allytips']), $champion->allytips);
+            self::assertCount(\count($dataSend['allytips']), $champion->allytips);
             foreach ($champion->allytips as $key => $allytip) {
                 self::assertSame($dataSend['allytips'][$key], $allytip);
             }
 
-            self::assertCount(count($dataSend['enemytips']), $champion->enemytips);
+            self::assertCount(\count($dataSend['enemytips']), $champion->enemytips);
             foreach ($champion->enemytips as $key => $enemytip) {
                 self::assertSame($dataSend['enemytips'][$key], $enemytip);
             }

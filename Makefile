@@ -17,7 +17,13 @@ PHPUNIT  = $(PHP) vendor/bin/phpunit
 #------------#
 #---PHPQA---#
 PHPQA = jakzal/phpqa:php8.2-debian
-PHPQA_RUN = $(DOCKER_RUN) --init -it --rm -v $(PWD):/project -w /project $(PHPQA)
+DOCKER_RUN_FLAGS ?= $(shell \
+  FLAGS=""; \
+  if [ -t 0 ]; then FLAGS="$${FLAGS} -i"; fi; \
+  if [ -t 1 ]; then FLAGS="$${FLAGS} -t"; fi; \
+  echo "$${FLAGS}"; \
+)
+PHPQA_RUN = $(DOCKER_RUN) --init $(DOCKER_RUN_FLAGS) --rm -v $(PWD):/project -w /project $(PHPQA)
 PHPQA_RUN_CI = $(DOCKER_RUN) --init --rm -v $(PWD):/project -w /project $(PHPQA)
 
 #------------#
@@ -35,25 +41,16 @@ help: ## Show this help.
 
 ## === 🐛  PHPQA =================================================
 qa-cs-fixer-dry-run: ## Run php-cs-fixer in dry-run mode.
-	$(PHPQA_RUN) php-cs-fixer fix ./src --verbose --dry-run --config ".php-cs-fixer.dist.php"
+	$(PHPQA_RUN) php-cs-fixer fix --diff --verbose --dry-run --config ".php-cs-fixer.dist.php"
 .PHONY: qa-cs-fixer-dry-run
 
-qa-cs-fixer-dry-run-ci: ## Run php-cs-fixer in dry-run mode for CI.
-	$(PHPQA_RUN_CI) php-cs-fixer fix ./src --verbose --dry-run --config ".php-cs-fixer.dist.php"
-.PHONY: qa-cs-fixer-dry-run-ci
-
 qa-cs-fixer: ## Run php-cs-fixer.
-	$(PHPQA_RUN) php-cs-fixer fix ./src --verbose --config ".php-cs-fixer.dist.php"
+	$(PHPQA_RUN) php-cs-fixer fix --verbose --config ".php-cs-fixer.dist.php" .
 .PHONY: qa-cs-fixer
 
 qa-phpstan: ## Run PHPStan static analysis.
 	$(PHPQA_RUN) phpstan analyse src tests --configuration phpstan.neon --memory-limit=1G
 .PHONY: qa-phpstan
-
-qa-phpstan-ci: ## Run PHPStan static analysis for CI.
-	$(PHPQA_RUN_CI) phpstan analyse src tests --configuration phpstan.neon --memory-limit=1G
-.PHONY: qa-phpstan-ci
-
 
 qa-phpstan-baseline: ## Generate PHPStan baseline.
 	$(PHPQA_RUN) phpstan analyse src tests --configuration phpstan.neon --generate-baseline
