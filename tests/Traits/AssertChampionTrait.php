@@ -3,10 +3,10 @@
 namespace Zeggriim\RiotApiDataDragon\Tests\Traits;
 
 use Zeggriim\RiotApiDataDragon\Dto\Champion\Champion;
-use Zeggriim\RiotApiDataDragon\Dto\Champion\ChampionImage;
 use Zeggriim\RiotApiDataDragon\Dto\Champion\ChampionInfo;
 use Zeggriim\RiotApiDataDragon\Dto\Champion\ChampionPassive;
 use Zeggriim\RiotApiDataDragon\Dto\Champion\ChampionStats;
+use Zeggriim\RiotApiDataDragon\Dto\Image;
 use Zeggriim\RiotApiDataDragon\Tests\Traits\Checker\AssertImageTrait;
 use Zeggriim\RiotApiDataDragon\Tests\Traits\Checker\AssertInfoTrait;
 use Zeggriim\RiotApiDataDragon\Tests\Traits\Checker\AssertPassiveTrait;
@@ -79,7 +79,7 @@ trait AssertChampionTrait
         self::assertInstanceOf(ChampionInfo::class, $champion->info);
         $this->assertInfoObjet($dataSend['info'], $champion->info);
 
-        self::assertInstanceOf(ChampionImage::class, $champion->image);
+        self::assertInstanceOf(Image::class, $champion->image);
         $this->assertImageObjet($dataSend['image'], $champion->image);
 
         self::assertSame($dataSend['tags'], $champion->tags);

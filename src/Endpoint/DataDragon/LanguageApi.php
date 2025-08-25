@@ -14,7 +14,7 @@ class LanguageApi implements LanguageApiInterface
 
     public function __construct(
         private readonly RiotApiDataDragonClient $riotApiDataDragon,
-        private readonly ?LanguageTransformer $languageTransformer = null,
+        private readonly LanguageTransformer $languageTransformer,
     ) {
     }
 
@@ -26,10 +26,6 @@ class LanguageApi implements LanguageApiInterface
     public function getLanguagesAsCollection(): LanguageCollection
     {
         $data = $this->getLanguages();
-
-        if (null === $this->languageTransformer) {
-            throw new \RuntimeException('LanguageTransformer is required for object transformation');
-        }
 
         return $this->languageTransformer->transformToCollection($data);
     }
