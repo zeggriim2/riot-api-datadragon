@@ -16,6 +16,7 @@ use Zeggriim\RiotApiDataDragon\Exception\DataNotFoundException;
 use Zeggriim\RiotApiDataDragon\Exception\ForbiddenException;
 use Zeggriim\RiotApiDataDragon\Exception\RequestException;
 use Zeggriim\RiotApiDataDragon\Exception\ServerException;
+use Zeggriim\RiotApiDataDragon\Exception\ServerLimitException;
 use Zeggriim\RiotApiDataDragon\Exception\UnauthorizedException;
 use Zeggriim\RiotApiDataDragon\Exception\UnsupportedMediaTypeException;
 
@@ -65,15 +66,17 @@ class RiotApiDataLeagueClient
 
         switch ($response->getStatusCode()) {
             case 400:
-                throw new RequestException();
+                throw new RequestException(code: $response->getStatusCode());
             case 401:
-                throw new UnauthorizedException();
+                throw new UnauthorizedException(code: $response->getStatusCode());
             case 403:
-                throw new ForbiddenException();
+                throw new ForbiddenException(code: $response->getStatusCode());
             case 404:
-                throw new DataNotFoundException();
+                throw new DataNotFoundException(code: $response->getStatusCode());
             case 415:
-                throw new UnsupportedMediaTypeException();
+                throw new UnsupportedMediaTypeException(code: $response->getStatusCode());
+            case 429:
+                throw new ServerLimitException(code: $response->getStatusCode());
             default:
                 throw $exception;
         }
