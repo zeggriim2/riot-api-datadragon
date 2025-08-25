@@ -18,12 +18,15 @@ use Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\VersionApi;
 use Zeggriim\RiotApiDataDragon\RiotApiDataDragonClient;
 use Zeggriim\RiotApiDataDragon\Serializer\Normalizer\Champion\ChampionCollectionNormalizer;
 use Zeggriim\RiotApiDataDragon\Serializer\Normalizer\Champion\ChampionNormalizer;
+use Zeggriim\RiotApiDataDragon\Serializer\Normalizer\Item\ItemCollectionNormalizer;
+use Zeggriim\RiotApiDataDragon\Serializer\Normalizer\Item\ItemNormalizer;
 use Zeggriim\RiotApiDataDragon\Serializer\Normalizer\LanguageCollectionNormalizer;
 use Zeggriim\RiotApiDataDragon\Serializer\Normalizer\ProfileIcon\ProfileIconCollectionNormalizer;
 use Zeggriim\RiotApiDataDragon\Serializer\Normalizer\ProfileIcon\ProfileIconNormalizer;
 use Zeggriim\RiotApiDataDragon\Serializer\Normalizer\Summoner\SummonerCollectionNormalizer;
 use Zeggriim\RiotApiDataDragon\Serializer\Normalizer\Summoner\SummonerNormalizer;
 use Zeggriim\RiotApiDataDragon\Transformer\ChampionTransformer;
+use Zeggriim\RiotApiDataDragon\Transformer\ItemTransformer;
 use Zeggriim\RiotApiDataDragon\Transformer\LanguageTransformer;
 use Zeggriim\RiotApiDataDragon\Transformer\ProfileIconTransformer;
 use Zeggriim\RiotApiDataDragon\Transformer\SummonerTransformer;
@@ -57,7 +60,27 @@ trait RiotApiDataDragonTrait
 
     private function getItemApi(array $dataResponse, array $info = ['http_code' => 200]): ItemApi
     {
-        return new ItemApi($this->getClientRiotApiDataDragon($dataResponse, $info));
+        $itemCollectionNormalizer = new ItemCollectionNormalizer();
+        $itemNormalizer = new ItemNormalizer();
+
+        $normalizers = [
+            $itemCollectionNormalizer,
+            $itemNormalizer,
+            new ArrayDenormalizer(),
+            new ObjectNormalizer(),
+        ];
+
+        $serializer = new Serializer($normalizers, [new JsonEncoder()]);
+
+        $itemCollectionNormalizer->setDenormalizer($serializer);
+        $itemNormalizer->setDenormalizer($serializer);
+
+        $transformer = new ItemTransformer($serializer);
+
+        return new ItemApi(
+            $this->getClientRiotApiDataDragon($dataResponse, $info),
+            $transformer
+        );
     }
 
     private function getLanguageApi(array $dataResponse, array $info = ['http_code' => 200]): LanguageApi

@@ -54,6 +54,9 @@ services:
     Zeggriim\RiotApiDataDragon\Serializer\Normalizer\ProfileIconNormalizer:
         tags: [ 'serializer.normalizer' ]
 
+    Zeggriim\RiotApiDataDragon\Serializer\Normalizer\Item\ItemCollectionNormalizer:
+        tags: [ 'serializer.normalizer' ]
+
     # Transformers
     Zeggriim\RiotApiDataDragon\Transformer\ChampionTransformer:
         arguments:
@@ -64,5 +67,9 @@ services:
             $denormalizer: '@serializer'
 
     Zeggriim\RiotApiDataDragon\Transformer\ProfileIconTransformer:
+        arguments:
+            $denormalizer: '@serializer'
+
+    Zeggriim\RiotApiDataDragon\Transformer\ItemTransformer:
         arguments:
             $denormalizer: '@serializer'

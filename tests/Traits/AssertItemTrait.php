@@ -2,6 +2,7 @@
 
 namespace Zeggriim\RiotApiDataDragon\Tests\Traits;
 
+use Zeggriim\RiotApiDataDragon\Dto\Item\Item;
 use Zeggriim\RiotApiDataDragon\Tests\Traits\Checker\AssertImageTrait;
 
 trait AssertItemTrait
@@ -27,6 +28,20 @@ trait AssertItemTrait
 
         self::assertArrayHasKey('maps', $item);
         $this->assertMap($dataItem['maps'], $item['maps']);
+    }
+
+    public function assertItemObjet(array $dataItem, Item $item): void
+    {
+        self::assertSame($dataItem['name'], $item->name);
+        self::assertSame($dataItem['description'], $item->description);
+        self::assertSame($dataItem['colloq'], $item->colloq);
+        self::assertSame($dataItem['plaintext'], $item->plaintext);
+
+        $this->assertImageObjet($dataItem['image'], $item->image);
+
+        $this->assertGold($dataItem['gold'], $item->gold);
+
+        $this->assertMap($dataItem['maps'], $item->maps);
     }
 
     private function assertGold(array $dataGold, array $gold): void
