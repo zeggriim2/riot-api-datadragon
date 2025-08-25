@@ -6,7 +6,6 @@ namespace Zeggriim\RiotApiDataDragon\Tests\Endpoint\DataDragon;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zeggriim\RiotApiDataDragon\Dto\Summoner\Summoner;
-use Zeggriim\RiotApiDataDragon\Dto\Summoner\SummonerCollection;
 use Zeggriim\RiotApiDataDragon\Tests\Traits\RiotApiDataDragonTrait;
 
 /**
@@ -14,7 +13,7 @@ use Zeggriim\RiotApiDataDragon\Tests\Traits\RiotApiDataDragonTrait;
  *
  * @internal
  *
- * @coversNothing
+ * @coversDefaultClass \Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\SummonerApi
  */
 final class SummonerApiTest extends KernelTestCase
 {
