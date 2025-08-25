@@ -13,7 +13,7 @@ use Zeggriim\RiotApiDataDragon\Tests\Traits\RiotApiDataDragonTrait;
  *
  * @internal
  *
- * @coversNothing
+ * @coversDefaultClass \Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\ProfileIconApi
  */
 final class ProfileIconApiTest extends KernelTestCase
 {

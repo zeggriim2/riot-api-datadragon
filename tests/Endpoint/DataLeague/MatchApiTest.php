@@ -13,7 +13,7 @@ use Zeggriim\RiotApiDataDragon\Tests\Traits\RiotApiDataLeagueTrait;
  *
  * @internal
  *
- * @coversNothing
+ * @coversDefaultClass \Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\MatchApi
  */
 final class MatchApiTest extends KernelTestCase
 {
