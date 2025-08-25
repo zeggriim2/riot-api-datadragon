@@ -12,7 +12,7 @@ use Zeggriim\RiotApiDataDragon\Tests\Traits\RiotApiDataDragonTrait;
  *
  * @internal
  *
- * @coversNothing
+ * @coversDefaultClass \Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\VersionApi
  */
 final class VersionApiTest extends KernelTestCase
 {

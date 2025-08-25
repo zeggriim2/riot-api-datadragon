@@ -16,7 +16,7 @@ use Zeggriim\RiotApiDataDragon\Tests\Traits\RiotApiDataDragonTrait;
  *
  * @internal
  *
- * @coversNothing
+ * @coversDefaultClass \Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\ChampionApi
  */
 final class ChampionApiTest extends KernelTestCase
 {

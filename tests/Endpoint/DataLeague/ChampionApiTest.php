@@ -10,7 +10,7 @@ use Zeggriim\RiotApiDataDragon\Tests\Traits\RiotApiDataLeagueTrait;
 /**
  * @internal
  *
- * @coversNothing
+ * @coversDefaultClass \Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\ChampionApi
  */
 final class ChampionApiTest extends KernelTestCase
 {
