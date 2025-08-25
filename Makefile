@@ -70,7 +70,6 @@ qa-all-ci: ## Run all quality assurance tools for CI.
 
 #---------------------------------------------#
 
-
 ## === 🐋  DOCKER ================================================
 docker-up: ## Start docker containers.
 	$(DOCKER_COMPOSE_UP)

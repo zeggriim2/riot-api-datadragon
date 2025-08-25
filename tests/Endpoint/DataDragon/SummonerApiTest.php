@@ -133,7 +133,6 @@ final class SummonerApiTest extends KernelTestCase
         $summonerApi = $this->getSummonerApi($data);
         $summoners = $summonerApi->getSummonerAsCollection('14.8.1');
 
-        //        self::assertInstanceOf(SummonerCollection::class, $summoners);
         self::assertSame($data['type'], $summoners->type);
         self::assertSame($data['version'], $summoners->version);
 

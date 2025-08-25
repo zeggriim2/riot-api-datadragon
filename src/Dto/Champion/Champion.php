@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Zeggriim\RiotApiDataDragon\Dto\Champion;
 
+use Zeggriim\RiotApiDataDragon\Dto\Image;
+
 final class Champion
 {
     public function __construct(
@@ -16,7 +18,7 @@ final class Champion
         public readonly ?string $lore = null,
         public readonly ?string $partype = null,
         public readonly ?ChampionInfo $info = null,
-        public readonly ?ChampionImage $image = null,
+        public readonly ?Image $image = null,
         public readonly ?ChampionStats $stats = null,
         public readonly ?ChampionPassive $passive = null,
         /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Zeggriim\RiotApiDataDragon\Tests\Traits\Checker;
 
-use Zeggriim\RiotApiDataDragon\Dto\Champion\ChampionImage;
+use Zeggriim\RiotApiDataDragon\Dto\Image;
 
 trait AssertImageTrait
 {
@@ -26,7 +26,7 @@ trait AssertImageTrait
         self::assertSame($dataImage['h'], $image['h']);
     }
 
-    public function assertImageObjet(array $dataImage, ChampionImage $image): void
+    public function assertImageObjet(array $dataImage, Image $image): void
     {
         self::assertSame($dataImage['full'], $image->full);
         self::assertSame($dataImage['sprite'], $image->sprite);
