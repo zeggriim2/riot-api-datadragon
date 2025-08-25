@@ -2,6 +2,8 @@
 
 namespace Zeggriim\RiotApiDataDragon\Tests\Traits;
 
+use Zeggriim\RiotApiDataDragon\Dto\Item\Gold;
+use Zeggriim\RiotApiDataDragon\Dto\Item\Item;
 use Zeggriim\RiotApiDataDragon\Tests\Traits\Checker\AssertImageTrait;
 
 trait AssertItemTrait
@@ -29,6 +31,29 @@ trait AssertItemTrait
         $this->assertMap($dataItem['maps'], $item['maps']);
     }
 
+    public function assertItemObjet(array $dataItem, Item $item): void
+    {
+        self::assertSame($dataItem['name'], $item->name);
+        self::assertSame($dataItem['description'], $item->description);
+        self::assertSame($dataItem['colloq'], $item->colloq);
+        self::assertSame($dataItem['plaintext'], $item->plaintext);
+        $this->assertImageObjet($dataItem['image'], $item->image);
+        $this->assertGoldObjet($dataItem['gold'], $item->gold);
+        $this->assertMap($dataItem['maps'], $item->maps);
+
+        isset($dataItem['from']) ?
+            self::assertSame($dataItem['from'], $item->from) :
+            self::assertNull($item->from);
+
+        isset($dataItem['into']) ?
+            self::assertSame($dataItem['into'], $item->into) :
+            self::assertNull($item->into);
+
+        isset($dataItem['depth']) ?
+            self::assertSame($dataItem['depth'], $item->depth) :
+            self::assertNull($item->depth);
+    }
+
     private function assertGold(array $dataGold, array $gold): void
     {
         self::assertArrayHasKey('base', $gold);
@@ -39,6 +64,14 @@ trait AssertItemTrait
         self::assertSame($dataGold['total'], $gold['total']);
         self::assertArrayHasKey('sell', $gold);
         self::assertSame($dataGold['sell'], $gold['sell']);
+    }
+
+    private function assertGoldObjet(array $dataGold, Gold $gold): void
+    {
+        self::assertSame($dataGold['base'], $gold->base);
+        self::assertSame($dataGold['purchasable'], $gold->purchasable);
+        self::assertSame($dataGold['total'], $gold->total);
+        self::assertSame($dataGold['sell'], $gold->sell);
     }
 
     private function assertMap(array $dataMap, array $map): void

@@ -18,7 +18,7 @@ final class ProfileIconCollectionNormalizer implements DenormalizerAwareInterfac
     {
         $profileIcons = [];
         foreach ($data['data'] as $profileIcon) {
-            $profileIcons[] = $this->denormalizer->denormalize($profileIcon, ProfileIcon::class);
+            $profileIcons[] = $this->denormalizer->denormalize($profileIcon, ProfileIcon::class, $format, $context);
         }
 
         return new ProfileIconCollection(

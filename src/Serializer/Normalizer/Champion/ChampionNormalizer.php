@@ -8,11 +8,11 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Zeggriim\RiotApiDataDragon\Dto\Champion\Champion;
-use Zeggriim\RiotApiDataDragon\Dto\Champion\ChampionImage;
 use Zeggriim\RiotApiDataDragon\Dto\Champion\ChampionInfo;
 use Zeggriim\RiotApiDataDragon\Dto\Champion\ChampionPassive;
 use Zeggriim\RiotApiDataDragon\Dto\Champion\ChampionSkin;
 use Zeggriim\RiotApiDataDragon\Dto\Champion\ChampionStats;
+use Zeggriim\RiotApiDataDragon\Dto\Image;
 
 final class ChampionNormalizer implements DenormalizerInterface, DenormalizerAwareInterface
 {
@@ -35,7 +35,7 @@ final class ChampionNormalizer implements DenormalizerInterface, DenormalizerAwa
             lore: $data['lore'] ?? null,
             partype: $data['partype'] ?? null,
             info: isset($data['info']) ? $this->denormalizer->denormalize($data['info'], ChampionInfo::class, $format, $context) : null,
-            image: isset($data['image']) ? $this->denormalizer->denormalize($data['image'], ChampionImage::class, $format, $context) : null,
+            image: isset($data['image']) ? $this->denormalizer->denormalize($data['image'], Image::class, $format, $context) : null,
             stats: isset($data['stats']) ? $this->denormalizer->denormalize($data['stats'], ChampionStats::class, $format, $context) : null,
             passive: isset($data['passive']) ? $this->denormalizer->denormalize($data['passive'], ChampionPassive::class, $format, $context) : null,
             tags: $data['tags'] ?? [],

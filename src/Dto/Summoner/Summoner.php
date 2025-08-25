@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Zeggriim\RiotApiDataDragon\Dto\Summoner;
 
+use Zeggriim\RiotApiDataDragon\Dto\Image;
+
 final class Summoner
 {
     public function __construct(
@@ -24,10 +26,10 @@ final class Summoner
         public readonly array $modes,
         public readonly string $costType,
         public readonly string $maxammo,
-        public readonly array $rang,
-        public readonly string $rangBurn,
+        public readonly array $range,
+        public readonly string $rangeBurn,
         public readonly string $resource,
-        public readonly ?SummonerImage $image = null,
+        public readonly ?Image $image = null,
     ) {
     }
 }

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Zeggriim\RiotApiDataDragon\Dto\Champion;
+namespace Zeggriim\RiotApiDataDragon\Dto;
 
-final class ChampionImage
+final class Image
 {
     public function __construct(
         public readonly string $full,
