@@ -1,13 +1,15 @@
 <?php
 
 $finder = PhpCsFixer\Finder::create()
-    ->in(__DIR__)
+    ->in(__DIR__ . '/src')
+    ->in(__DIR__ . '/tests')
     ->exclude([
         'config',
         'docker',
         'public',
         'var',
         'vendor',
+        'report'
     ]);
 
 $config = new PhpCsFixer\Config();
