@@ -566,7 +566,7 @@ final class ChampionApiTest extends KernelTestCase
                         'difficulty' => 4,
                     ],
                     'stats' => [
-                        'hp' => 650.0,
+                        'hp' => 650,
                         'hpperlevel' => 114.0,
                         'mp' => 0.0,
                         'mpperlevel' => 0.0,
