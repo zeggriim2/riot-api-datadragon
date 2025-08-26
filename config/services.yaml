@@ -28,12 +28,17 @@ services:
     Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\VersionApi:
         autowire: true
 
+    Zeggriim\RiotApiDataDragon\DataDragon\DataDragonApi:
+        autowire: true
+        public: false
+
     Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\ChampionApiInterface: '@Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\ChampionApi'
     Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\ItemApiInterface: '@Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\ItemApi'
     Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\LanguageApiInterface: '@Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\LanguageApi'
     Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\ProfileIconApiInterface: '@Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\ProfileIconApi'
     Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\SummonerApiInterface: '@Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\SummonerApi'
     Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\VersionApiInterface: '@Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\VersionApi'
+    Zeggriim\RiotApiDataDragon\DataDragon\DataDragonApiInterface: '@Zeggriim\RiotApiDataDragon\DataDragon\DataDragonApi'
 
 
     Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\LeagueApi:
@@ -42,16 +47,16 @@ services:
     Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\LeagueApiInterface: '@Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\LeagueApi'
 
     # Normalizers
-    Zeggriim\RiotApiDataDragon\Serializer\Normalizer\ChampionCollectionNormalizer:
+    Zeggriim\RiotApiDataDragon\Serializer\Normalizer\Champion\ChampionCollectionNormalizer:
         tags: [ 'serializer.normalizer' ]
 
     Zeggriim\RiotApiDataDragon\Serializer\Normalizer\LanguageCollectionNormalizer:
         tags: [ 'serializer.normalizer' ]
 
-    Zeggriim\RiotApiDataDragon\Serializer\Normalizer\ProfileIconCollectionNormalizer:
+    Zeggriim\RiotApiDataDragon\Serializer\Normalizer\ProfileIcon\ProfileIconCollectionNormalizer:
         tags: [ 'serializer.normalizer' ]
 
-    Zeggriim\RiotApiDataDragon\Serializer\Normalizer\ProfileIconNormalizer:
+    Zeggriim\RiotApiDataDragon\Serializer\Normalizer\ProfileIcon\ProfileIconNormalizer:
         tags: [ 'serializer.normalizer' ]
 
     Zeggriim\RiotApiDataDragon\Serializer\Normalizer\Item\ItemCollectionNormalizer:
