@@ -15,6 +15,7 @@ use Zeggriim\RiotApiDataDragon\Exception\DataNotFoundException;
 use Zeggriim\RiotApiDataDragon\Exception\ForbiddenException;
 use Zeggriim\RiotApiDataDragon\Exception\RequestException;
 use Zeggriim\RiotApiDataDragon\Exception\ServerException;
+use Zeggriim\RiotApiDataDragon\Exception\ServerLimitException;
 use Zeggriim\RiotApiDataDragon\Exception\UnauthorizedException;
 use Zeggriim\RiotApiDataDragon\Exception\UnsupportedMediaTypeException;
 use Zeggriim\RiotApiDataDragon\Tests\Traits\AssertLeagueTrait;
@@ -268,6 +269,7 @@ final class LeagueApiTest extends KernelTestCase
             [Response::HTTP_NOT_FOUND, DataNotFoundException::class,  'LeagueAPI: Data not found'],
             [Response::HTTP_UNSUPPORTED_MEDIA_TYPE, UnsupportedMediaTypeException::class,  'LeagueAPI: Unsupported media type'],
             [Response::HTTP_NOT_ACCEPTABLE, ClientException::class,  'HTTP 406 returned for "https://euw1.api.riotgames.com/lol/league/v4/grandmasterleagues/by-queue/RANKED_SOLO_5x5".'],
+            [Response::HTTP_TOO_MANY_REQUESTS, ServerLimitException::class,  'LeagueAPI: Rate limit exceeded request.'],
             [Response::HTTP_INTERNAL_SERVER_ERROR, ServerException::class,  'LeagueAPI: Internal server error occured.'],
             [Response::HTTP_SERVICE_UNAVAILABLE, ServerException::class,  'LeagueAPI: Service is temporarily unavailable.'],
             [Response::HTTP_GATEWAY_TIMEOUT, ServerExceptionHttpClient::class,  'HTTP 504 returned for "https://euw1.api.riotgames.com/lol/league/v4/grandmasterleagues/by-queue/RANKED_SOLO_5x5'],
