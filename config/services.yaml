@@ -78,3 +78,7 @@ services:
     Zeggriim\RiotApiDataDragon\Transformer\ItemTransformer:
         arguments:
             $denormalizer: '@serializer'
+
+    Zeggriim\RiotApiDataDragon\Transformer\SummonerTransformer:
+        arguments:
+            $denormalizer: '@serializer'
