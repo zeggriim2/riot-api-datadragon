@@ -44,7 +44,11 @@ services:
     Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\LeagueApi:
         autowire: true
 
+    Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\SummonerApi:
+        autowire: true
+
     Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\LeagueApiInterface: '@Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\LeagueApi'
+    Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\SummonerApiInterface: '@Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\SummonerApi'
 
     # Normalizers
     Zeggriim\RiotApiDataDragon\Serializer\Normalizer\Champion\ChampionCollectionNormalizer:
