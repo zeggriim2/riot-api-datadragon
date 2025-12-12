@@ -12,6 +12,7 @@ use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 use Zeggriim\RiotApiDataDragon\Enum\Platform;
+use Zeggriim\RiotApiDataDragon\Enum\Region;
 use Zeggriim\RiotApiDataDragon\Exception\DataNotFoundException;
 use Zeggriim\RiotApiDataDragon\Exception\ForbiddenException;
 use Zeggriim\RiotApiDataDragon\Exception\RequestException;
@@ -27,11 +28,11 @@ class RiotApiDataLeagueClient
     public function __construct(
         public HttpClientInterface $riotLeague,
         private readonly string $apiKey,
-        private readonly Platform $platform = Platform::EUW1,
+        Platform|Region $platform,
     ) {
         $this->riotLeague = $this->riotLeague->withOptions(
             (new HttpOptions())
-                ->setBaseUri(\sprintf(self::URL, $this->platform->value))
+                ->setBaseUri(\sprintf(self::URL, $platform->value))
                 ->setHeaders(['X-Riot-Token' => $this->apiKey])
                 ->toArray()
         );

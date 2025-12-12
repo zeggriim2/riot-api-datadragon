@@ -47,6 +47,7 @@ services:
     Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\SummonerApi:
         autowire: true
 
+    Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\AccountApiInterface: '@Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\AccountApi'
     Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\LeagueApiInterface: '@Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\LeagueApi'
     Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\SummonerApiInterface: '@Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\SummonerApi'
 
