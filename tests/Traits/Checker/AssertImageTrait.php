@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Zeggriim\RiotApiDataDragon\Tests\Traits\Checker;
 
-use Zeggriim\RiotApiDataDragon\Dto\Image;
+use Zeggriim\RiotApiDataDragon\DataDragon\Dto\Image;
 
 trait AssertImageTrait
 {

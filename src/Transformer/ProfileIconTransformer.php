@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Zeggriim\RiotApiDataDragon\Transformer;
 
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
-use Zeggriim\RiotApiDataDragon\Dto\ProfileIcon\ProfileIconCollection;
+use Zeggriim\RiotApiDataDragon\DataDragon\Dto\ProfileIcon\ProfileIconCollection;
 
 final class ProfileIconTransformer
 {

@@ -7,8 +7,8 @@ namespace Zeggriim\RiotApiDataDragon\Serializer\Normalizer\Item;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
-use Zeggriim\RiotApiDataDragon\Dto\Item\Item;
-use Zeggriim\RiotApiDataDragon\Dto\Item\ItemCollection;
+use Zeggriim\RiotApiDataDragon\DataDragon\Dto\Item\Item;
+use Zeggriim\RiotApiDataDragon\DataDragon\Dto\Item\ItemCollection;
 
 final class ItemCollectionNormalizer implements DenormalizerAwareInterface, DenormalizerInterface
 {

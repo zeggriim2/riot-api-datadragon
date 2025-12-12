@@ -6,12 +6,12 @@ namespace Zeggriim\RiotApiDataDragon\Tests\DataDragon;
 
 use PHPUnit\Framework\TestCase;
 use Zeggriim\RiotApiDataDragon\DataDragon\DataDragonApi;
-use Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\ChampionApiInterface;
-use Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\ItemApiInterface;
-use Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\LanguageApiInterface;
-use Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\ProfileIconApiInterface;
-use Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\SummonerApiInterface;
-use Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\VersionApiInterface;
+use Zeggriim\RiotApiDataDragon\DataDragon\Endpoint\ChampionApiInterface;
+use Zeggriim\RiotApiDataDragon\DataDragon\Endpoint\ItemApiInterface;
+use Zeggriim\RiotApiDataDragon\DataDragon\Endpoint\LanguageApiInterface;
+use Zeggriim\RiotApiDataDragon\DataDragon\Endpoint\ProfileIconApiInterface;
+use Zeggriim\RiotApiDataDragon\DataDragon\Endpoint\SummonerApiInterface;
+use Zeggriim\RiotApiDataDragon\DataDragon\Endpoint\VersionApiInterface;
 
 /**
  * @internal
