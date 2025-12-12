@@ -7,8 +7,8 @@ namespace Zeggriim\RiotApiDataDragon\Serializer\Normalizer\ProfileIcon;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
-use Zeggriim\RiotApiDataDragon\Dto\ProfileIcon\ProfileIcon;
-use Zeggriim\RiotApiDataDragon\Dto\ProfileIcon\ProfileIconImage;
+use Zeggriim\RiotApiDataDragon\DataDragon\Dto\ProfileIcon\ProfileIcon;
+use Zeggriim\RiotApiDataDragon\DataDragon\Dto\ProfileIcon\ProfileIconImage;
 
 final class ProfileIconNormalizer implements DenormalizerInterface, DenormalizerAwareInterface
 {

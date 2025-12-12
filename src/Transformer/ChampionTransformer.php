@@ -6,8 +6,8 @@ namespace Zeggriim\RiotApiDataDragon\Transformer;
 
 use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
-use Zeggriim\RiotApiDataDragon\Dto\Champion\Champion;
-use Zeggriim\RiotApiDataDragon\Dto\Champion\ChampionCollection;
+use Zeggriim\RiotApiDataDragon\DataDragon\Dto\Champion\Champion;
+use Zeggriim\RiotApiDataDragon\DataDragon\Dto\Champion\ChampionCollection;
 
 final class ChampionTransformer
 {

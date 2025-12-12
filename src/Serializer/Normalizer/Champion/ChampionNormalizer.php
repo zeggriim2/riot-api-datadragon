@@ -7,12 +7,12 @@ namespace Zeggriim\RiotApiDataDragon\Serializer\Normalizer\Champion;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
-use Zeggriim\RiotApiDataDragon\Dto\Champion\Champion;
-use Zeggriim\RiotApiDataDragon\Dto\Champion\ChampionInfo;
-use Zeggriim\RiotApiDataDragon\Dto\Champion\ChampionPassive;
-use Zeggriim\RiotApiDataDragon\Dto\Champion\ChampionSkin;
-use Zeggriim\RiotApiDataDragon\Dto\Champion\ChampionStats;
-use Zeggriim\RiotApiDataDragon\Dto\Image;
+use Zeggriim\RiotApiDataDragon\DataDragon\Dto\Champion\Champion;
+use Zeggriim\RiotApiDataDragon\DataDragon\Dto\Champion\ChampionInfo;
+use Zeggriim\RiotApiDataDragon\DataDragon\Dto\Champion\ChampionPassive;
+use Zeggriim\RiotApiDataDragon\DataDragon\Dto\Champion\ChampionSkin;
+use Zeggriim\RiotApiDataDragon\DataDragon\Dto\Champion\ChampionStats;
+use Zeggriim\RiotApiDataDragon\DataDragon\Dto\Image;
 
 final class ChampionNormalizer implements DenormalizerInterface, DenormalizerAwareInterface
 {

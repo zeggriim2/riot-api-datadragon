@@ -7,8 +7,8 @@ namespace Zeggriim\RiotApiDataDragon\Serializer\Normalizer\Champion;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
-use Zeggriim\RiotApiDataDragon\Dto\Champion\Champion;
-use Zeggriim\RiotApiDataDragon\Dto\Champion\ChampionCollection;
+use Zeggriim\RiotApiDataDragon\DataDragon\Dto\Champion\Champion;
+use Zeggriim\RiotApiDataDragon\DataDragon\Dto\Champion\ChampionCollection;
 
 final class ChampionCollectionNormalizer implements DenormalizerAwareInterface, DenormalizerInterface
 {

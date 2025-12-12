@@ -2,8 +2,8 @@
 
 namespace Zeggriim\RiotApiDataDragon\Tests\Traits;
 
-use Zeggriim\RiotApiDataDragon\Dto\Item\Gold;
-use Zeggriim\RiotApiDataDragon\Dto\Item\Item;
+use Zeggriim\RiotApiDataDragon\DataDragon\Dto\Item\Gold;
+use Zeggriim\RiotApiDataDragon\DataDragon\Dto\Item\Item;
 use Zeggriim\RiotApiDataDragon\Tests\Traits\Checker\AssertImageTrait;
 
 trait AssertItemTrait

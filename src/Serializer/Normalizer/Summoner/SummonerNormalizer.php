@@ -7,8 +7,8 @@ namespace Zeggriim\RiotApiDataDragon\Serializer\Normalizer\Summoner;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
-use Zeggriim\RiotApiDataDragon\Dto\Image;
-use Zeggriim\RiotApiDataDragon\Dto\Summoner\Summoner;
+use Zeggriim\RiotApiDataDragon\DataDragon\Dto\Image;
+use Zeggriim\RiotApiDataDragon\DataDragon\Dto\Summoner\Summoner;
 
 final class SummonerNormalizer implements DenormalizerInterface, DenormalizerAwareInterface
 {
