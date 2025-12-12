@@ -30,6 +30,7 @@ Dans le fichier `.env` de l'environnement souhaité, ajouter :
 
 ```
 API_RIO_BASE_URI='https://ddragon.leagueoflegends.com'
+API_RIOT_KEY='your-riot-api-key'  # Required for League API endpoints
 ```
 
 # Exemple
@@ -55,6 +56,8 @@ API_RIO_BASE_URI='https://ddragon.leagueoflegends.com'
 
 # Liste Endpoints
 
+## Data Dragon API (Static Data)
+
 | Endpoint                                                                               | Interface               |
 |----------------------------------------------------------------------------------------|-------------------------|
 | [Champions & Champion](https://developer.riotgames.com/docs/lol#data-dragon_champions) | ChampionApiInterface    |
@@ -62,3 +65,15 @@ API_RIO_BASE_URI='https://ddragon.leagueoflegends.com'
 | [Languages](https://developer.riotgames.com/docs/lol#data-dragon_data-assets)          | LanguagesApiInterface   |
 | [Profile Icon](https://developer.riotgames.com/docs/lol#data-dragon_other)             | ProfileIconApiInterface |
 | [Versions](https://developer.riotgames.com/docs/lol#data-dragon_versions)              | VersionApiInterface     |
+
+## League API (Live Data - Requires API Key)
+
+| Endpoint                                                        | Interface            | Namespace           |
+|-----------------------------------------------------------------|----------------------|---------------------|
+| [Account V1](https://developer.riotgames.com/apis#account-v1)   | AccountApiInterface  | DataLeague          |
+| [Champion V3](https://developer.riotgames.com/apis#champion-v3) | ChampionApiInterface | DataLeague          |
+| [League V4](https://developer.riotgames.com/apis#league-v4)     | LeagueApiInterface   | DataLeague          | 
+| [Summoner V4](https://developer.riotgames.com/apis#summoner-v4) | SummonerApiInterface | DataLeague          |
+
+
+**Note:** The Account API uses regional routing (americas, asia, europe) instead of platform routing. You can specify the region when configuring the service or it defaults to Europe.
