@@ -2,11 +2,11 @@
 
 namespace Zeggriim\RiotApiDataDragon\Tests\Traits;
 
-use Zeggriim\RiotApiDataDragon\Dto\Champion\Champion;
-use Zeggriim\RiotApiDataDragon\Dto\Champion\ChampionInfo;
-use Zeggriim\RiotApiDataDragon\Dto\Champion\ChampionPassive;
-use Zeggriim\RiotApiDataDragon\Dto\Champion\ChampionStats;
-use Zeggriim\RiotApiDataDragon\Dto\Image;
+use Zeggriim\RiotApiDataDragon\DataDragon\Dto\Champion\Champion;
+use Zeggriim\RiotApiDataDragon\DataDragon\Dto\Champion\ChampionInfo;
+use Zeggriim\RiotApiDataDragon\DataDragon\Dto\Champion\ChampionPassive;
+use Zeggriim\RiotApiDataDragon\DataDragon\Dto\Champion\ChampionStats;
+use Zeggriim\RiotApiDataDragon\DataDragon\Dto\Image;
 use Zeggriim\RiotApiDataDragon\Tests\Traits\Checker\AssertImageTrait;
 use Zeggriim\RiotApiDataDragon\Tests\Traits\Checker\AssertInfoTrait;
 use Zeggriim\RiotApiDataDragon\Tests\Traits\Checker\AssertPassiveTrait;

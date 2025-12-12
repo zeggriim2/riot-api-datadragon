@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Zeggriim\RiotApiDataDragon\Transformer;
 
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
-use Zeggriim\RiotApiDataDragon\Dto\Item\ItemCollection;
+use Zeggriim\RiotApiDataDragon\DataDragon\Dto\Item\ItemCollection;
 
 final class ItemTransformer
 {

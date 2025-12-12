@@ -7,8 +7,8 @@ namespace Zeggriim\RiotApiDataDragon\Serializer\Normalizer;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
-use Zeggriim\RiotApiDataDragon\Dto\Language\Language;
-use Zeggriim\RiotApiDataDragon\Dto\Language\LanguageCollection;
+use Zeggriim\RiotApiDataDragon\DataDragon\Dto\Language\Language;
+use Zeggriim\RiotApiDataDragon\DataDragon\Dto\Language\LanguageCollection;
 
 final class LanguageCollectionNormalizer implements DenormalizerInterface, DenormalizerAwareInterface
 {
