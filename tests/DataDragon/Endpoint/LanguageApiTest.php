@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Zeggriim\RiotApiDataDragon\Tests\DataDragon\Endpoint;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Zeggriim\RiotApiDataDragon\DataDragon\Dto\Language\Language;
 use Zeggriim\RiotApiDataDragon\DataDragon\Dto\Language\LanguageCollection;
 use Zeggriim\RiotApiDataDragon\Tests\Traits\RiotApiDataDragonTrait;
 
@@ -49,7 +50,8 @@ final class LanguageApiTest extends KernelTestCase
         self::assertCount(\count($data), $languagesCollection->getLanguages());
         self::assertSame(\count($data), $languagesCollection->count());
         self::assertTrue($languagesCollection->hasLanguage($data[0]));
-        self::assertSame($data[0], $languagesCollection->getLanguage($data[0])?->code);
+        self::assertInstanceOf(Language::class, $languagesCollection->getLanguage($data[0]));
+        self::assertSame($data[0], $languagesCollection->getLanguage($data[0])->code);
         self::assertNull($languagesCollection->getLanguage('test'));
     }
 }

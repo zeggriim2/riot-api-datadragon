@@ -10,46 +10,62 @@ services:
         autowire: true
         public: false
 
-    Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\ChampionApi:
+    Zeggriim\RiotApiDataDragon\DataDragon\Endpoint\ChampionApi:
         autowire: true
 
-    Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\ItemApi:
+    Zeggriim\RiotApiDataDragon\DataDragon\Endpoint\ItemApi:
         autowire: true
 
-    Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\LanguageApi:
+    Zeggriim\RiotApiDataDragon\DataDragon\Endpoint\LanguageApi:
         autowire: true
 
-    Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\ProfileIconApi:
+    Zeggriim\RiotApiDataDragon\DataDragon\Endpoint\ProfileIconApi:
         autowire: true
 
-    Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\SummonerApi:
+    Zeggriim\RiotApiDataDragon\DataDragon\Endpoint\SummonerApi:
         autowire: true
 
-    Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\VersionApi:
+    Zeggriim\RiotApiDataDragon\DataDragon\Endpoint\VersionApi:
         autowire: true
 
     Zeggriim\RiotApiDataDragon\DataDragon\DataDragonApi:
         autowire: true
         public: false
 
-    Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\ChampionApiInterface: '@Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\ChampionApi'
-    Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\ItemApiInterface: '@Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\ItemApi'
-    Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\LanguageApiInterface: '@Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\LanguageApi'
-    Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\ProfileIconApiInterface: '@Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\ProfileIconApi'
-    Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\SummonerApiInterface: '@Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\SummonerApi'
-    Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\VersionApiInterface: '@Zeggriim\RiotApiDataDragon\Endpoint\DataDragon\VersionApi'
+    Zeggriim\RiotApiDataDragon\DataDragon\Endpoint\ChampionApiInterface: '@Zeggriim\RiotApiDataDragon\DataDragon\Endpoint\ChampionApi'
+    Zeggriim\RiotApiDataDragon\DataDragon\Endpoint\ItemApiInterface: '@Zeggriim\RiotApiDataDragon\DataDragon\Endpoint\ItemApi'
+    Zeggriim\RiotApiDataDragon\DataDragon\Endpoint\LanguageApiInterface: '@Zeggriim\RiotApiDataDragon\DataDragon\Endpoint\LanguageApi'
+    Zeggriim\RiotApiDataDragon\DataDragon\Endpoint\ProfileIconApiInterface: '@Zeggriim\RiotApiDataDragon\DataDragon\Endpoint\ProfileIconApi'
+    Zeggriim\RiotApiDataDragon\DataDragon\Endpoint\SummonerApiInterface: '@Zeggriim\RiotApiDataDragon\DataDragon\Endpoint\SummonerApi'
+    Zeggriim\RiotApiDataDragon\DataDragon\Endpoint\VersionApiInterface: '@Zeggriim\RiotApiDataDragon\DataDragon\Endpoint\VersionApi'
     Zeggriim\RiotApiDataDragon\DataDragon\DataDragonApiInterface: '@Zeggriim\RiotApiDataDragon\DataDragon\DataDragonApi'
 
-
-    Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\LeagueApi:
+    Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\AccountApi:
         autowire: true
 
-    Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\SummonerApi:
+    Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\ChampionApi:
+        autowire: true
+
+    Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\ChampionMasteryApi:
+        autowire: true
+
+    Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\LeagueApi:
+        autowire: true
+
+    Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\MatchApi:
         autowire: true
 
     Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\AccountApiInterface: '@Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\AccountApi'
     Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\LeagueApiInterface: '@Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\LeagueApi'
     Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\SummonerApiInterface: '@Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\SummonerApi'
+    Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\SummonerApi:
+        autowire: true
+
+    Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\AccountApiInterface: '@Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\AccountApi'
+    Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\ChampionApiInterface: '@Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\ChampionApi'
+    Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\LeagueApiInterface: '@Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\LeagueApi'
+    Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\MatchApiInterface: '@Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\MatchApi'
+    Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\SummonerApiInterface: '@Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\SummonerApi'
 
     # Normalizers
     Zeggriim\RiotApiDataDragon\Serializer\Normalizer\Champion\ChampionCollectionNormalizer:

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Zeggriim\RiotApiDataDragon\DataLeague\endpoint;
+namespace Zeggriim\RiotApiDataDragon\DataLeague\Endpoint;
 
 use Zeggriim\RiotApiDataDragon\Enum\Division;
 use Zeggriim\RiotApiDataDragon\Enum\Queue;

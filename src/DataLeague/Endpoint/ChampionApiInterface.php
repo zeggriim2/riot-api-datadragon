@@ -1,6 +1,6 @@
 <?php
 
-namespace Zeggriim\RiotApiDataDragon\DataLeague\endpoint;
+namespace Zeggriim\RiotApiDataDragon\DataLeague\Endpoint;
 
 interface ChampionApiInterface
 {

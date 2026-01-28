@@ -26,7 +26,7 @@ use Zeggriim\RiotApiDataDragon\Tests\Traits\RiotApiDataLeagueTrait;
  *
  * @internal
  *
- * @coversDefaultClass \Zeggriim\RiotApiDataDragon\DataLeague\endpoint\LeagueApi
+ * @coversDefaultClass \Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\LeagueApi
  */
 final class LeagueApiTest extends KernelTestCase
 {
