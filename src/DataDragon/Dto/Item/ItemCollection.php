@@ -19,7 +19,7 @@ final class ItemCollection implements \IteratorAggregate, \Countable
     ) {
     }
 
-    public function getIterator(): \Traversable
+    public function getIterator(): \ArrayIterator
     {
         return new \ArrayIterator($this->items);
     }

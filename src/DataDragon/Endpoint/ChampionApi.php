@@ -6,8 +6,8 @@ namespace Zeggriim\RiotApiDataDragon\DataDragon\Endpoint;
 
 use Zeggriim\RiotApiDataDragon\DataDragon\Dto\Champion\Champion;
 use Zeggriim\RiotApiDataDragon\DataDragon\Dto\Champion\ChampionCollection;
+use Zeggriim\RiotApiDataDragon\DataDragon\Transformer\ChampionTransformer;
 use Zeggriim\RiotApiDataDragon\RiotApiDataDragonClient;
-use Zeggriim\RiotApiDataDragon\Transformer\ChampionTransformer;
 
 class ChampionApi implements ChampionApiInterface
 {
