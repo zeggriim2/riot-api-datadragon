@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Zeggriim\RiotApiDataDragon\DataDragon\Endpoint;
 
+use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Zeggriim\RiotApiDataDragon\DataDragon\Dto\Language\LanguageCollection;
-use Zeggriim\RiotApiDataDragon\DataDragon\Transformer\LanguageTransformer;
 use Zeggriim\RiotApiDataDragon\RiotApiDataDragonClient;
 
 class LanguageApi implements LanguageApiInterface
@@ -14,7 +14,7 @@ class LanguageApi implements LanguageApiInterface
 
     public function __construct(
         private readonly RiotApiDataDragonClient $riotApiDataDragon,
-        private readonly LanguageTransformer $languageTransformer,
+        private readonly DenormalizerInterface $denormalizer,
     ) {
     }
 
@@ -27,6 +27,6 @@ class LanguageApi implements LanguageApiInterface
     {
         $data = $this->getLanguages();
 
-        return $this->languageTransformer->transformToCollection($data);
+        return $this->denormalizer->denormalize($data, LanguageCollection::class);
     }
 }
