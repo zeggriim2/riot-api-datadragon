@@ -55,9 +55,6 @@ services:
     Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\MatchApi:
         autowire: true
 
-    Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\AccountApiInterface: '@Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\AccountApi'
-    Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\LeagueApiInterface: '@Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\LeagueApi'
-    Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\SummonerApiInterface: '@Zeggriim\RiotApiDataDragon\Endpoint\DataLeague\SummonerApi'
     Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\SummonerApi:
         autowire: true
 
@@ -66,6 +63,7 @@ services:
     Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\LeagueApiInterface: '@Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\LeagueApi'
     Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\MatchApiInterface: '@Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\MatchApi'
     Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\SummonerApiInterface: '@Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\SummonerApi'
+    Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\ChampionMasteryApiInterface: '@Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\ChampionMasteryApi'
 
     # Normalizers
     Zeggriim\RiotApiDataDragon\Serializer\Normalizer\Champion\ChampionCollectionNormalizer:
@@ -81,6 +79,18 @@ services:
         tags: [ 'serializer.normalizer' ]
 
     Zeggriim\RiotApiDataDragon\Serializer\Normalizer\Item\ItemCollectionNormalizer:
+        tags: [ 'serializer.normalizer' ]
+
+    Zeggriim\RiotApiDataDragon\DataLeague\Serializer\Normalizer\ChampionMastery\ChampionMasteryCollectionNormalizer:
+        tags: [ 'serializer.normalizer' ]
+
+    Zeggriim\RiotApiDataDragon\DataLeague\Serializer\Normalizer\ChampionMastery\ChampionMasteryNormalizer:
+        tags: [ 'serializer.normalizer' ]
+
+    Zeggriim\RiotApiDataDragon\DataLeague\Serializer\Normalizer\ChampionMastery\NextSeasonMilestonesNormalizer:
+        tags: [ 'serializer.normalizer' ]
+
+    Zeggriim\RiotApiDataDragon\DataLeague\Serializer\Normalizer\ChampionMastery\RewardConfigNormalizer:
         tags: [ 'serializer.normalizer' ]
 
     # Transformers
@@ -101,5 +111,11 @@ services:
             $denormalizer: '@serializer'
 
     Zeggriim\RiotApiDataDragon\Transformer\SummonerTransformer:
+        arguments:
+            $denormalizer: '@serializer'
+
+
+    # Transformers Data League
+    Zeggriim\RiotApiDataDragon\DataLeague\Transformer\ChampionMasteryTransformer:
         arguments:
             $denormalizer: '@serializer'
