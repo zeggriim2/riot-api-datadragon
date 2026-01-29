@@ -15,21 +15,21 @@ use Zeggriim\RiotApiDataDragon\DataDragon\Endpoint\LanguageApi;
 use Zeggriim\RiotApiDataDragon\DataDragon\Endpoint\ProfileIconApi;
 use Zeggriim\RiotApiDataDragon\DataDragon\Endpoint\SummonerApi;
 use Zeggriim\RiotApiDataDragon\DataDragon\Endpoint\VersionApi;
+use Zeggriim\RiotApiDataDragon\DataDragon\Serializer\Normalizer\Champion\ChampionCollectionNormalizer;
+use Zeggriim\RiotApiDataDragon\DataDragon\Serializer\Normalizer\Champion\ChampionNormalizer;
+use Zeggriim\RiotApiDataDragon\DataDragon\Serializer\Normalizer\Item\ItemCollectionNormalizer;
+use Zeggriim\RiotApiDataDragon\DataDragon\Serializer\Normalizer\Item\ItemNormalizer;
+use Zeggriim\RiotApiDataDragon\DataDragon\Serializer\Normalizer\LanguageCollectionNormalizer;
+use Zeggriim\RiotApiDataDragon\DataDragon\Serializer\Normalizer\ProfileIcon\ProfileIconCollectionNormalizer;
+use Zeggriim\RiotApiDataDragon\DataDragon\Serializer\Normalizer\ProfileIcon\ProfileIconNormalizer;
+use Zeggriim\RiotApiDataDragon\DataDragon\Serializer\Normalizer\Summoner\SummonerCollectionNormalizer;
+use Zeggriim\RiotApiDataDragon\DataDragon\Serializer\Normalizer\Summoner\SummonerNormalizer;
+use Zeggriim\RiotApiDataDragon\DataDragon\Transformer\ChampionTransformer;
+use Zeggriim\RiotApiDataDragon\DataDragon\Transformer\ItemTransformer;
+use Zeggriim\RiotApiDataDragon\DataDragon\Transformer\LanguageTransformer;
+use Zeggriim\RiotApiDataDragon\DataDragon\Transformer\ProfileIconTransformer;
+use Zeggriim\RiotApiDataDragon\DataDragon\Transformer\SummonerTransformer;
 use Zeggriim\RiotApiDataDragon\RiotApiDataDragonClient;
-use Zeggriim\RiotApiDataDragon\Serializer\Normalizer\Champion\ChampionCollectionNormalizer;
-use Zeggriim\RiotApiDataDragon\Serializer\Normalizer\Champion\ChampionNormalizer;
-use Zeggriim\RiotApiDataDragon\Serializer\Normalizer\Item\ItemCollectionNormalizer;
-use Zeggriim\RiotApiDataDragon\Serializer\Normalizer\Item\ItemNormalizer;
-use Zeggriim\RiotApiDataDragon\Serializer\Normalizer\LanguageCollectionNormalizer;
-use Zeggriim\RiotApiDataDragon\Serializer\Normalizer\ProfileIcon\ProfileIconCollectionNormalizer;
-use Zeggriim\RiotApiDataDragon\Serializer\Normalizer\ProfileIcon\ProfileIconNormalizer;
-use Zeggriim\RiotApiDataDragon\Serializer\Normalizer\Summoner\SummonerCollectionNormalizer;
-use Zeggriim\RiotApiDataDragon\Serializer\Normalizer\Summoner\SummonerNormalizer;
-use Zeggriim\RiotApiDataDragon\Transformer\ChampionTransformer;
-use Zeggriim\RiotApiDataDragon\Transformer\ItemTransformer;
-use Zeggriim\RiotApiDataDragon\Transformer\LanguageTransformer;
-use Zeggriim\RiotApiDataDragon\Transformer\ProfileIconTransformer;
-use Zeggriim\RiotApiDataDragon\Transformer\SummonerTransformer;
 
 trait RiotApiDataDragonTrait
 {

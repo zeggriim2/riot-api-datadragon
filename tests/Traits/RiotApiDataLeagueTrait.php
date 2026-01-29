@@ -14,11 +14,14 @@ use Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\ChampionApi;
 use Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\ChampionMasteryApi;
 use Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\LeagueApi;
 use Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\MatchApi;
+use Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\SummonerApi;
 use Zeggriim\RiotApiDataDragon\DataLeague\Serializer\Normalizer\ChampionMastery\ChampionMasteryCollectionNormalizer;
 use Zeggriim\RiotApiDataDragon\DataLeague\Serializer\Normalizer\ChampionMastery\ChampionMasteryNormalizer;
 use Zeggriim\RiotApiDataDragon\DataLeague\Serializer\Normalizer\ChampionMastery\NextSeasonMilestonesNormalizer;
 use Zeggriim\RiotApiDataDragon\DataLeague\Serializer\Normalizer\ChampionMastery\RewardConfigNormalizer;
+use Zeggriim\RiotApiDataDragon\DataLeague\Serializer\Normalizer\Summoner\SummonerNormalizer;
 use Zeggriim\RiotApiDataDragon\DataLeague\Transformer\ChampionMasteryTransformer;
+use Zeggriim\RiotApiDataDragon\DataLeague\Transformer\SummonerTransformer;
 use Zeggriim\RiotApiDataDragon\Enum\Platform;
 use Zeggriim\RiotApiDataDragon\Enum\Region;
 use Zeggriim\RiotApiDataDragon\RiotApiDataLeagueClient;
@@ -43,6 +46,26 @@ trait RiotApiDataLeagueTrait
     private function getAccountApi(array $dataResponse, array $info = ['http_code' => 200]): AccountApi
     {
         return new AccountApi($this->getClientRiotApiDataLeague($dataResponse, Region::EUROPE, $info));
+    }
+
+    private function getSummonerApi(array $dataResponse, array $info = ['http_code' => 200]): SummonerApi
+    {
+        $summonerNormalizer = new SummonerNormalizer();
+        $normalizers = [
+            $summonerNormalizer,
+            new ArrayDenormalizer(),
+            new ObjectNormalizer(),
+        ];
+
+        $serializer = new Serializer($normalizers, [new JsonEncoder()]);
+        $summonerNormalizer->setDenormalizer($serializer);
+
+        $transformer = new SummonerTransformer($serializer);
+
+        return new SummonerApi(
+            $this->getClientRiotApiDataLeague($dataResponse, Region::EUROPE, $info),
+            $transformer
+        );
     }
 
     private function getChampionMasteryApi(array $dataResponse, array $info = ['http_code' => 200]): ChampionMasteryApi

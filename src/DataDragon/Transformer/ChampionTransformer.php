@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Zeggriim\RiotApiDataDragon\Transformer;
+namespace Zeggriim\RiotApiDataDragon\DataDragon\Transformer;
 
 use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
