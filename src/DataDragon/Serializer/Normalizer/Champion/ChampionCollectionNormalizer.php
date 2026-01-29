@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Zeggriim\RiotApiDataDragon\Serializer\Normalizer\Champion;
+namespace Zeggriim\RiotApiDataDragon\DataDragon\Serializer\Normalizer\Champion;
 
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;

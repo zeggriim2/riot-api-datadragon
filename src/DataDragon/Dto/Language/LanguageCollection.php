@@ -37,7 +37,7 @@ final class LanguageCollection implements \Countable, \IteratorAggregate
         return \count($this->languages);
     }
 
-    public function getIterator(): \Traversable
+    public function getIterator(): \ArrayIterator
     {
         return new \ArrayIterator($this->languages);
     }
