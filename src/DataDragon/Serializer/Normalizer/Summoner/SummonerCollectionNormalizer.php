@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Zeggriim\RiotApiDataDragon\Serializer\Normalizer\Summoner;
+namespace Zeggriim\RiotApiDataDragon\DataDragon\Serializer\Normalizer\Summoner;
 
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;

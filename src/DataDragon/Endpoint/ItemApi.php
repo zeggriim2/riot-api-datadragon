@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Zeggriim\RiotApiDataDragon\DataDragon\Endpoint;
 
 use Zeggriim\RiotApiDataDragon\DataDragon\Dto\Item\ItemCollection;
+use Zeggriim\RiotApiDataDragon\DataDragon\Transformer\ItemTransformer;
 use Zeggriim\RiotApiDataDragon\RiotApiDataDragonClient;
-use Zeggriim\RiotApiDataDragon\Transformer\ItemTransformer;
 
 class ItemApi implements ItemApiInterface
 {

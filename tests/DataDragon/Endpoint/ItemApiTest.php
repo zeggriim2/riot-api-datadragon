@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Zeggriim\RiotApiDataDragon\Tests\DataDragon\Endpoint;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Zeggriim\RiotApiDataDragon\DataDragon\Dto\Item\Item;
 use Zeggriim\RiotApiDataDragon\DataDragon\Dto\Item\ItemCollection;
 use Zeggriim\RiotApiDataDragon\Tests\Traits\AssertItemTrait;
 use Zeggriim\RiotApiDataDragon\Tests\Traits\RiotApiDataDragonTrait;
@@ -235,13 +236,13 @@ final class ItemApiTest extends KernelTestCase
         self::assertSame($data['tree'], $itemColletion->tree);
 
         // Item 1
-        self::assertArrayHasKey('1028', $itemColletion->items);
-        $item1 = $itemColletion->items['1028'];
+        self::assertTrue($itemColletion->getIterator()->offsetExists('1028'));
+        $item1 = $itemColletion->getIterator()->offsetGet('1028');
         $this->assertItemObjet($data['data']['1028'], $item1);
 
         // Item 2
-        self::assertArrayHasKey('2021', $itemColletion->items);
-        $item2 = $itemColletion->items['2021'];
+        self::assertTrue($itemColletion->getIterator()->offsetExists('2021'));
+        $item2 = $itemColletion->getIterator()->offsetGet('2021');
         $this->assertItemObjet($data['data']['2021'], $item2);
     }
 }
