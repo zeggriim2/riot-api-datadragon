@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Zeggriim\RiotApiDataDragon\DataDragon\Endpoint;
 
+use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Zeggriim\RiotApiDataDragon\DataDragon\Dto\Item\ItemCollection;
-use Zeggriim\RiotApiDataDragon\DataDragon\Transformer\ItemTransformer;
 use Zeggriim\RiotApiDataDragon\RiotApiDataDragonClient;
 
 class ItemApi implements ItemApiInterface
@@ -14,7 +14,7 @@ class ItemApi implements ItemApiInterface
 
     public function __construct(
         private readonly RiotApiDataDragonClient $riotApiDataDragon,
-        private readonly ItemTransformer $itemTransformer,
+        private readonly DenormalizerInterface $denormalizer,
     ) {
     }
 
@@ -27,6 +27,6 @@ class ItemApi implements ItemApiInterface
     {
         $itemsData = $this->riotApiDataDragon->get(\sprintf(self::URL_ITEMS, $version, $locale))->toArray();
 
-        return $this->itemTransformer->transformToCollection($itemsData);
+        return $this->denormalizer->denormalize($itemsData, ItemCollection::class);
     }
 }

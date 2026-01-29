@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Zeggriim\RiotApiDataDragon\DataLeague\Endpoint;
 
+use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Zeggriim\RiotApiDataDragon\DataLeague\Dto\ChampionMastery;
 use Zeggriim\RiotApiDataDragon\DataLeague\Dto\ChampionMasteryCollection;
-use Zeggriim\RiotApiDataDragon\DataLeague\Transformer\ChampionMasteryTransformer;
 use Zeggriim\RiotApiDataDragon\RiotApiDataLeagueClient;
 
 class ChampionMasteryApi implements ChampionMasteryApiInterface
@@ -18,7 +18,7 @@ class ChampionMasteryApi implements ChampionMasteryApiInterface
 
     public function __construct(
         private readonly RiotApiDataLeagueClient $riotApiDataLeagueClient,
-        private readonly ChampionMasteryTransformer $championMasteryTransformer,
+        private readonly DenormalizerInterface $denormalizer,
     ) {
     }
 
@@ -28,7 +28,7 @@ class ChampionMasteryApi implements ChampionMasteryApiInterface
 
         $championMasteriesData = $this->riotApiDataLeagueClient->get($url)->toArray();
 
-        return $this->championMasteryTransformer->transformToChampionMasteryCollection($championMasteriesData);
+        return $this->denormalizer->denormalize($championMasteriesData, ChampionMasteryCollection::class);
     }
 
     public function getAllChampionMasteries(string $puuid): array
@@ -44,7 +44,7 @@ class ChampionMasteryApi implements ChampionMasteryApiInterface
 
         $championMasteyData = $this->riotApiDataLeagueClient->get($url)->toArray();
 
-        return $this->championMasteryTransformer->transformToChampionMastery($championMasteyData);
+        return $this->denormalizer->denormalize($championMasteyData, ChampionMastery::class);
     }
 
     public function getChampionMastery(string $puuid, int $championId): array
@@ -64,7 +64,7 @@ class ChampionMasteryApi implements ChampionMasteryApiInterface
 
         $championMasteriesData = $this->riotApiDataLeagueClient->get($url)->toArray();
 
-        return $this->championMasteryTransformer->transformToChampionMasteryCollection($championMasteriesData);
+        return $this->denormalizer->denormalize($championMasteriesData, ChampionMasteryCollection::class);
     }
 
     public function getTopChampionMasteries(string $puuid, ?int $count = null): array
