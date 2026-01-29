@@ -16,15 +16,23 @@ services:
 
     Zeggriim\RiotApiDataDragon\DataDragon\Endpoint\ItemApi:
         autowire: true
+        arguments:
+            $denormalizer: '@serializer'
 
     Zeggriim\RiotApiDataDragon\DataDragon\Endpoint\LanguageApi:
         autowire: true
+        arguments:
+            $denormalizer: '@serializer'
 
     Zeggriim\RiotApiDataDragon\DataDragon\Endpoint\ProfileIconApi:
         autowire: true
+        arguments:
+            $denormalizer: '@serializer'
 
     Zeggriim\RiotApiDataDragon\DataDragon\Endpoint\SummonerApi:
         autowire: true
+        arguments:
+            $denormalizer: '@serializer'
 
     Zeggriim\RiotApiDataDragon\DataDragon\Endpoint\VersionApi:
         autowire: true
@@ -50,6 +58,8 @@ services:
 
     Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\ChampionMasteryApi:
         autowire: true
+        arguments:
+            $denormalizer: '@serializer'
 
     Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\LeagueApi:
         autowire: true
@@ -59,6 +69,8 @@ services:
 
     Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\SummonerApi:
         autowire: true
+        arguments:
+            $denormalizer: '@serializer'
 
     Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\AccountApiInterface: '@Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\AccountApi'
     Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\ChampionApiInterface: '@Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\ChampionApi'
@@ -97,36 +109,7 @@ services:
     Zeggriim\RiotApiDataDragon\DataLeague\Serializer\Normalizer\ChampionMastery\RewardConfigNormalizer:
         tags: [ 'serializer.normalizer' ]
 
-    Zeggriim\RiotApiDataDragon\DataLeague\Serializer\Normalizer\Summoner\SummonerNormalizer:
-        tags: [ 'serializer.normalizer' ]
-
     # Transformers Data Dragon
     Zeggriim\RiotApiDataDragon\DataDragon\Transformer\ChampionTransformer:
-        arguments:
-            $denormalizer: '@serializer'
-
-    Zeggriim\RiotApiDataDragon\DataDragon\Transformer\LanguageTransformer:
-        arguments:
-            $denormalizer: '@serializer'
-
-    Zeggriim\RiotApiDataDragon\DataDragon\Transformer\ProfileIconTransformer:
-        arguments:
-            $denormalizer: '@serializer'
-
-    Zeggriim\RiotApiDataDragon\DataDragon\Transformer\ItemTransformer:
-        arguments:
-            $denormalizer: '@serializer'
-
-    Zeggriim\RiotApiDataDragon\DataDragon\Transformer\SummonerTransformer:
-        arguments:
-            $denormalizer: '@serializer'
-
-
-    # Transformers Data League
-    Zeggriim\RiotApiDataDragon\DataLeague\Transformer\ChampionMasteryTransformer:
-        arguments:
-            $denormalizer: '@serializer'
-
-    Zeggriim\RiotApiDataDragon\DataLeague\Transformer\SummonerTransformer:
         arguments:
             $denormalizer: '@serializer'

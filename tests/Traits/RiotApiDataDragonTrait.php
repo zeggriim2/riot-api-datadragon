@@ -25,10 +25,6 @@ use Zeggriim\RiotApiDataDragon\DataDragon\Serializer\Normalizer\ProfileIcon\Prof
 use Zeggriim\RiotApiDataDragon\DataDragon\Serializer\Normalizer\Summoner\SummonerCollectionNormalizer;
 use Zeggriim\RiotApiDataDragon\DataDragon\Serializer\Normalizer\Summoner\SummonerNormalizer;
 use Zeggriim\RiotApiDataDragon\DataDragon\Transformer\ChampionTransformer;
-use Zeggriim\RiotApiDataDragon\DataDragon\Transformer\ItemTransformer;
-use Zeggriim\RiotApiDataDragon\DataDragon\Transformer\LanguageTransformer;
-use Zeggriim\RiotApiDataDragon\DataDragon\Transformer\ProfileIconTransformer;
-use Zeggriim\RiotApiDataDragon\DataDragon\Transformer\SummonerTransformer;
 use Zeggriim\RiotApiDataDragon\RiotApiDataDragonClient;
 
 trait RiotApiDataDragonTrait
@@ -75,11 +71,9 @@ trait RiotApiDataDragonTrait
         $itemCollectionNormalizer->setDenormalizer($serializer);
         $itemNormalizer->setDenormalizer($serializer);
 
-        $transformer = new ItemTransformer($serializer);
-
         return new ItemApi(
             $this->getClientRiotApiDataDragon($dataResponse, $info),
-            $transformer
+            $serializer
         );
     }
 
@@ -95,11 +89,9 @@ trait RiotApiDataDragonTrait
         $serializer = new Serializer($normalizers, [new JsonEncoder()]);
         $languageCollectionNormalizer->setDenormalizer($serializer);
 
-        $transformer = new LanguageTransformer($serializer);
-
         return new LanguageApi(
             $this->getClientRiotApiDataDragon($dataResponse, $info),
-            $transformer
+            $serializer
         );
     }
 
@@ -120,11 +112,9 @@ trait RiotApiDataDragonTrait
         $summonerCollectionNormalizer->setDenormalizer($serializer);
         $summonerNormalizer->setDenormalizer($serializer);
 
-        $transformer = new SummonerTransformer($serializer);
-
         return new SummonerApi(
             $this->getClientRiotApiDataDragon($dataResponse, $info),
-            $transformer
+            $serializer
         );
     }
 
@@ -149,11 +139,9 @@ trait RiotApiDataDragonTrait
         $profileIconCollectionNormalizer->setDenormalizer($serializer);
         $profileIconNormalizer->setDenormalizer($serializer);
 
-        $transformer = new ProfileIconTransformer($serializer);
-
         return new ProfileIconApi(
             $this->getClientRiotApiDataDragon($dataResponse, $info),
-            $transformer
+            $serializer
         );
     }
 

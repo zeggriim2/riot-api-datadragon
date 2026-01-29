@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Zeggriim\RiotApiDataDragon\DataLeague\Endpoint;
 
+use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Zeggriim\RiotApiDataDragon\DataLeague\Dto\Summoner;
-use Zeggriim\RiotApiDataDragon\DataLeague\Transformer\SummonerTransformer;
 use Zeggriim\RiotApiDataDragon\RiotApiDataLeagueClient;
 
 class SummonerApi implements SummonerApiInterface
@@ -14,7 +14,7 @@ class SummonerApi implements SummonerApiInterface
 
     public function __construct(
         private readonly RiotApiDataLeagueClient $riotApiDataLeague,
-        private readonly SummonerTransformer $summonerTransformer,
+        private readonly DenormalizerInterface $denormalizer,
     ) {
     }
 
@@ -31,6 +31,6 @@ class SummonerApi implements SummonerApiInterface
 
         $summoner = $this->riotApiDataLeague->get($url)->toArray();
 
-        return $this->summonerTransformer->transformToSummoner($summoner);
+        return $this->denormalizer->denormalize($summoner, Summoner::class);
     }
 }
