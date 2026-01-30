@@ -80,6 +80,9 @@ services:
     Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\ChampionMasteryApiInterface: '@Zeggriim\RiotApiDataDragon\DataLeague\Endpoint\ChampionMasteryApi'
 
     # Normalizers Data Dragon
+    Zeggriim\RiotApiDataDragon\DataDragon\Serializer\Normalizer\Champion\ChampionNormalizer:
+        tags: [ 'serializer.normalizer' ]
+
     Zeggriim\RiotApiDataDragon\DataDragon\Serializer\Normalizer\Champion\ChampionCollectionNormalizer:
         tags: [ 'serializer.normalizer' ]
 
@@ -95,6 +98,14 @@ services:
     Zeggriim\RiotApiDataDragon\DataDragon\Serializer\Normalizer\Item\ItemCollectionNormalizer:
         tags: [ 'serializer.normalizer' ]
 
+    Zeggriim\RiotApiDataDragon\DataDragon\Serializer\Normalizer\Item\ItemNormalizer:
+        tags: [ 'serializer.normalizer' ]
+
+    Zeggriim\RiotApiDataDragon\DataDragon\Serializer\Normalizer\Summoner\SummonerNormalizer:
+        tags: [ 'serializer.normalizer' ]
+
+    Zeggriim\RiotApiDataDragon\DataDragon\Serializer\Normalizer\Summoner\SummonerCollectionNormalizer:
+        tags: [ 'serializer.normalizer' ]
 
     # Normalizers Data League
     Zeggriim\RiotApiDataDragon\DataLeague\Serializer\Normalizer\ChampionMastery\ChampionMasteryCollectionNormalizer:
