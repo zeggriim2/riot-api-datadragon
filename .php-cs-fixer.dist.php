@@ -10,7 +10,8 @@ $finder = PhpCsFixer\Finder::create()
         'var',
         'vendor',
         'report'
-    ]);
+    ])
+    ->notPath('RiotApiDataDragonBundle.php');
 
 $config = new PhpCsFixer\Config();
 return $config
