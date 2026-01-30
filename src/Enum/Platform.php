@@ -16,7 +16,7 @@ enum Platform: string
     case NA1 = 'na1';
     case OC1 = 'oc1';
     case TR1 = 'tr1';
-    case RU = 'ru.';
+    case RU = 'ru';
     case PH2 = 'ph2';
     case SG2 = 'sg2';
     case TH2 = 'th2';

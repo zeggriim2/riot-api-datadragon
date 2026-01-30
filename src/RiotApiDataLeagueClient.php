@@ -26,7 +26,7 @@ class RiotApiDataLeagueClient
     public const URL = 'https://%s.api.riotgames.com';
 
     public function __construct(
-        public HttpClientInterface $riotLeague,
+        private HttpClientInterface $riotLeague,
         private readonly string $apiKey,
         Platform|Region $platform,
     ) {
