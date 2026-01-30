@@ -20,7 +20,7 @@ final class MatchApiTest extends KernelTestCase
     use AssertMatchApiTrait;
     use RiotApiDataLeagueTrait;
 
-    public function testGetMatchs(): void
+    public function testGetMatches(): void
     {
         $dataResponse = [
             'EUW1_6921737266',
@@ -38,10 +38,10 @@ final class MatchApiTest extends KernelTestCase
         ];
 
         $matchApi = $this->getMatchApi($dataResponse);
-        $matchs = $matchApi->getMatchs('Iavkw0jaMjK2JBchJo3x68Lf8tQ4rNyIRP4jca_5rX3LSMkFA88KOkYbIqsl7FgR8ni2zanAOXPH6Q');
+        $matches = $matchApi->getMatches('Iavkw0jaMjK2JBchJo3x68Lf8tQ4rNyIRP4jca_5rX3LSMkFA88KOkYbIqsl7FgR8ni2zanAOXPH6Q');
 
-        self::assertNotEmpty($matchs);
-        self::assertCount(\count($dataResponse), $matchs);
+        self::assertNotEmpty($matches);
+        self::assertCount(\count($dataResponse), $matches);
     }
 
     public function testGetMatch(): void
@@ -41053,7 +41053,7 @@ final class MatchApiTest extends KernelTestCase
         ];
 
         $matchApi = $this->getMatchApi($dataResponse);
-        $match = $matchApi->getMatchTimeLine('EUW1_6921668065');
+        $match = $matchApi->getMatchTimeline('EUW1_6921668065');
 
         $this->assertMatch($match, $dataResponse);
     }
