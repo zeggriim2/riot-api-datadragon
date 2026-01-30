@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Zeggriim\RiotApiDataDragon\DataLeague\Endpoint;
 
+use Zeggriim\RiotApiDataDragon\DataLeague\Filter\MatchFilter;
 use Zeggriim\RiotApiDataDragon\RiotApiDataLeagueClient;
 
 class MatchApi implements MatchApiInterface
 {
-    public const URL_MATCHS = 'lol/match/v5/matches/by-puuid/%s/ids';
+    private const URL_MATCHES = '/lol/match/v5/matches/by-puuid/%s/ids';
     private const URL_MATCH = '/lol/match/v5/matches/%s';
     private const URL_MATCH_TIMELINE = '/lol/match/v5/matches/%s/timeline';
 
@@ -16,9 +17,13 @@ class MatchApi implements MatchApiInterface
     {
     }
 
-    public function getMatchs(string $puuidSummoner): array
+    public function getMatches(string $puuidSummoner, ?MatchFilter $filter = null): array
     {
-        $url = \sprintf(self::URL_MATCHS, $puuidSummoner);
+        $url = \sprintf(self::URL_MATCHES, $puuidSummoner);
+
+        if (null !== $filter) {
+            $url .= $filter->toQueryString();
+        }
 
         return $this->riotApiDataLeague->get($url)->toArray();
     }
@@ -30,7 +35,7 @@ class MatchApi implements MatchApiInterface
         return $this->riotApiDataLeague->get($url)->toArray();
     }
 
-    public function getMatchTimeLine(string $idMatch): array
+    public function getMatchTimeline(string $idMatch): array
     {
         $url = \sprintf(self::URL_MATCH_TIMELINE, $idMatch);
 
