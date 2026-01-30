@@ -77,3 +77,28 @@ API_RIOT_KEY='your-riot-api-key'  # Required for League API endpoints
 
 
 **Note:** The Account API uses regional routing (americas, asia, europe) instead of platform routing. You can specify the region when configuring the service or it defaults to Europe.
+
+📋 Roadmap suggérée                                                                                                                                                                                                              
+┌───────┬─────────────────────────────────────────┬────────┐                                                                                                                                                                     
+│ Phase │                 Tâches                  │ Effort │                                                                                                                                                                     
+├───────┼─────────────────────────────────────────┼────────┤                                                                                                                                                                     
+│ 1     │ Ajouter SpectatorApi (parties en cours) │   2h   │                                                                                                                                                                     
+├───────┼─────────────────────────────────────────┼────────┤                                                                                                                                                                     
+│ 2     │ Filtres pour MatchApi                   │   1h   │                                                                                                                                                                     
+├───────┼─────────────────────────────────────────┼────────┤                                                                                                                                                                     
+│ 3     │ DTOs pour Match/League/Account          │   4h   │                                                                                                                                                                     
+├───────┼─────────────────────────────────────────┼────────┤                                                                                                                                                                     
+│ 4     │ Retry automatique sur rate limit        │   2h   │                                                                                                                                                                     
+├───────┼─────────────────────────────────────────┼────────┤                                                                                                                                                                     
+│ 5     │ Cache HTTP                              │   3h   │                                                                                                                                                                     
+├───────┼─────────────────────────────────────────┼────────┤                                                                                                                                                                     
+│ 6     │ Support TFT                             │   6h   │                                                                                                                                                                     
+├───────┼─────────────────────────────────────────┼────────┤                                                                                                                                                                     
+│ 7     │ Requêtes asynchrones                    │   3h   │                                                                                                                                                                     
+└───────┴─────────────────────────────────────────┴────────┘
+
+- Pagination pour les endpoints match/league
+- Cache HTTP pour les données statiques DataDragon
+- Query builders pour les filtres complexes
+- Support async/Promise pour les requêtes parallèles
+- Exposition des headers Rate-Limit (Retry-After) 
