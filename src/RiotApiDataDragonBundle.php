@@ -22,7 +22,7 @@ class RiotApiDataDragonBundle extends AbstractBundle
 
     public function configure(DefinitionConfigurator $definition): void
     {
-        /** @phpstan-ignore method.notFound */
+        /* @phpstan-ignore method.notFound */
         $definition->rootNode()
             ->children()
                 ->arrayNode('data_dragon')

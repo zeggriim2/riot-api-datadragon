@@ -7,6 +7,7 @@ namespace Zeggriim\RiotApiDataDragon\DataLeague\Endpoint;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Zeggriim\RiotApiDataDragon\DataLeague\Dto\ChampionMastery;
 use Zeggriim\RiotApiDataDragon\DataLeague\Dto\ChampionMasteryCollection;
+use Zeggriim\RiotApiDataDragon\Enum\Platform;
 use Zeggriim\RiotApiDataDragon\RiotApiDataLeagueClient;
 
 class ChampionMasteryApi implements ChampionMasteryApiInterface
@@ -22,39 +23,39 @@ class ChampionMasteryApi implements ChampionMasteryApiInterface
     ) {
     }
 
-    public function getAllChampionMasteriesAsCollection(string $puuid): ChampionMasteryCollection
+    public function getAllChampionMasteriesAsCollection(string $puuid, ?Platform $platform = null): ChampionMasteryCollection
     {
         $url = \sprintf(self::URL_ALL_MASTERIES, $puuid);
 
-        $championMasteriesData = $this->riotApiDataLeagueClient->get($url)->toArray();
+        $championMasteriesData = $this->riotApiDataLeagueClient->get($url, $platform)->toArray();
 
         return $this->denormalizer->denormalize($championMasteriesData, ChampionMasteryCollection::class);
     }
 
-    public function getAllChampionMasteries(string $puuid): array
+    public function getAllChampionMasteries(string $puuid, ?Platform $platform = null): array
     {
         $url = \sprintf(self::URL_ALL_MASTERIES, $puuid);
 
-        return $this->riotApiDataLeagueClient->get($url)->toArray();
+        return $this->riotApiDataLeagueClient->get($url, $platform)->toArray();
     }
 
-    public function getChampionMasteryAsObject(string $puuid, int $championId): ChampionMastery
+    public function getChampionMasteryAsObject(string $puuid, int $championId, ?Platform $platform = null): ChampionMastery
     {
         $url = \sprintf(self::URL_MASTERY_BY_CHAMPION, $puuid, $championId);
 
-        $championMasteyData = $this->riotApiDataLeagueClient->get($url)->toArray();
+        $championMasteyData = $this->riotApiDataLeagueClient->get($url, $platform)->toArray();
 
         return $this->denormalizer->denormalize($championMasteyData, ChampionMastery::class);
     }
 
-    public function getChampionMastery(string $puuid, int $championId): array
+    public function getChampionMastery(string $puuid, int $championId, ?Platform $platform = null): array
     {
         $url = \sprintf(self::URL_MASTERY_BY_CHAMPION, $puuid, $championId);
 
-        return $this->riotApiDataLeagueClient->get($url)->toArray();
+        return $this->riotApiDataLeagueClient->get($url, $platform)->toArray();
     }
 
-    public function getTopChampionMasteriesAsCollection(string $puuid, ?int $count = null): ChampionMasteryCollection
+    public function getTopChampionMasteriesAsCollection(string $puuid, ?Platform $platform = null, ?int $count = null): ChampionMasteryCollection
     {
         $url = \sprintf(self::URL_TOP_MASTERIES, $puuid);
 
@@ -62,12 +63,12 @@ class ChampionMasteryApi implements ChampionMasteryApiInterface
             $url .= '?count='.$count;
         }
 
-        $championMasteriesData = $this->riotApiDataLeagueClient->get($url)->toArray();
+        $championMasteriesData = $this->riotApiDataLeagueClient->get($url, $platform)->toArray();
 
         return $this->denormalizer->denormalize($championMasteriesData, ChampionMasteryCollection::class);
     }
 
-    public function getTopChampionMasteries(string $puuid, ?int $count = null): array
+    public function getTopChampionMasteries(string $puuid, ?Platform $platform = null, ?int $count = null): array
     {
         $url = \sprintf(self::URL_TOP_MASTERIES, $puuid);
 
@@ -75,13 +76,13 @@ class ChampionMasteryApi implements ChampionMasteryApiInterface
             $url .= '?count='.$count;
         }
 
-        return $this->riotApiDataLeagueClient->get($url)->toArray();
+        return $this->riotApiDataLeagueClient->get($url, $platform)->toArray();
     }
 
-    public function getTotalMasteryScore(string $puuid): int
+    public function getTotalMasteryScore(string $puuid, ?Platform $platform = null): int
     {
         $url = \sprintf(self::URL_TOTAL_SCORE, $puuid);
-        $responseArray = $this->riotApiDataLeagueClient->get($url)->toArray();
+        $responseArray = $this->riotApiDataLeagueClient->get($url, $platform)->toArray();
 
         return $responseArray[array_key_first($responseArray)];
     }

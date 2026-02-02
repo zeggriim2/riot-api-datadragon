@@ -6,6 +6,7 @@ namespace Zeggriim\RiotApiDataDragon\DataLeague\Endpoint;
 
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Zeggriim\RiotApiDataDragon\DataLeague\Dto\Summoner;
+use Zeggriim\RiotApiDataDragon\Enum\Platform;
 use Zeggriim\RiotApiDataDragon\RiotApiDataLeagueClient;
 
 class SummonerApi implements SummonerApiInterface
@@ -18,18 +19,18 @@ class SummonerApi implements SummonerApiInterface
     ) {
     }
 
-    public function getSummoner(string $puuid): array
+    public function getSummoner(string $puuid, ?Platform $platform = null): array
     {
         $url = \sprintf(self::URL_SUMMONER, $puuid);
 
-        return $this->riotApiDataLeague->get($url)->toArray();
+        return $this->riotApiDataLeague->get($url, $platform)->toArray();
     }
 
-    public function getSummonerAsObject(string $puuid): Summoner
+    public function getSummonerAsObject(string $puuid, ?Platform $platform = null): Summoner
     {
         $url = \sprintf(self::URL_SUMMONER, $puuid);
 
-        $summoner = $this->riotApiDataLeague->get($url)->toArray();
+        $summoner = $this->riotApiDataLeague->get($url, $platform)->toArray();
 
         return $this->denormalizer->denormalize($summoner, Summoner::class);
     }

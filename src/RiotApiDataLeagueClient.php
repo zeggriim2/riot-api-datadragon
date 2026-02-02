@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Zeggriim\RiotApiDataDragon;
 
-use Symfony\Component\HttpClient\HttpOptions;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\ExceptionInterface;
@@ -26,29 +25,33 @@ class RiotApiDataLeagueClient
     public const URL = 'https://%s.api.riotgames.com';
 
     public function __construct(
-        private HttpClientInterface $riotLeague,
+        private readonly HttpClientInterface $riotLeague,
         private readonly string $apiKey,
-        Platform|Region $platform,
+        private readonly Platform|Region $defaultPlatform = Platform::EUW1,
     ) {
-        $this->riotLeague = $this->riotLeague->withOptions(
-            (new HttpOptions())
-                ->setBaseUri(\sprintf(self::URL, $platform->value))
-                ->setHeaders(['X-Riot-Token' => $this->apiKey])
-                ->toArray()
-        );
     }
 
-    public function get(string $path): ResponseInterface
+    public function get(string $path, Platform|Region|null $platform = null): ResponseInterface
     {
-        return $this->processRequest(Request::METHOD_GET, $path);
+        $platform = $platform ?? $this->defaultPlatform;
+        $url = \sprintf(self::URL, $platform->value).$path;
+
+        return $this->processRequest(Request::METHOD_GET, $url);
     }
 
-    private function processRequest(string $method, string $path): ResponseInterface
+    public function getDefaultPlatform(): Platform|Region
+    {
+        return $this->defaultPlatform;
+    }
+
+    private function processRequest(string $method, string $url): ResponseInterface
     {
         $response = null;
 
         try {
-            $response = $this->riotLeague->request($method, $path);
+            $response = $this->riotLeague->request($method, $url, [
+                'headers' => ['X-Riot-Token' => $this->apiKey],
+            ]);
             $response->getContent();
         } catch (ClientExceptionInterface $exception) {
             $this->handleClientException($exception);
