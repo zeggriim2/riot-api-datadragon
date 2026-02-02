@@ -6,6 +6,7 @@ namespace Zeggriim\RiotApiDataDragon\DataLeague\Endpoint;
 
 use Zeggriim\RiotApiDataDragon\DataLeague\Dto\ChampionMastery;
 use Zeggriim\RiotApiDataDragon\DataLeague\Dto\ChampionMasteryCollection;
+use Zeggriim\RiotApiDataDragon\Enum\Platform;
 
 interface ChampionMasteryApiInterface
 {
@@ -14,18 +15,18 @@ interface ChampionMasteryApiInterface
      *
      * @return ChampionMasteryCollection Array of ChampionMastery data
      */
-    public function getAllChampionMasteriesAsCollection(string $puuid): ChampionMasteryCollection;
+    public function getAllChampionMasteriesAsCollection(string $puuid, ?Platform $platform = null): ChampionMasteryCollection;
 
-    public function getAllChampionMasteries(string $puuid): array;
+    public function getAllChampionMasteries(string $puuid, ?Platform $platform = null): array;
 
     /**
      * Get a champion mastery by puuid and champion ID.
      *
      * @return ChampionMastery ChampionMastery data for the specified champion
      */
-    public function getChampionMasteryAsObject(string $puuid, int $championId): ChampionMastery;
+    public function getChampionMasteryAsObject(string $puuid, int $championId, ?Platform $platform = null): ChampionMastery;
 
-    public function getChampionMastery(string $puuid, int $championId): array;
+    public function getChampionMastery(string $puuid, int $championId, ?Platform $platform = null): array;
 
     /**
      * Get specified number of top champion masteries by puuid.
@@ -34,14 +35,14 @@ interface ChampionMasteryApiInterface
      *
      * @return ChampionMasteryCollection Array of top ChampionMastery entries
      */
-    public function getTopChampionMasteriesAsCollection(string $puuid, ?int $count = null): ChampionMasteryCollection;
+    public function getTopChampionMasteriesAsCollection(string $puuid, ?Platform $platform = null, ?int $count = null): ChampionMasteryCollection;
 
-    public function getTopChampionMasteries(string $puuid, ?int $count = null): array;
+    public function getTopChampionMasteries(string $puuid, ?Platform $platform = null, ?int $count = null): array;
 
     /**
      * Get a player's total champion mastery score.
      *
      * @return int Total mastery score
      */
-    public function getTotalMasteryScore(string $puuid): int;
+    public function getTotalMasteryScore(string $puuid, ?Platform $platform = null): int;
 }

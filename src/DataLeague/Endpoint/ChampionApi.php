@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Zeggriim\RiotApiDataDragon\DataLeague\Endpoint;
 
+use Zeggriim\RiotApiDataDragon\Enum\Platform;
 use Zeggriim\RiotApiDataDragon\RiotApiDataLeagueClient;
 
 class ChampionApi implements ChampionApiInterface
@@ -14,8 +15,8 @@ class ChampionApi implements ChampionApiInterface
     {
     }
 
-    public function getChampionRotation(): array
+    public function getChampionRotation(?Platform $platform = null): array
     {
-        return $this->riotApiDataLeague->get(self::URL_CHAMPION_ROTATION)->toArray();
+        return $this->riotApiDataLeague->get(self::URL_CHAMPION_ROTATION, $platform)->toArray();
     }
 }

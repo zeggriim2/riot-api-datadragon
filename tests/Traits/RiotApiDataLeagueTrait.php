@@ -19,30 +19,28 @@ use Zeggriim\RiotApiDataDragon\DataLeague\Serializer\Normalizer\ChampionMastery\
 use Zeggriim\RiotApiDataDragon\DataLeague\Serializer\Normalizer\ChampionMastery\ChampionMasteryNormalizer;
 use Zeggriim\RiotApiDataDragon\DataLeague\Serializer\Normalizer\ChampionMastery\NextSeasonMilestonesNormalizer;
 use Zeggriim\RiotApiDataDragon\DataLeague\Serializer\Normalizer\ChampionMastery\RewardConfigNormalizer;
-use Zeggriim\RiotApiDataDragon\Enum\Platform;
-use Zeggriim\RiotApiDataDragon\Enum\Region;
 use Zeggriim\RiotApiDataDragon\RiotApiDataLeagueClient;
 
 trait RiotApiDataLeagueTrait
 {
     private function getLeagueApi(array $dataResponse, array $info = ['http_code' => 200]): LeagueApi
     {
-        return new LeagueApi($this->getClientRiotApiDataLeague($dataResponse, Platform::EUW1, $info));
+        return new LeagueApi($this->getClientRiotApiDataLeague($dataResponse, $info));
     }
 
     private function getMatchApi(array $dataResponse, array $info = ['http_code' => 200]): MatchApi
     {
-        return new MatchApi($this->getClientRiotApiDataLeague($dataResponse, Platform::EUW1, $info));
+        return new MatchApi($this->getClientRiotApiDataLeague($dataResponse, $info));
     }
 
     public function getChampionApi(array $dataResponse, array $info = ['http_code' => 200]): ChampionApi
     {
-        return new ChampionApi($this->getClientRiotApiDataLeague($dataResponse, Platform::EUW1, $info));
+        return new ChampionApi($this->getClientRiotApiDataLeague($dataResponse, $info));
     }
 
     private function getAccountApi(array $dataResponse, array $info = ['http_code' => 200]): AccountApi
     {
-        return new AccountApi($this->getClientRiotApiDataLeague($dataResponse, Region::EUROPE, $info));
+        return new AccountApi($this->getClientRiotApiDataLeague($dataResponse, $info));
     }
 
     private function getSummonerApi(array $dataResponse, array $info = ['http_code' => 200]): SummonerApi
@@ -55,7 +53,7 @@ trait RiotApiDataLeagueTrait
         $serializer = new Serializer($normalizers, [new JsonEncoder()]);
 
         return new SummonerApi(
-            $this->getClientRiotApiDataLeague($dataResponse, Region::EUROPE, $info),
+            $this->getClientRiotApiDataLeague($dataResponse, $info),
             $serializer
         );
     }
@@ -82,12 +80,12 @@ trait RiotApiDataLeagueTrait
         $rewardConfigNormalizer->setDenormalizer($serializer);
 
         return new ChampionMasteryApi(
-            $this->getClientRiotApiDataLeague($dataResponse, Region::EUROPE, $info),
+            $this->getClientRiotApiDataLeague($dataResponse, $info),
             $serializer
         );
     }
 
-    private function getClientRiotApiDataLeague(array $data, Platform|Region $platform, array $info = ['http_code' => 200]): RiotApiDataLeagueClient
+    private function getClientRiotApiDataLeague(array $data, array $info = ['http_code' => 200]): RiotApiDataLeagueClient
     {
         $jsonData = json_encode($data);
         if (false === $jsonData) {
@@ -98,6 +96,6 @@ trait RiotApiDataLeagueTrait
         $this->createMock(HttpClientInterface::class);
         $httpClient = new MockHttpClient($response, null);
 
-        return new RiotApiDataLeagueClient($httpClient, 'key', $platform);
+        return new RiotApiDataLeagueClient($httpClient, 'key');
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Zeggriim\RiotApiDataDragon\DataLeague\Endpoint;
 
 use Zeggriim\RiotApiDataDragon\Enum\Division;
+use Zeggriim\RiotApiDataDragon\Enum\Platform;
 use Zeggriim\RiotApiDataDragon\Enum\Queue;
 use Zeggriim\RiotApiDataDragon\Enum\Tier;
 use Zeggriim\RiotApiDataDragon\RiotApiDataLeagueClient;
@@ -22,45 +23,45 @@ class LeagueApi implements LeagueApiInterface
     {
     }
 
-    public function getChallenger(Queue $queue = Queue::RANKED_SOLO): array
+    public function getChallenger(?Platform $platform = null, Queue $queue = Queue::RANKED_SOLO): array
     {
         $path = \sprintf(self::URL_LEAGUE_CHALLENGER, $queue->value);
 
-        return $this->riotApiDataLeague->get($path)->toArray();
+        return $this->riotApiDataLeague->get($path, $platform)->toArray();
     }
 
-    public function getGrandMaster(Queue $queue = Queue::RANKED_SOLO): array
+    public function getGrandMaster(?Platform $platform = null, Queue $queue = Queue::RANKED_SOLO): array
     {
         $path = \sprintf(self::URL_LEAGUE_GRANDMASTER, $queue->value);
 
-        return $this->riotApiDataLeague->get($path)->toArray();
+        return $this->riotApiDataLeague->get($path, $platform)->toArray();
     }
 
-    public function getMaster(Queue $queue = Queue::RANKED_SOLO): array
+    public function getMaster(?Platform $platform = null, Queue $queue = Queue::RANKED_SOLO): array
     {
         $path = \sprintf(self::URL_LEAGUE_MASTER, $queue->value);
 
-        return $this->riotApiDataLeague->get($path)->toArray();
+        return $this->riotApiDataLeague->get($path, $platform)->toArray();
     }
 
-    public function getAll(Queue $queue, Tier $tier, Division $division): array
+    public function getAll(Queue $queue, Tier $tier, Division $division, ?Platform $platform = null): array
     {
         $path = \sprintf(self::URL_LEAGUE_OTHER, $queue->value, $tier->value, $division->value);
 
-        return $this->riotApiDataLeague->get($path)->toArray();
+        return $this->riotApiDataLeague->get($path, $platform)->toArray();
     }
 
-    public function getLeagueWithId(string $leagueId): array
+    public function getLeagueWithId(string $leagueId, ?Platform $platform = null): array
     {
         $path = \sprintf(self::URL_LEAGUE_ID, $leagueId);
 
-        return $this->riotApiDataLeague->get($path)->toArray();
+        return $this->riotApiDataLeague->get($path, $platform)->toArray();
     }
 
-    public function getLeagueInAllQueuesWithSummonerId(string $summonerId): array
+    public function getLeagueInAllQueuesWithSummonerId(string $summonerId, ?Platform $platform = null): array
     {
         $path = \sprintf(self::URL_LEAGUE_SUMMUNER_ID, $summonerId);
 
-        return $this->riotApiDataLeague->get($path)->toArray();
+        return $this->riotApiDataLeague->get($path, $platform)->toArray();
     }
 }

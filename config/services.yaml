@@ -1,9 +1,9 @@
 services:
     Zeggriim\RiotApiDataDragon\RiotApiDataLeagueClient:
         autowire: true
-        public: false
         arguments:
             $apiKey: '%env(string:API_RIOT_KEY)%'
+            $defaultPlatform: '%env(enum:Zeggriim\RiotApiDataDragon\Enum\Platform:RIOT_DEFAULT_PLATFORM)%'
 
 
     # Endpoint Data Dragon

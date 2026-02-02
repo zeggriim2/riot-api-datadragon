@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpClient\Exception\ClientException;
 use Symfony\Component\HttpClient\Exception\ServerException as ServerExceptionHttpClient;
 use Symfony\Component\HttpFoundation\Response;
+use Zeggriim\RiotApiDataDragon\Enum\Region;
 use Zeggriim\RiotApiDataDragon\Exception\DataNotFoundException;
 use Zeggriim\RiotApiDataDragon\Exception\ForbiddenException;
 use Zeggriim\RiotApiDataDragon\Exception\RequestException;
@@ -37,7 +38,7 @@ final class AccountApiTest extends KernelTestCase
         ];
 
         $accountApi = $this->getAccountApi($dataResponse);
-        $account = $accountApi->getAccountByPuuid('test-puuid-12345');
+        $account = $accountApi->getAccountByPuuid('test-puuid-12345', Region::EUROPE);
 
         self::assertArrayHasKey('puuid', $account);
         self::assertArrayHasKey('gameName', $account);
@@ -45,6 +46,21 @@ final class AccountApiTest extends KernelTestCase
         self::assertSame('test-puuid-12345', $account['puuid']);
         self::assertSame('TestPlayer', $account['gameName']);
         self::assertSame('EUW', $account['tagLine']);
+    }
+
+    public function testGetAccountByPuuidWithDefaultPlatform(): void
+    {
+        $dataResponse = [
+            'puuid' => 'test-puuid-12345',
+            'gameName' => 'TestPlayer',
+            'tagLine' => 'EUW',
+        ];
+
+        $accountApi = $this->getAccountApi($dataResponse);
+        $account = $accountApi->getAccountByPuuid('test-puuid-12345');
+
+        self::assertArrayHasKey('puuid', $account);
+        self::assertSame('test-puuid-12345', $account['puuid']);
     }
 
     public function testGetAccountByRiotId(): void
@@ -56,7 +72,7 @@ final class AccountApiTest extends KernelTestCase
         ];
 
         $accountApi = $this->getAccountApi($dataResponse, ['http_code' => 200]);
-        $account = $accountApi->getAccountByRiotId('AnotherPlayer', 'NA1');
+        $account = $accountApi->getAccountByRiotId('AnotherPlayer', 'NA1', Region::EUROPE);
 
         self::assertArrayHasKey('puuid', $account);
         self::assertArrayHasKey('gameName', $account);
@@ -75,7 +91,7 @@ final class AccountApiTest extends KernelTestCase
         ];
 
         $accountApi = $this->getAccountApi($dataResponse);
-        $account = $accountApi->getAccountByAccessToken();
+        $account = $accountApi->getAccountByAccessToken(Region::EUROPE);
 
         self::assertArrayHasKey('puuid', $account);
         self::assertArrayHasKey('gameName', $account);
@@ -95,7 +111,7 @@ final class AccountApiTest extends KernelTestCase
         $accountApi = $this->getAccountApi(['test' => 'test'], ['http_code' => $codeStatus]);
         self::expectException($exceptionClass);
         self::expectExceptionMessage($exceptionMessage);
-        $res = $accountApi->getAccountByPuuid('test-puuid');
+        $res = $accountApi->getAccountByPuuid('test-puuid', Region::EUROPE);
         self::assertCount(0, $res);
     }
 

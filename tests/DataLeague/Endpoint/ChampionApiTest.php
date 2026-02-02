@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Zeggriim\RiotApiDataDragon\Tests\DataLeague\Endpoint;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Zeggriim\RiotApiDataDragon\Enum\Platform;
 use Zeggriim\RiotApiDataDragon\Tests\Traits\RiotApiDataLeagueTrait;
 
 /**
@@ -25,7 +26,7 @@ final class ChampionApiTest extends KernelTestCase
         ];
 
         $championApi = $this->getChampionApi($dataResponse);
-        $championRotation = $championApi->getChampionRotation();
+        $championRotation = $championApi->getChampionRotation(Platform::EUW1);
 
         self::assertNotEmpty($championRotation);
         self::assertArrayHasKey('freeChampionIds', $championRotation);
@@ -34,5 +35,20 @@ final class ChampionApiTest extends KernelTestCase
         self::assertCount(\count($dataResponse['freeChampionIdsForNewPlayers']), $championRotation['freeChampionIdsForNewPlayers']);
         self::assertArrayHasKey('maxNewPlayerLevel', $championRotation);
         self::assertSame($dataResponse['maxNewPlayerLevel'], $championRotation['maxNewPlayerLevel']);
+    }
+
+    public function testGetChampionRotationWithDefaultPlatform(): void
+    {
+        $dataResponse = [
+            'freeChampionIds' => [13, 14],
+            'freeChampionIdsForNewPlayers' => [222, 254],
+            'maxNewPlayerLevel' => 10,
+        ];
+
+        $championApi = $this->getChampionApi($dataResponse);
+        $championRotation = $championApi->getChampionRotation();
+
+        self::assertNotEmpty($championRotation);
+        self::assertArrayHasKey('freeChampionIds', $championRotation);
     }
 }
