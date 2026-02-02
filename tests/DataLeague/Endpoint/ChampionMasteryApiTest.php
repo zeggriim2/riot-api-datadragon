@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Zeggriim\RiotApiDataDragon\DataLeague\Dto\ChampionMastery;
 use Zeggriim\RiotApiDataDragon\DataLeague\Dto\NextSeasonMilestones;
 use Zeggriim\RiotApiDataDragon\DataLeague\Dto\RewardConfig;
+use Zeggriim\RiotApiDataDragon\Enum\Platform;
 use Zeggriim\RiotApiDataDragon\Exception\DataNotFoundException;
 use Zeggriim\RiotApiDataDragon\Exception\ForbiddenException;
 use Zeggriim\RiotApiDataDragon\Exception\RequestException;
@@ -77,7 +78,7 @@ final class ChampionMasteryApiTest extends KernelTestCase
         ];
 
         $championMasteryApi = $this->getChampionMasteryApi($dataResponse);
-        $masteries = $championMasteryApi->getAllChampionMasteries('test-puuid-12345');
+        $masteries = $championMasteryApi->getAllChampionMasteries('test-puuid-12345', Platform::EUW1);
 
         self::assertCount(2, $masteries);
     }
@@ -128,7 +129,7 @@ final class ChampionMasteryApiTest extends KernelTestCase
         ];
 
         $championMasteryApi = $this->getChampionMasteryApi($dataResponse);
-        $masteries = $championMasteryApi->getAllChampionMasteriesAsCollection('test-puuid-12345');
+        $masteries = $championMasteryApi->getAllChampionMasteriesAsCollection('test-puuid-12345', Platform::EUW1);
 
         self::assertCount(2, $masteries);
 
@@ -178,7 +179,7 @@ final class ChampionMasteryApiTest extends KernelTestCase
         ];
 
         $championMasteryApi = $this->getChampionMasteryApi($dataResponse);
-        $mastery = $championMasteryApi->getChampionMastery('test-puuid-67890', 157);
+        $mastery = $championMasteryApi->getChampionMastery('test-puuid-67890', 157, Platform::EUW1);
 
         self::assertSame($dataResponse['puuid'], $mastery['puuid']);
         self::assertSame($dataResponse['championPointsUntilNextLevel'], $mastery['championPointsUntilNextLevel']);
@@ -234,7 +235,7 @@ final class ChampionMasteryApiTest extends KernelTestCase
         ];
 
         $championMasteryApi = $this->getChampionMasteryApi($dataResponse);
-        $mastery = $championMasteryApi->getChampionMasteryAsObject('test-puuid-67890', 157);
+        $mastery = $championMasteryApi->getChampionMasteryAsObject('test-puuid-67890', 157, Platform::EUW1);
 
         self::assertSame($dataResponse['puuid'], $mastery->puuid);
         self::assertSame($dataResponse['championPointsUntilNextLevel'], $mastery->championPointsUntilNextLevel);
@@ -305,7 +306,7 @@ final class ChampionMasteryApiTest extends KernelTestCase
         ];
 
         $championMasteryApi = $this->getChampionMasteryApi($dataResponse);
-        $topMasteries = $championMasteryApi->getTopChampionMasteries('test-puuid-abc');
+        $topMasteries = $championMasteryApi->getTopChampionMasteries('test-puuid-abc', Platform::EUW1);
 
         self::assertCount(\count($dataResponse), $topMasteries);
         $dataTopMasteryFirst = $dataResponse[0];
@@ -361,7 +362,7 @@ final class ChampionMasteryApiTest extends KernelTestCase
         ];
 
         $championMasteryApi = $this->getChampionMasteryApi($dataResponse);
-        $topMasteries = $championMasteryApi->getTopChampionMasteriesAsCollection('test-puuid-abc');
+        $topMasteries = $championMasteryApi->getTopChampionMasteriesAsCollection('test-puuid-abc', Platform::EUW1);
 
         self::assertCount(\count($dataResponse), $topMasteries);
         $topMasteriesFirst = $topMasteries->getIterator()->current();
@@ -438,7 +439,7 @@ final class ChampionMasteryApiTest extends KernelTestCase
         ];
 
         $championMasteryApi = $this->getChampionMasteryApi($dataResponse);
-        $topMasteries = $championMasteryApi->getTopChampionMasteries('test-puuid-xyz', 3);
+        $topMasteries = $championMasteryApi->getTopChampionMasteries('test-puuid-xyz', Platform::EUW1, 3);
 
         self::assertCount(\count($dataResponse), $topMasteries);
         $topMasteryFirst = $topMasteries[0];
@@ -515,7 +516,7 @@ final class ChampionMasteryApiTest extends KernelTestCase
         ];
 
         $championMasteryApi = $this->getChampionMasteryApi($dataResponse);
-        $topMasteries = $championMasteryApi->getTopChampionMasteriesAsCollection('test-puuid-xyz', 3);
+        $topMasteries = $championMasteryApi->getTopChampionMasteriesAsCollection('test-puuid-xyz', Platform::EUW1, 3);
 
         $topMasteryFirst = $topMasteries->getIterator()->current();
         $dataMasteryFirst = $dataResponse[0];
@@ -534,7 +535,7 @@ final class ChampionMasteryApiTest extends KernelTestCase
 
         // @phpstan-ignore-next-line - Intentionally passing int instead of array for this specific endpoint
         $championMasteryApi = $this->getChampionMasteryApi($dataResponse);
-        $totalScore = $championMasteryApi->getTotalMasteryScore('test-puuid-score');
+        $totalScore = $championMasteryApi->getTotalMasteryScore('test-puuid-score', Platform::EUW1);
 
         self::assertSame(342, $totalScore);
     }
@@ -549,7 +550,7 @@ final class ChampionMasteryApiTest extends KernelTestCase
         $championMasteryApi = $this->getChampionMasteryApi(['test' => 'test'], ['http_code' => $codeStatus]);
         self::expectException($exceptionClass);
         self::expectExceptionMessage($exceptionMessage);
-        $res = $championMasteryApi->getAllChampionMasteries('test-puuid');
+        $res = $championMasteryApi->getAllChampionMasteries('test-puuid', Platform::EUW1);
         self::assertCount(0, $res);
     }
 
@@ -561,11 +562,11 @@ final class ChampionMasteryApiTest extends KernelTestCase
             [Response::HTTP_FORBIDDEN, ForbiddenException::class, 'LeagueAPI: Forbidden.'],
             [Response::HTTP_NOT_FOUND, DataNotFoundException::class, 'LeagueAPI: Data not found'],
             [Response::HTTP_UNSUPPORTED_MEDIA_TYPE, UnsupportedMediaTypeException::class, 'LeagueAPI: Unsupported media type'],
-            [Response::HTTP_NOT_ACCEPTABLE, ClientException::class, 'HTTP 406 returned for "https://europe.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/test-puuid".'],
+            [Response::HTTP_NOT_ACCEPTABLE, ClientException::class, 'HTTP 406 returned for "https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/test-puuid".'],
             [Response::HTTP_TOO_MANY_REQUESTS, ServerLimitException::class, 'LeagueAPI: Rate limit exceeded request.'],
             [Response::HTTP_INTERNAL_SERVER_ERROR, ServerException::class, 'LeagueAPI: Internal server error occured.'],
             [Response::HTTP_SERVICE_UNAVAILABLE, ServerException::class, 'LeagueAPI: Service is temporarily unavailable.'],
-            [Response::HTTP_GATEWAY_TIMEOUT, ServerExceptionHttpClient::class, 'HTTP 504 returned for "https://europe.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/test-puuid".'],
+            [Response::HTTP_GATEWAY_TIMEOUT, ServerExceptionHttpClient::class, 'HTTP 504 returned for "https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/test-puuid".'],
         ];
     }
 }

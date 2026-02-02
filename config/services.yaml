@@ -1,7 +1,6 @@
 services:
     Zeggriim\RiotApiDataDragon\RiotApiDataLeagueClient:
         autowire: true
-        public: false
         arguments:
             $apiKey: '%env(string:API_RIOT_KEY)%'
 

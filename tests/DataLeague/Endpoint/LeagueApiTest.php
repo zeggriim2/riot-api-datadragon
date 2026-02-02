@@ -9,6 +9,7 @@ use Symfony\Component\HttpClient\Exception\ClientException;
 use Symfony\Component\HttpClient\Exception\ServerException as ServerExceptionHttpClient;
 use Symfony\Component\HttpFoundation\Response;
 use Zeggriim\RiotApiDataDragon\Enum\Division;
+use Zeggriim\RiotApiDataDragon\Enum\Platform;
 use Zeggriim\RiotApiDataDragon\Enum\Queue;
 use Zeggriim\RiotApiDataDragon\Enum\Tier;
 use Zeggriim\RiotApiDataDragon\Exception\DataNotFoundException;
@@ -42,7 +43,7 @@ final class LeagueApiTest extends KernelTestCase
 
         self::assertTrue(method_exists($leagueApi, $method));
 
-        $leagues = $leagueApi->{$method}();
+        $leagues = $leagueApi->{$method}(Platform::EUW1);
 
         self::assertIsArray($leagues);
         $this->assertLeagueEntryList($leagues, $dataResponse, 2);
@@ -137,7 +138,7 @@ final class LeagueApiTest extends KernelTestCase
         ];
 
         $leagueApi = $this->getLeagueApi($dataResponse);
-        $leagues = $leagueApi->getAll(Queue::RANKED_FLEX_SR, Tier::GOLD, Division::I);
+        $leagues = $leagueApi->getAll(Queue::RANKED_FLEX_SR, Tier::GOLD, Division::I, Platform::EUW1);
 
         $firstLeague = $leagues[0];
         $this->assertLeagueEntry($firstLeague, $dataResponse[0]);
@@ -191,7 +192,7 @@ final class LeagueApiTest extends KernelTestCase
         ];
 
         $leagueApi = $this->getLeagueApi($dataResponse);
-        $leagues = $leagueApi->getLeagueWithId('3437378e-b857-4b1e-b554-4598f31dd36a');
+        $leagues = $leagueApi->getLeagueWithId('3437378e-b857-4b1e-b554-4598f31dd36a', Platform::EUW1);
 
         $this->assertLeagueEntryList($leagues, $dataResponse, 3);
 
@@ -238,7 +239,7 @@ final class LeagueApiTest extends KernelTestCase
         ];
 
         $leagueApi = $this->getLeagueApi($dataResponse);
-        $leagues = $leagueApi->getLeagueInAllQueuesWithSummonerId('YIhWs5RLvg0K1TvICE0Z0lRq9qYe0vEqJ5NYD7It72q_Ddc');
+        $leagues = $leagueApi->getLeagueInAllQueuesWithSummonerId('YIhWs5RLvg0K1TvICE0Z0lRq9qYe0vEqJ5NYD7It72q_Ddc', Platform::EUW1);
 
         $firstLeague = $leagues[0];
         $this->assertLeagueEntry($firstLeague, $dataResponse[0]);
@@ -256,7 +257,7 @@ final class LeagueApiTest extends KernelTestCase
         $leagueApi = $this->getLeagueApi(['test' => 'test'], ['http_code' => $codeStatus]);
         self::expectException($exceptionClass);
         self::expectExceptionMessage($exceptionMessage);
-        $res = $leagueApi->getGrandMaster();
+        $res = $leagueApi->getGrandMaster(Platform::EUW1);
         self::assertCount(0, $res);
     }
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Zeggriim\RiotApiDataDragon\DataLeague\Endpoint;
 
+use Zeggriim\RiotApiDataDragon\Enum\Region;
 use Zeggriim\RiotApiDataDragon\RiotApiDataLeagueClient;
 
 class AccountApi implements AccountApiInterface
@@ -16,22 +17,22 @@ class AccountApi implements AccountApiInterface
     {
     }
 
-    public function getAccountByPuuid(string $puuid): array
+    public function getAccountByPuuid(string $puuid, ?Region $region = null): array
     {
         $path = \sprintf(self::URL_ACCOUNT_BY_PUUID, $puuid);
 
-        return $this->riotApiDataLeagueClient->get($path)->toArray();
+        return $this->riotApiDataLeagueClient->get($path, $region)->toArray();
     }
 
-    public function getAccountByRiotId(string $gameName, string $tagLine): array
+    public function getAccountByRiotId(string $gameName, string $tagLine, ?Region $region = null): array
     {
         $path = \sprintf(self::URL_ACCOUNT_BY_RIOT_ID, $gameName, $tagLine);
 
-        return $this->riotApiDataLeagueClient->get($path)->toArray();
+        return $this->riotApiDataLeagueClient->get($path, $region)->toArray();
     }
 
-    public function getAccountByAccessToken(): array
+    public function getAccountByAccessToken(?Region $region = null): array
     {
-        return $this->riotApiDataLeagueClient->get(self::URL_ACCOUNT_ME)->toArray();
+        return $this->riotApiDataLeagueClient->get(self::URL_ACCOUNT_ME, $region)->toArray();
     }
 }

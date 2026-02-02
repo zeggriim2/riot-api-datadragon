@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Zeggriim\RiotApiDataDragon\DataLeague\Endpoint;
 
 use Zeggriim\RiotApiDataDragon\DataLeague\Filter\MatchFilter;
+use Zeggriim\RiotApiDataDragon\Enum\Region;
 use Zeggriim\RiotApiDataDragon\RiotApiDataLeagueClient;
 
 class MatchApi implements MatchApiInterface
@@ -17,7 +18,7 @@ class MatchApi implements MatchApiInterface
     {
     }
 
-    public function getMatches(string $puuidSummoner, ?MatchFilter $filter = null): array
+    public function getMatches(string $puuidSummoner, ?Region $region = null, ?MatchFilter $filter = null): array
     {
         $url = \sprintf(self::URL_MATCHES, $puuidSummoner);
 
@@ -25,20 +26,20 @@ class MatchApi implements MatchApiInterface
             $url .= $filter->toQueryString();
         }
 
-        return $this->riotApiDataLeague->get($url)->toArray();
+        return $this->riotApiDataLeague->get($url, $region)->toArray();
     }
 
-    public function getMatch(string $idMatch): array
+    public function getMatch(string $idMatch, ?Region $region = null): array
     {
         $url = \sprintf(self::URL_MATCH, $idMatch);
 
-        return $this->riotApiDataLeague->get($url)->toArray();
+        return $this->riotApiDataLeague->get($url, $region)->toArray();
     }
 
-    public function getMatchTimeline(string $idMatch): array
+    public function getMatchTimeline(string $idMatch, ?Region $region = null): array
     {
         $url = \sprintf(self::URL_MATCH_TIMELINE, $idMatch);
 
-        return $this->riotApiDataLeague->get($url)->toArray();
+        return $this->riotApiDataLeague->get($url, $region)->toArray();
     }
 }
