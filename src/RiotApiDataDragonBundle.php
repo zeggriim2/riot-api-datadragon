@@ -90,7 +90,7 @@ class RiotApiDataDragonBundle extends AbstractBundle
         $httpClientConfig = [
             'http_client' => [
                 'scoped_clients' => [
-                    'riotApi' => [
+                    'riot.api' => [
                         'base_uri' => $config['data_dragon']['base_uri'],
                     ],
                 ],
@@ -99,7 +99,7 @@ class RiotApiDataDragonBundle extends AbstractBundle
 
         // Add retry configuration if enabled
         if ($config['retry']['enabled']) {
-            $httpClientConfig['http_client']['scoped_clients']['riotApi']['retry_failed'] = [
+            $httpClientConfig['http_client']['scoped_clients']['riot.api']['retry_failed'] = [
                 'enabled' => true,
                 'max_retries' => $config['retry']['max_retries'],
                 'delay' => $config['retry']['delay_ms'],
