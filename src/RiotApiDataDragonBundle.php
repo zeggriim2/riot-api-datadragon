@@ -82,11 +82,20 @@ class RiotApiDataDragonBundle extends AbstractBundle
         ;
     }
 
-    public function loadExtension(array $config, ContainerConfigurator $container, ContainerBuilder $builder): void
+    public function prependExtension(ContainerConfigurator $container, ContainerBuilder $builder): void
     {
-        $container->import('../config/services.yaml');
+        $configs = $builder->getExtensionConfig($this->extensionAlias);
+        $config = array_replace_recursive([
+            'data_dragon' => ['base_uri' => self::DEFAULT_DATA_DRAGON_BASE_URI],
+            'retry' => [
+                'enabled' => true,
+                'max_retries' => self::DEFAULT_RETRY_MAX,
+                'delay_ms' => self::DEFAULT_RETRY_DELAY_MS,
+                'multiplier' => self::DEFAULT_RETRY_MULTIPLIER,
+                'max_delay_ms' => self::DEFAULT_RETRY_MAX_DELAY_MS,
+            ],
+        ], ...$configs);
 
-        // Configure scoped HTTP client for Data Dragon with retry on 429
         $httpClientConfig = [
             'http_client' => [
                 'scoped_clients' => [
@@ -97,7 +106,6 @@ class RiotApiDataDragonBundle extends AbstractBundle
             ],
         ];
 
-        // Add retry configuration if enabled
         if ($config['retry']['enabled']) {
             $httpClientConfig['http_client']['scoped_clients']['riot.api']['retry_failed'] = [
                 'enabled' => true,
@@ -112,6 +120,11 @@ class RiotApiDataDragonBundle extends AbstractBundle
         }
 
         $builder->prependExtensionConfig('framework', $httpClientConfig);
+    }
+
+    public function loadExtension(array $config, ContainerConfigurator $container, ContainerBuilder $builder): void
+    {
+        $container->import('../config/services.yaml');
 
         // Configure cache decorator if enabled
         if ($config['cache']['enabled']) {
