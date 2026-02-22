@@ -34,12 +34,12 @@ class ChampionApi implements ChampionApiInterface
 
     public function getChampion(string $key, string $version, string $locale = 'fr_FR'): array
     {
-        return $this->riotApiDataDragon->get(\sprintf(self::URL_CHAMPION, $version, $locale, $key))->toArray();
+        return $this->riotApiDataDragon->get(\sprintf(self::URL_CHAMPION, $version, $locale, ucfirst($key)))->toArray();
     }
 
     public function getChampionAsObject(string $key, string $version, string $locale = 'fr_FR'): Champion
     {
-        $championData = $this->riotApiDataDragon->get(\sprintf(self::URL_CHAMPION, $version, $locale, $key))->toArray();
+        $championData = $this->riotApiDataDragon->get(\sprintf(self::URL_CHAMPION, $version, $locale, ucfirst($key)))->toArray();
 
         return $this->championTransformer->transformToChampion($championData);
     }
