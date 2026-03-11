@@ -10,6 +10,7 @@ use Symfony\Contracts\HttpClient\Exception\ExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
+use Zeggriim\RiotApiDataDragon\DataLeague\RateLimit\RateLimitStatus;
 use Zeggriim\RiotApiDataDragon\Enum\Platform;
 use Zeggriim\RiotApiDataDragon\Enum\Region;
 use Zeggriim\RiotApiDataDragon\Exception\DataNotFoundException;
@@ -23,6 +24,8 @@ use Zeggriim\RiotApiDataDragon\Exception\UnsupportedMediaTypeException;
 class RiotApiDataLeagueClient
 {
     public const URL = 'https://%s.api.riotgames.com';
+
+    private ?RateLimitStatus $lastRateLimitStatus = null;
 
     public function __construct(
         private readonly HttpClientInterface $riotLeague,
@@ -44,6 +47,11 @@ class RiotApiDataLeagueClient
         return $this->defaultPlatform;
     }
 
+    public function getLastRateLimitStatus(): ?RateLimitStatus
+    {
+        return $this->lastRateLimitStatus;
+    }
+
     private function processRequest(string $method, string $url): ResponseInterface
     {
         $response = null;
@@ -53,6 +61,7 @@ class RiotApiDataLeagueClient
                 'headers' => ['X-Riot-Token' => $this->apiKey],
             ]);
             $response->getContent();
+            $this->lastRateLimitStatus = RateLimitStatus::fromHeaders($response->getHeaders(false));
         } catch (ClientExceptionInterface $exception) {
             $this->handleClientException($exception);
         } catch (ServerExceptionInterface $exception) {
@@ -80,7 +89,11 @@ class RiotApiDataLeagueClient
             case 415:
                 throw new UnsupportedMediaTypeException(code: $response->getStatusCode());
             case 429:
-                throw new ServerLimitException(code: $response->getStatusCode());
+                $headers = $response->getHeaders(false);
+                $retryAfter = isset($headers['retry-after'][0]) ? (int) $headers['retry-after'][0] : null;
+                $limitType = $headers['x-rate-limit-type'][0] ?? null;
+
+                throw new ServerLimitException(code: $response->getStatusCode(), retryAfter: $retryAfter, limitType: $limitType);
             default:
                 throw $exception;
         }
