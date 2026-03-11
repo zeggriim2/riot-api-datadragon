@@ -65,12 +65,38 @@ Two separate clients for different Riot API surfaces:
 - Config: `API_RIOT_KEY` env var, `Platform` enum for region
 - Custom exception mapping for HTTP status codes (400→RequestException, 401→UnauthorizedException, 403→ForbiddenException, 404→DataNotFoundException, 415→UnsupportedMediaTypeException, 429→ServerLimitException, 500/503→ServerException)
 
-### Endpoint Organization
+### Structure des sources
 
 ```
-src/Endpoint/
-├── DataDragon/    # Static data: ChampionApi, ItemApi, LanguageApi, ProfileIconApi, SummonerApi, VersionApi
-└── DataLeague/    # Live API: ChampionApi, LeagueApi, MatchApi, SummonerApi
+src/
+├── Cache/
+│   ├── CachedHttpClientDecorator.php
+│   └── CachedResponse.php
+├── DataDragon/
+│   ├── DataDragonApi.php / DataDragonApiInterface.php
+│   ├── Dto/
+│   │   ├── Champion/   (Champion, ChampionCollection, ChampionInfo, ChampionPassive, ChampionSkin, ChampionStats)
+│   │   ├── Item/       (Item, ItemCollection, Gold)
+│   │   ├── Language/   (Language, LanguageCollection)
+│   │   ├── ProfileIcon/ (ProfileIcon, ProfileIconCollection, ProfileIconImage)
+│   │   ├── Summoner/   (Summoner, SummonerCollection)
+│   │   └── Image.php
+│   ├── Endpoint/       (ChampionApi, ItemApi, LanguageApi, ProfileIconApi, SummonerApi, VersionApi + interfaces)
+│   ├── Serializer/Normalizer/
+│   │   ├── Champion/   (ChampionCollectionNormalizer, ChampionNormalizer)
+│   │   ├── Item/       (ItemCollectionNormalizer, ItemNormalizer)
+│   │   ├── ProfileIcon/ (ProfileIconCollectionNormalizer, ProfileIconNormalizer)
+│   │   ├── Summoner/   (SummonerCollectionNormalizer, SummonerNormalizer)
+│   │   └── LanguageCollectionNormalizer.php
+│   └── Transformer/    (ChampionTransformer)
+├── DataLeague/
+│   ├── Dto/            (Summoner, ChampionMastery, ChampionMasteryCollection, NextSeasonMilestones, RewardConfig)
+│   ├── Endpoint/       (AccountApi, ChampionApi, ChampionMasteryApi, LeagueApi, MatchApi, SummonerApi + interfaces)
+│   ├── Filter/         (MatchFilter)
+│   └── Serializer/Normalizer/
+│       └── ChampionMastery/ (ChampionMasteryCollectionNormalizer, ChampionMasteryNormalizer, NextSeasonMilestonesNormalizer, RewardConfigNormalizer)
+├── Enum/               (Division, MatchType, Platform, Queue, QueueId, Region, Tier)
+└── Exception/          (DataNotFoundException, ForbiddenException, RequestException, ServerException, ServerLimitException, UnauthorizedException, UnsupportedMediaTypeException)
 ```
 
 Each endpoint:
@@ -95,18 +121,24 @@ $api->summoners()     // SummonerApiInterface
 Three-layer pattern for API responses:
 
 1. **Raw array** from HTTP client
-2. **Transformer** (`src/Transformer/*`) uses Symfony Serializer with custom Normalizers
-3. **DTO** (`src/Dto/*`) strongly-typed objects
+2. **Transformer** (`src/DataDragon/Transformer/`) uses Symfony Serializer with custom Normalizers
+3. **DTO** (`src/DataDragon/Dto/` ou `src/DataLeague/Dto/`) strongly-typed objects
 
 Example:
 - `ChampionApi::getChampions()` → raw array
 - `ChampionApi::getChampionsAsCollection()` → `ChampionCollection` DTO
 - Uses `ChampionCollectionNormalizer` registered with `serializer.normalizer` tag
 
-Custom normalizers handle nested API structures:
-- `ChampionCollectionNormalizer`, `LanguageCollectionNormalizer`
-- `ProfileIconCollectionNormalizer`, `ItemCollectionNormalizer`
-- `SummonerCollectionNormalizer`
+### Cache Layer
+
+`CachedHttpClientDecorator` wraps the HTTP client to add caching via `CachedResponse`.
+
+### Enums
+
+`src/Enum/` contient les enums utilisés pour les paramètres API :
+- `Platform` : région pour les URLs Live API (e.g. `EUW1`)
+- `Region` : région globale (e.g. `EUROPE`)
+- `Queue`, `QueueId`, `Tier`, `Division`, `MatchType`
 
 ## Code Standards
 
@@ -125,11 +157,11 @@ API_RIOT_KEY=your_api_key                              # League API auth
 
 ## Adding New Endpoints
 
-1. Create interface in `src/Endpoint/DataDragon/` or `src/Endpoint/DataLeague/`
+1. Create interface in `src/DataDragon/Endpoint/` or `src/DataLeague/Endpoint/`
 2. Implement with appropriate client injection
-3. Create DTOs in `src/Dto/` if needed
-4. Add Normalizer in `src/Serializer/Normalizer/` for complex deserialization
-5. Create Transformer in `src/Transformer/` if DTO conversion needed
+3. Create DTOs in `src/DataDragon/Dto/` or `src/DataLeague/Dto/` if needed
+4. Add Normalizer in `src/DataDragon/Serializer/Normalizer/` or `src/DataLeague/Serializer/Normalizer/` for complex deserialization
+5. Create Transformer in `src/DataDragon/Transformer/` if DTO conversion needed
 6. Register in `config/services.yaml`:
    ```yaml
    Namespace\NewApi:
