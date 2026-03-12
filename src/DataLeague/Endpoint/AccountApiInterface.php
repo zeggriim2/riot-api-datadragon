@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Zeggriim\RiotApiDataDragon\DataLeague\Endpoint;
 
-use Zeggriim\RiotApiDataDragon\Enum\Region;
+use Zeggriim\RiotApiDataDragon\Enum\Platform;
 
 interface AccountApiInterface
 {
@@ -13,19 +13,19 @@ interface AccountApiInterface
      *
      * @return array Account data with gameName, tagLine, and puuid
      */
-    public function getAccountByPuuid(string $puuid, ?Region $region = null): array;
+    public function getAccountByPuuid(string $puuid, ?Platform $platform = null): array;
 
     /**
      * Get account by Riot ID (gameName + tagLine).
      *
      * @return array Account data with gameName, tagLine, and puuid
      */
-    public function getAccountByRiotId(string $gameName, string $tagLine, ?Region $region = null): array;
+    public function getAccountByRiotId(string $gameName, string $tagLine, ?Platform $platform = null): array;
 
     /**
      * Get active account by access token (requires OAuth).
      *
      * @return array Account data with gameName, tagLine, and puuid
      */
-    public function getAccountByAccessToken(?Region $region = null): array;
+    public function getAccountByAccessToken(?Platform $platform = null): array;
 }

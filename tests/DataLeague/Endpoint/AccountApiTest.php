@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpClient\Exception\ClientException;
 use Symfony\Component\HttpClient\Exception\ServerException as ServerExceptionHttpClient;
 use Symfony\Component\HttpFoundation\Response;
-use Zeggriim\RiotApiDataDragon\Enum\Region;
+use Zeggriim\RiotApiDataDragon\Enum\Platform;
 use Zeggriim\RiotApiDataDragon\Exception\DataNotFoundException;
 use Zeggriim\RiotApiDataDragon\Exception\ForbiddenException;
 use Zeggriim\RiotApiDataDragon\Exception\RequestException;
@@ -38,7 +38,7 @@ final class AccountApiTest extends KernelTestCase
         ];
 
         $accountApi = $this->getAccountApi($dataResponse);
-        $account = $accountApi->getAccountByPuuid('test-puuid-12345', Region::EUROPE);
+        $account = $accountApi->getAccountByPuuid('test-puuid-12345', Platform::EUW1);
 
         self::assertArrayHasKey('puuid', $account);
         self::assertArrayHasKey('gameName', $account);
@@ -72,7 +72,7 @@ final class AccountApiTest extends KernelTestCase
         ];
 
         $accountApi = $this->getAccountApi($dataResponse, ['http_code' => 200]);
-        $account = $accountApi->getAccountByRiotId('AnotherPlayer', 'NA1', Region::EUROPE);
+        $account = $accountApi->getAccountByRiotId('AnotherPlayer', 'NA1', Platform::EUW1);
 
         self::assertArrayHasKey('puuid', $account);
         self::assertArrayHasKey('gameName', $account);
@@ -91,7 +91,7 @@ final class AccountApiTest extends KernelTestCase
         ];
 
         $accountApi = $this->getAccountApi($dataResponse);
-        $account = $accountApi->getAccountByAccessToken(Region::EUROPE);
+        $account = $accountApi->getAccountByAccessToken(Platform::EUW1);
 
         self::assertArrayHasKey('puuid', $account);
         self::assertArrayHasKey('gameName', $account);
@@ -111,7 +111,7 @@ final class AccountApiTest extends KernelTestCase
         $accountApi = $this->getAccountApi(['test' => 'test'], ['http_code' => $codeStatus]);
         self::expectException($exceptionClass);
         self::expectExceptionMessage($exceptionMessage);
-        $res = $accountApi->getAccountByPuuid('test-puuid', Region::EUROPE);
+        $res = $accountApi->getAccountByPuuid('test-puuid', Platform::EUW1);
         self::assertCount(0, $res);
     }
 

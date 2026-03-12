@@ -12,7 +12,7 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 use Zeggriim\RiotApiDataDragon\DataLeague\RateLimit\RateLimitStatus;
 use Zeggriim\RiotApiDataDragon\Enum\Platform;
-use Zeggriim\RiotApiDataDragon\Enum\Region;
+use Zeggriim\RiotApiDataDragon\Enum\RoutingInterface;
 use Zeggriim\RiotApiDataDragon\Exception\DataNotFoundException;
 use Zeggriim\RiotApiDataDragon\Exception\ForbiddenException;
 use Zeggriim\RiotApiDataDragon\Exception\RequestException;
@@ -30,19 +30,18 @@ class RiotApiDataLeagueClient
     public function __construct(
         private readonly HttpClientInterface $riotLeague,
         private readonly string $apiKey,
-        private readonly Platform|Region $defaultPlatform = Platform::EUW1,
+        private readonly Platform $defaultPlatform = Platform::EUW1,
     ) {
     }
 
-    public function get(string $path, Platform|Region|null $platform = null): ResponseInterface
+    public function get(string $path, RoutingInterface $routing): ResponseInterface
     {
-        $platform = $platform ?? $this->defaultPlatform;
-        $url = \sprintf(self::URL, $platform->value).$path;
+        $url = \sprintf(self::URL, $routing->getRoutingKey()).$path;
 
         return $this->processRequest(Request::METHOD_GET, $url);
     }
 
-    public function getDefaultPlatform(): Platform|Region
+    public function getDefaultPlatform(): Platform
     {
         return $this->defaultPlatform;
     }

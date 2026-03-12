@@ -17,6 +17,6 @@ class ChampionApi implements ChampionApiInterface
 
     public function getChampionRotation(?Platform $platform = null): array
     {
-        return $this->riotApiDataLeague->get(self::URL_CHAMPION_ROTATION, $platform)->toArray();
+        return $this->riotApiDataLeague->get(self::URL_CHAMPION_ROTATION, $platform ?? $this->riotApiDataLeague->getDefaultPlatform())->toArray();
     }
 }

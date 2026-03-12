@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpClient\MockHttpClient;
 use Symfony\Component\HttpClient\Response\MockResponse;
 use Zeggriim\RiotApiDataDragon\DataLeague\RateLimit\RateLimitStatus;
+use Zeggriim\RiotApiDataDragon\Enum\Platform;
 use Zeggriim\RiotApiDataDragon\RiotApiDataLeagueClient;
 
 /**
@@ -105,7 +106,7 @@ final class RateLimitStatusTest extends TestCase
 
         self::assertNull($client->getLastRateLimitStatus());
 
-        $client->get('/lol/summoner/v4/summoners/by-puuid/test');
+        $client->get('/lol/summoner/v4/summoners/by-puuid/test', Platform::EUW1);
         $status = $client->getLastRateLimitStatus();
 
         self::assertInstanceOf(RateLimitStatus::class, $status);
@@ -132,11 +133,11 @@ final class RateLimitStatusTest extends TestCase
             'key'
         );
 
-        $client->get('/lol/summoner/v4/summoners/by-puuid/first');
+        $client->get('/lol/summoner/v4/summoners/by-puuid/first', Platform::EUW1);
         $statusAfterSuccess = $client->getLastRateLimitStatus();
 
         try {
-            $client->get('/lol/summoner/v4/summoners/by-puuid/second');
+            $client->get('/lol/summoner/v4/summoners/by-puuid/second', Platform::EUW1);
         } catch (\Throwable) {
         }
 

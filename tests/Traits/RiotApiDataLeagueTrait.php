@@ -19,6 +19,7 @@ use Zeggriim\RiotApiDataDragon\DataLeague\Serializer\Normalizer\ChampionMastery\
 use Zeggriim\RiotApiDataDragon\DataLeague\Serializer\Normalizer\ChampionMastery\ChampionMasteryNormalizer;
 use Zeggriim\RiotApiDataDragon\DataLeague\Serializer\Normalizer\ChampionMastery\NextSeasonMilestonesNormalizer;
 use Zeggriim\RiotApiDataDragon\DataLeague\Serializer\Normalizer\ChampionMastery\RewardConfigNormalizer;
+use Zeggriim\RiotApiDataDragon\Enum\Platform;
 use Zeggriim\RiotApiDataDragon\RiotApiDataLeagueClient;
 
 trait RiotApiDataLeagueTrait
@@ -96,6 +97,6 @@ trait RiotApiDataLeagueTrait
         $this->createMock(HttpClientInterface::class);
         $httpClient = new MockHttpClient($response, null);
 
-        return new RiotApiDataLeagueClient($httpClient, 'key');
+        return new RiotApiDataLeagueClient($httpClient, 'key', Platform::EUW1);
     }
 }
