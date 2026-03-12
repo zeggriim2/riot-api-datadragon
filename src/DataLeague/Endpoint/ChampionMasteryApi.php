@@ -27,7 +27,7 @@ class ChampionMasteryApi implements ChampionMasteryApiInterface
     {
         $url = \sprintf(self::URL_ALL_MASTERIES, $puuid);
 
-        $championMasteriesData = $this->riotApiDataLeagueClient->get($url, $platform)->toArray();
+        $championMasteriesData = $this->riotApiDataLeagueClient->get($url, $platform ?? $this->riotApiDataLeagueClient->getDefaultPlatform())->toArray();
 
         return $this->denormalizer->denormalize($championMasteriesData, ChampionMasteryCollection::class);
     }
@@ -36,14 +36,14 @@ class ChampionMasteryApi implements ChampionMasteryApiInterface
     {
         $url = \sprintf(self::URL_ALL_MASTERIES, $puuid);
 
-        return $this->riotApiDataLeagueClient->get($url, $platform)->toArray();
+        return $this->riotApiDataLeagueClient->get($url, $platform ?? $this->riotApiDataLeagueClient->getDefaultPlatform())->toArray();
     }
 
     public function getChampionMasteryAsObject(string $puuid, int $championId, ?Platform $platform = null): ChampionMastery
     {
         $url = \sprintf(self::URL_MASTERY_BY_CHAMPION, $puuid, $championId);
 
-        $championMasteyData = $this->riotApiDataLeagueClient->get($url, $platform)->toArray();
+        $championMasteyData = $this->riotApiDataLeagueClient->get($url, $platform ?? $this->riotApiDataLeagueClient->getDefaultPlatform())->toArray();
 
         return $this->denormalizer->denormalize($championMasteyData, ChampionMastery::class);
     }
@@ -52,7 +52,7 @@ class ChampionMasteryApi implements ChampionMasteryApiInterface
     {
         $url = \sprintf(self::URL_MASTERY_BY_CHAMPION, $puuid, $championId);
 
-        return $this->riotApiDataLeagueClient->get($url, $platform)->toArray();
+        return $this->riotApiDataLeagueClient->get($url, $platform ?? $this->riotApiDataLeagueClient->getDefaultPlatform())->toArray();
     }
 
     public function getTopChampionMasteriesAsCollection(string $puuid, ?Platform $platform = null, ?int $count = null): ChampionMasteryCollection
@@ -63,7 +63,7 @@ class ChampionMasteryApi implements ChampionMasteryApiInterface
             $url .= '?count='.$count;
         }
 
-        $championMasteriesData = $this->riotApiDataLeagueClient->get($url, $platform)->toArray();
+        $championMasteriesData = $this->riotApiDataLeagueClient->get($url, $platform ?? $this->riotApiDataLeagueClient->getDefaultPlatform())->toArray();
 
         return $this->denormalizer->denormalize($championMasteriesData, ChampionMasteryCollection::class);
     }
@@ -76,13 +76,13 @@ class ChampionMasteryApi implements ChampionMasteryApiInterface
             $url .= '?count='.$count;
         }
 
-        return $this->riotApiDataLeagueClient->get($url, $platform)->toArray();
+        return $this->riotApiDataLeagueClient->get($url, $platform ?? $this->riotApiDataLeagueClient->getDefaultPlatform())->toArray();
     }
 
     public function getTotalMasteryScore(string $puuid, ?Platform $platform = null): int
     {
         $url = \sprintf(self::URL_TOTAL_SCORE, $puuid);
-        $responseArray = $this->riotApiDataLeagueClient->get($url, $platform)->toArray();
+        $responseArray = $this->riotApiDataLeagueClient->get($url, $platform ?? $this->riotApiDataLeagueClient->getDefaultPlatform())->toArray();
 
         return $responseArray[array_key_first($responseArray)];
     }

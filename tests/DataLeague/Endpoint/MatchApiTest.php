@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Zeggriim\RiotApiDataDragon\Tests\DataLeague\Endpoint;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Zeggriim\RiotApiDataDragon\Enum\Region;
+use Zeggriim\RiotApiDataDragon\Enum\Platform;
 use Zeggriim\RiotApiDataDragon\Tests\Traits\AssertMatchApiTrait;
 use Zeggriim\RiotApiDataDragon\Tests\Traits\RiotApiDataLeagueTrait;
 
@@ -3286,7 +3286,7 @@ final class MatchApiTest extends KernelTestCase
         ];
 
         $matchApi = $this->getMatchApi($dataResponse);
-        $match = $matchApi->getMatch('EUW1_6921668065', Region::EUROPE);
+        $match = $matchApi->getMatch('EUW1_6921668065', Platform::EUW1);
 
         $this->assertMatch($match, $dataResponse);
     }
@@ -41054,7 +41054,7 @@ final class MatchApiTest extends KernelTestCase
         ];
 
         $matchApi = $this->getMatchApi($dataResponse);
-        $match = $matchApi->getMatchTimeline('EUW1_6921668065', Region::EUROPE);
+        $match = $matchApi->getMatchTimeline('EUW1_6921668065', Platform::EUW1);
 
         $this->assertMatch($match, $dataResponse);
     }
