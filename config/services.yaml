@@ -4,7 +4,6 @@ services:
         arguments:
             $apiKey: '%env(string:API_RIOT_KEY)%'
             $defaultPlatform: '%env(enum:Zeggriim\RiotApiDataDragon\Enum\Platform:RIOT_DEFAULT_PLATFORM)%'
-            $defaultRegion: '%env(enum:Zeggriim\RiotApiDataDragon\Enum\Region:RIOT_DEFAULT_REGION)%'
 
 
     # Endpoint Data Dragon
