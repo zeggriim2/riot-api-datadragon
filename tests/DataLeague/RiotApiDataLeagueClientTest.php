@@ -7,7 +7,6 @@ namespace Zeggriim\RiotApiDataDragon\Tests\DataLeague;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpClient\MockHttpClient;
 use Symfony\Component\HttpClient\Response\MockResponse;
-use Zeggriim\RiotApiDataDragon\Enum\Platform;
 use Zeggriim\RiotApiDataDragon\Exception\ServerLimitException;
 use Zeggriim\RiotApiDataDragon\RiotApiDataLeagueClient;
 
@@ -32,7 +31,7 @@ final class RiotApiDataLeagueClientTest extends TestCase
         $client = new RiotApiDataLeagueClient(new MockHttpClient($response, null), 'key');
 
         try {
-            $client->get('/lol/summoner/v4/summoners/by-puuid/test', Platform::EUW1);
+            $client->get('/lol/summoner/v4/summoners/by-puuid/test');
             self::fail('ServerLimitException expected');
         } catch (ServerLimitException $e) {
             self::assertSame(429, $e->getCode());
@@ -54,7 +53,7 @@ final class RiotApiDataLeagueClientTest extends TestCase
         $client = new RiotApiDataLeagueClient(new MockHttpClient($response, null), 'key');
 
         try {
-            $client->get('/lol/summoner/v4/summoners/by-puuid/test', Platform::EUW1);
+            $client->get('/lol/summoner/v4/summoners/by-puuid/test');
             self::fail('ServerLimitException expected');
         } catch (ServerLimitException $e) {
             self::assertSame(429, $e->getCode());
@@ -72,7 +71,7 @@ final class RiotApiDataLeagueClientTest extends TestCase
         $client = new RiotApiDataLeagueClient(new MockHttpClient($response, null), 'key');
 
         try {
-            $client->get('/lol/summoner/v4/summoners/by-puuid/test', Platform::EUW1);
+            $client->get('/lol/summoner/v4/summoners/by-puuid/test');
             self::fail('ServerLimitException expected');
         } catch (ServerLimitException $e) {
             self::assertSame(429, $e->getCode());
@@ -94,7 +93,7 @@ final class RiotApiDataLeagueClientTest extends TestCase
         $client = new RiotApiDataLeagueClient(new MockHttpClient($response, null), 'key');
 
         try {
-            $client->get('/lol/summoner/v4/summoners/by-puuid/test', Platform::EUW1);
+            $client->get('/lol/summoner/v4/summoners/by-puuid/test');
             self::fail('ServerLimitException expected');
         } catch (ServerLimitException $e) {
             self::assertSame(10, $e->retryAfter);

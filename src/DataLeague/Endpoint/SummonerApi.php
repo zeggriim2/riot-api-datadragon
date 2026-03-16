@@ -23,14 +23,14 @@ class SummonerApi implements SummonerApiInterface
     {
         $url = \sprintf(self::URL_SUMMONER, $puuid);
 
-        return $this->riotApiDataLeague->get($url, $platform ?? $this->riotApiDataLeague->getDefaultPlatform())->toArray();
+        return $this->riotApiDataLeague->get($url, $platform)->toArray();
     }
 
     public function getSummonerAsObject(string $puuid, ?Platform $platform = null): Summoner
     {
         $url = \sprintf(self::URL_SUMMONER, $puuid);
 
-        $summoner = $this->riotApiDataLeague->get($url, $platform ?? $this->riotApiDataLeague->getDefaultPlatform())->toArray();
+        $summoner = $this->riotApiDataLeague->get($url, $platform)->toArray();
 
         return $this->denormalizer->denormalize($summoner, Summoner::class);
     }

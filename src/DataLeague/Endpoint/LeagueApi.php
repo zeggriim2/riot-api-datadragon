@@ -27,41 +27,41 @@ class LeagueApi implements LeagueApiInterface
     {
         $path = \sprintf(self::URL_LEAGUE_CHALLENGER, $queue->value);
 
-        return $this->riotApiDataLeague->get($path, $platform ?? $this->riotApiDataLeague->getDefaultPlatform())->toArray();
+        return $this->riotApiDataLeague->get($path, $platform)->toArray();
     }
 
     public function getGrandMaster(?Platform $platform = null, Queue $queue = Queue::RANKED_SOLO): array
     {
         $path = \sprintf(self::URL_LEAGUE_GRANDMASTER, $queue->value);
 
-        return $this->riotApiDataLeague->get($path, $platform ?? $this->riotApiDataLeague->getDefaultPlatform())->toArray();
+        return $this->riotApiDataLeague->get($path, $platform)->toArray();
     }
 
     public function getMaster(?Platform $platform = null, Queue $queue = Queue::RANKED_SOLO): array
     {
         $path = \sprintf(self::URL_LEAGUE_MASTER, $queue->value);
 
-        return $this->riotApiDataLeague->get($path, $platform ?? $this->riotApiDataLeague->getDefaultPlatform())->toArray();
+        return $this->riotApiDataLeague->get($path, $platform)->toArray();
     }
 
     public function getAll(Queue $queue, Tier $tier, Division $division, ?Platform $platform = null): array
     {
         $path = \sprintf(self::URL_LEAGUE_OTHER, $queue->value, $tier->value, $division->value);
 
-        return $this->riotApiDataLeague->get($path, $platform ?? $this->riotApiDataLeague->getDefaultPlatform())->toArray();
+        return $this->riotApiDataLeague->get($path, $platform)->toArray();
     }
 
     public function getLeagueWithId(string $leagueId, ?Platform $platform = null): array
     {
         $path = \sprintf(self::URL_LEAGUE_ID, $leagueId);
 
-        return $this->riotApiDataLeague->get($path, $platform ?? $this->riotApiDataLeague->getDefaultPlatform())->toArray();
+        return $this->riotApiDataLeague->get($path, $platform)->toArray();
     }
 
     public function getLeagueInAllQueuesWithSummonerId(string $summonerId, ?Platform $platform = null): array
     {
         $path = \sprintf(self::URL_LEAGUE_SUMMUNER_ID, $summonerId);
 
-        return $this->riotApiDataLeague->get($path, $platform ?? $this->riotApiDataLeague->getDefaultPlatform())->toArray();
+        return $this->riotApiDataLeague->get($path, $platform)->toArray();
     }
 }
