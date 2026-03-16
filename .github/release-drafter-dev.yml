@@ -1,7 +1,8 @@
-version-template: '3.0.$PATCH'
+version-template: '$MAJOR.$MINOR.$PATCH'
 name-template: 'v$RESOLVED_VERSION-beta'
 tag-template: 'v$RESOLVED_VERSION-beta'
 prerelease: true
+initial-version: '3.0.0'
 
 categories:
     - title: ':boom: Breaking Changes'
@@ -30,12 +31,16 @@ change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
 change-title-escapes: '\<*_&'
 
 version-resolver:
-    patch:
+    major:
         labels:
             - 'major'
             - 'breaking-change'
+    minor:
+        labels:
             - 'feature'
             - 'enhancement'
+    patch:
+        labels:
             - 'fix'
             - 'bugfix'
             - 'bug'
@@ -51,6 +56,6 @@ template: |
     $CHANGES
 
     ---
-    > :warning: This is a **pre-release** of v3.0.0 — do not use in production.
+    > :warning: This is a **pre-release** — do not use in production.
 
-    Full Changelog: https://github.com/zeggriim/riot-api-datadragon/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION-beta
+    Full Changelog: https://github.com/zeggriim2/riot-api-datadragon/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION-beta
